@@ -1,0 +1,63 @@
+a.s_dp, u.s_yellow { text-decoration: none; color: #fa7004; font-family: Arial, Helvetica, sans-serif; }
+a.s_dp:hover { cursor: pointer; text-decoration: underline; }
+.review, .episode { margin: 20px; font-family: Arial, Verdana, "宋体"; position: relative; display: none; }
+.episode { display: block; margin: 20px 0; }
+.my_dp li, .tab, .reviewList li, .rRight h2, .reply h3 { overflow: hidden; zoom: 1; }
+.tab, .tab2 { border-bottom: 2px solid #fa7305; height: 30px; }
+.tab a, .tab2 a { display: block; height: 28px; width: 128px; float: left; background: url(../images/review_sprite.png) left -32px; height: 32px; text-align: center; font: bold 14px/30px Arial; color: #f48237; margin-right: 5px; }
+.tab a.tab_on, .tab2 a.tab_on { background: url(../images/review_sprite.png) left top; color: #fff; }
+.review_con, .review_con2 { padding: 15px 0; }
+.review_con .r1, .review_con2 .r1 { padding: 0 10px; }
+.my_dp li { padding: 6px 0; position: relative; }
+.my_dp li u { text-decoration: none; display: block; float: left; width: 90px; text-align: right; line-height: 25px; }
+.my_dp li div { float: left; width: 500px; }
+.my_dp li em { position: absolute; left: 235px; color: #666; font-style: normal; line-height: 25px; }
+.starone, .star_on, .star_on2 { display: block; background: url(../images/star_click.gif) 0 0; width: 25px; height: 25px; float: left; margin: 0 1px; }
+.star_on2 { background: url(../images/star_hover.gif) 0 0; }
+.star_on { background: url(../images/star_on.gif) 0 0; }
+.i_input { border: 1px solid #b9b9b9; padding: 5px; color: #666; width: 410px; }
+.reviewList li { padding-bottom: 15px; }
+.rLeft { width: 95px; float: left; text-align: center; color: #666; line-height: 18px; border: 1px solid #f3e6c6; background: #fffcf5; padding: 10px 0; border-radius: 5px; }
+.rRight { width: 510px; float: right; border: 1px solid #f3e6c6; background: #fffcf5; position: relative; border-radius: 5px; }
+.corner { background: url(../images/review_sprite.png) left -71px; width: 14px; height: 26px; position: absolute; left: -14px; top: 10px; }
+.rRight h2 { line-height: 30px; border-bottom: 1px solid #f7e7c6; margin: 0 15px; vertical-align: middle; }
+.rRight h2 img { padding-top: 9px; }
+.rRight h2 span { padding-left: 20px; }
+.rRight h2 span u { text-decoration: none; color: #9c9a9c; padding-left: 2px; }
+.comment-txt{ padding:10px 15px; line-height:20px; overflow:hidden;}
+.time { float: right; color: #9c9a9c; }
+.reply { border-top: 1px dashed #f6e6c5; margin: 0 15px; padding: 10px 0; line-height: 20px; }
+.reply h3 { color: #fa7004; line-height: 30px; }
+div.user { color: #0896ae; font-weight: bold; padding-bottom: 10px; font-family: Arial, Verdana, "宋体"; }
+div.gray_time { color: #9c9a9c; font-family: Arial, Verdana, "宋体"; }
+a.back_menu { font-size: 14px; position: absolute; right: 10px; display: block; line-height: 30px; color: #fa7004; font-weight: bold; }
+a.back_menu:hover { text-decoration: underline; }
+.float_div { right: 20px; bottom: 20px; position: fixed; background: #f7f7f7; border: 1px solid #ccc; font-size: 12px; border-radius: 3px; text-align: center; cursor: pointer; }
+.tc { color: #808080; display: block; line-height: 16px; width: 20px; }
+.fd_con { border: 1px solid #fff; padding: 5px; }
+.count { display: block; background: url(../images/u_sprite_0325.png) left top; width: 20px; height: 19px; padding-top: 1px; line-height: 18px; color: #fff; font-style: normal; text-align: center; font-size: 12px; }
+.episode h2 { background: #ff9100; color: #fff; line-height: 35px; height: 35px; position: relative; padding-left: 110px; }
+.episode h2 span { background: #f67919; display: block; line-height: 35px; font-size: 14px; font-weight: bold; position: absolute; padding: 0 20px; left: 0; top: 0; }
+.epi_con { border: 1px solid #cfcfcf; padding: 15px; border-top: none; margin-bottom: 15px; background: #fff; }
+.episode .rLeft div.user { font-weight: normal; padding-bottom: 5px; }
+.episode .rRight { width: 590px; }
+.m_tc { padding: 0 15px 10px 15px; text-align: right; }
+.m_tc a { color: #fb7c04; }
+.m_tc a:hover { text-decoration: underline; }
+.episode .r1 { padding: 0; }
+.pager { text-align: center; padding: 10px 0; }
+.pager a, .pager span { display: inline-block; padding: 3px 10px; border: 1px solid #f8d59f; color: #e48b0c; background: #fff8e1; margin: 10px 2px; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; vertical-align: middle; }
+.pager a:hover, .pager .current, .pager a.current, .pager span { background: #ffebaa; text-decoration: none; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; }
+.poselo { position: absolute; line-height: 30px; margin-left: 280px; color: #0896ae; }
+li.input07 { padding-left: 36px; }
+li.input07 input { background: url(../images/input07.png) no-repeat; border: none; height: 24px; line-height: 24px; width: 30px; }
+li.input07 input.input_s { background: url(../images/input08.png) no-repeat; width: 118px; }
+.container { width: 980px; margin: 0 auto; overflow: hidden; zoom: 1; }
+.eLeft { width: 710px; float: left; }
+.eRight { width: 250px; float: right; padding-top: 20px; }
+.r_p { margin-bottom: 10px; }
+
+.no_review { text-align: center; font: 16px/40px "Microsoft Yahei"; padding-bottom: 20px; padding-top: 10px; }
+/*2013-05-13新加样式*/
+.rRight .my_dp { display: none; }
+.gt h3 { color: #0896ae; }

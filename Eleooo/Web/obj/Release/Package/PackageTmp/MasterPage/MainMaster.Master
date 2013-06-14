@@ -1,0 +1,23 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainMaster.master.cs"
+    Inherits="Eleooo.Web.MasterPage.MainMaster" MasterPageFile="~/MasterPage/ContentMaster.Master" EnableViewState="false" %>
+
+<%@ Import Namespace="Eleooo.Web" %>
+<%@ Register Src="~/Controls/UcMenuNavigation.ascx" TagName="UcMenuNavigation" TagPrefix="uc" %>
+
+<asp:Content ContentPlaceHolderID="head" runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+
+<asp:Content ContentPlaceHolderID="ContentLeft" runat="server">
+    <div class="lb">
+        <asp:ContentPlaceHolder runat="server" ID="ContentPlaceHolderMemberInfo">
+        </asp:ContentPlaceHolder>
+        <uc:UcMenuNavigation ID="navLeft" runat="server" Region="Left">
+        </uc:UcMenuNavigation>
+    </div>
+</asp:Content>
+<asp:Content runat="server" ContentPlaceHolderID="ContentRight">
+    <asp:ContentPlaceHolder ID="ContentPlaceHolderMain" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>

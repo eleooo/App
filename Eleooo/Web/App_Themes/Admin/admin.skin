@@ -1,0 +1,35 @@
+﻿<%--
+默认的外观模板。以下外观仅作为示例提供。
+
+1. 命名的控件外观。SkinId 的定义应唯一，因为在同一主题中不允许一个控件类型有重复的 SkinId。
+
+<asp:GridView runat="server" SkinId="gridviewSkin" BackColor="White" >
+   <AlternatingRowStyle BackColor="Blue" />
+</asp:GridView>
+
+2. 默认外观。未定义 SkinId。在同一主题中每个控件类型只允许有一个默认的控件外观。
+
+<asp:Image runat="server" ImageUrl="~/images/image1.jpg" />
+--%>
+
+<asp:Label runat="server" SkinId ="labelRed" ForeColor ="red" />
+<asp:Label runat="server" SkinId ="labelPageTitle" ForeColor ="#1D6397" Font-Bold ="true" />
+<asp:Label runat="server" SkinId="label" width ="75px" style="text-align:right;" ForeColor ="#333333" />
+<asp:Label runat="server" />
+
+<asp:TextBox runat="server" SkinId="TextBox" CssClass = "iTextBox" />
+<asp:TextBox runat="server" SkinId="TextBoxPopup" CssClass = "iTextBox" />
+<asp:TextBox runat="server" SkinId="TextBoxNumber" CssClass = "iTextBoxNumber"  style="text-align:right" />
+<asp:TextBox runat="server" SkinId="TextBoxNote" CssClass = "iTextBoxNote" />
+
+<asp:DropDownList runat="server" SkinId="DropDownList" />
+
+<asp:GridView runat="server" Width="100%" CellPadding="1"  BorderStyle="Solid"  BorderWidth="1px" BackColor="Black">
+    <HeaderStyle HorizontalAlign ="Center" BackColor="#f00" Font-Bold="True"  ForeColor="white" BorderStyle="Solid"  BorderColor="#ffffff"  BorderWidth="1px" />
+    <FooterStyle BackColor="white" ForeColor="#003399" />
+    <PagerStyle BackColor="#ffffff" ForeColor="#003399" HorizontalAlign="center" />
+    <RowStyle BackColor="#ffffff" ForeColor="black" BorderStyle="Solid"  BorderWidth="1px"  BorderColor="#ffffff" />
+    <AlternatingRowStyle BackColor="#f5f5f5" ForeColor ="black" BorderStyle="Solid"  BorderWidth="1px"   BorderColor="Black" />
+    <SelectedRowStyle BackColor="#009999"   Font-Bold="True" ForeColor="#CCFF99" />
+</asp:GridView>
+

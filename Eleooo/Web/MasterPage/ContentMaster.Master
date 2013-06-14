@@ -1,0 +1,20 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ContentMaster.Master.cs"
+    Inherits="Eleooo.Web.MasterPage.ContentMaster" MasterPageFile="~/MasterPage/ContentMainMaster.Master" EnableViewState="false" %>
+
+<asp:Content ContentPlaceHolderID="head" runat="server">
+<asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content runat="server" ContentPlaceHolderID="ContentPlaceHolderMain">
+    <div class="left">
+        <asp:ContentPlaceHolder ID="ContentLeft" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    <div class="right">
+        <div class="nr">
+            <asp:ContentPlaceHolder ID="ContentRight" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </div>
+    <div class="clear" style="clear: both">
+    </div>
+</asp:Content>

@@ -1,0 +1,43 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/MasterPage/EleoooMasterV2.master" AutoEventWireup="true"
+    CodeBehind="EleoooMemberMasterV2.master.cs" Inherits="Eleooo.Web.MasterPage.EleoooMemberMasterV2" %>
+
+<%@ Register Namespace="Eleooo.Web.Controls" Assembly="Eleooo.Web" TagPrefix="ele" %>
+<%@ Register Src="~/Controls/UcMenuNavigation.ascx" TagName="UcMenuNavigation" TagPrefix="uc" %>
+<%@ Register Src="~/Controls/UcPagePosition.ascx" TagPrefix="uc" TagName="UcPagePosition" %>
+<%@ Register Src="~/Controls/UcMemberInfo.ascx" TagPrefix="uc" TagName="UcMemberInfo" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead" runat="server">
+    <ele:ResLink ID="rs1" runat="server" Src="/App_Themes/ThemesV2/style/public.css" />
+    <ele:ResLink ID="rs2" runat="server" Src="/App_Themes/ThemesV2/style/admin.css" />
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderMain" runat="server">
+    <!--内容开始-->
+    <div class="contents clearall">
+        <uc:UcPagePosition ID="UcPagePosition1" runat="server" />
+        <asp:ContentPlaceHolder ID="ContentPlaceHolderPagePos" runat="server" />
+        <div class="content clearall">
+            <div class="colum fl">
+                <uc:UcMemberInfo ID="UcMemberInfo1" runat="server" />
+                <uc:UcMenuNavigation ID="navLeft" runat="server" Region="Left" />
+                <div class="columAdOne">
+                    <a href="/Public/Help.aspx">
+                        <img alt="乐多分管家" src="/App_Themes/ThemesV2/style/cut/ldfgj.jpg" />
+                    </a>
+                </div>
+            </div>
+            <div class="main fr">
+                <uc:UcMenuNavigation ID="navMain" runat="server" Region="Main" />
+                <asp:ContentPlaceHolder ID="ContentPlaceHolderMain" runat="server" />
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+    </div>
+    <!--内容结束-->
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderBottom" runat="server">
+    <asp:ContentPlaceHolder ID="ContentPlaceHolderBottomScript" runat="server" />
+</asp:Content>
+<asp:Content ID="Content8" ContentPlaceHolderID="dlgSupport" runat="server">
+    <asp:ContentPlaceHolder ID="dlgSupport" runat="server" />
+</asp:Content>

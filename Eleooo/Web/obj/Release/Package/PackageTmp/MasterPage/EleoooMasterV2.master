@@ -1,0 +1,181 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/MasterPage/MasterPageBase.Master" AutoEventWireup="true"
+    CodeBehind="EleoooMasterV2.master.cs" Inherits="Eleooo.Web.MasterPage.EleoooMasterV2" %>
+
+<%@ Register Namespace="Eleooo.Web.Controls" Assembly="Eleooo.Web" TagPrefix="ele" %>
+<asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+    <ele:ResLink ID="rs1" runat="server" Src="/App_Themes/ThemesV2/css/inc.css" />
+    <asp:ContentPlaceHolder ID="ContentPlaceHolderHead" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content5" ContentPlaceHolderID="ContentPlaceHolderTop" runat="server">
+    <!--头部开始-->
+    <div class="head">
+        <div class="top">
+            <div class="logo">
+                <a href="/">
+                    <img src="/App_Themes/ThemesV2/images/logo.png" width="325" height="64" alt="" /></a></div>
+            <div class="logo-w">
+                <span>
+                    <%=BasePage.City.AreaName %></span> <a href="#">[切换&nbsp;]</a></div>
+            <div class="dh">
+                <img src="/App_Themes/ThemesV2/images/dh.png" width="161" height="34" alt="" /></div>
+        </div>
+        <div class="menu_bg">
+            <div class="menu-jz">
+                <div class="menu">
+                    <ul>
+                        <li <%=this.GetCurrentCssClass("/Default.aspx") %>><a href="/">首页</a></li>
+                        <li <%=this.GetCurrentCssClass("/Public/OrderMealPage.aspx") %>><a href="/Public/OrderMealPage.aspx"
+                            id="mealPageLink" runat="server">订快餐</a></li>
+                        <li <%=this.GetCurrentCssClass("/Public/ViewItemList.aspx") %>><a href="/Public/ViewItemList.aspx">
+                            抢优惠</a></li>
+                        <li <%=this.GetCurrentCssClass("/Public/ViewAdsList.aspx") %>><a href="/Public/ViewAdsList.aspx">
+                            赚积分</a></li>
+                        <li <%=this.GetCurrentCssClass("/Public/EleoooComment.aspx") %>><a href="/Public/EleoooComment.aspx">
+                            吐槽区</a></li>
+                    </ul>
+                </div>
+                <div class="ldf" id="outStatus" runat="server">
+                    <ul>
+                        <li id="myEleoooLink" style="display: block;"><a class="ej ldfhover" href="/Member/MyCompany.aspx">
+                            <span>我的乐多分</span></a>
+                            <div class="subMenu" id="myEleoooSubMenu">
+                                <a href="/Member/SaleList.aspx">我的订单</a> <a href="/Member/CompanyMyItems.aspx">我的优惠</a>
+                                <a href="/Member/FinanceList.aspx">我的积分</a> <a href="/Member/MyCompany.aspx">我的商圈</a>
+                                <a href="/Member/MyInfo.aspx">帐户设置</a>
+                            </div>
+                        </li>
+                        <li><a class="ldfhover" href="/Public/Login.aspx?returnUrl=<%=Server.UrlEncode( this.Request.RawUrl) %>">
+                            登录</a></li>
+                        <li><a class="ldfhover" href="/Public/Register.aspx">注册</a></li>
+                    </ul>
+                </div>
+                <div class="ldf" id="inStatus" runat="server">
+                    <ul>
+                        <li class="ldfhover">欢迎您，<%=Eleooo.Web.AppContext.Context.User.MemberPhoneNumber %></li>
+                        <li id="myEleoooLink" style="display: block;"><a class="ej ldfhover" href="/Member/MyCompany.aspx"
+                            id="userLink" runat="server"><span>我的乐多分</span></a>
+                            <div class="subMenu" id="myEleoooSubMenu">
+                                <a href="/Member/SaleList.aspx">我的订单</a> <a href="/Member/CompanyMyItems.aspx">我的优惠</a>
+                                <a href="/Member/FinanceList.aspx">我的积分</a> <a href="/Member/MyCompany.aspx">我的商圈</a>
+                                <a href="/Member/MyInfo.aspx">帐户设置</a>
+                            </div>
+                        </li>
+                        <li><a class="ldfhover" href="/Public/Login.aspx?Action=Logout">退出</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--头部结束-->
+</asp:Content>
+<asp:Content ID="Content6" ContentPlaceHolderID="ContentPlaceHolderMain" runat="server">
+    <!--内容开始-->
+    <asp:ContentPlaceHolder ID="ContentPlaceHolderMain" runat="server">
+    </asp:ContentPlaceHolder>
+    <!--内容结束-->
+</asp:Content>
+<asp:Content ID="Content7" ContentPlaceHolderID="ContentPlaceHolderBottom" runat="server">
+    <!--版权开始-->
+    <div class="bottom">
+        <div class="bottom-lj_bg">
+            <div class="bottom-lj">
+                <div class="dbw">
+                    <h3>
+                        用户指南</h3>
+                    <ul>
+                        <li><a href="/Public/Help.aspx?h=s1&c=h1">怎么订快餐</a> </li>
+                        <li><a href="/Public/Help.aspx?h=s1&c=h2">如何抢优惠</a> </li>
+                        <li><a href="/Public/Help.aspx?h=s1&c=h3">怎么赚积分</a> </li>
+                    </ul>
+                </div>
+                <div class="dbw1">
+                    <h3>
+                        商务合作</h3>
+                    <ul>
+                        <li style="display: none"><a href="/Public/Help.aspx?h=s2&c=h1">什么是联盟商家</a> </li>
+                        <li><a href="/Public/Help.aspx?h=s2&c=h2">商家推广</a> </li>
+                        <li><a href="/Public/Help.aspx?h=s2&c=h3">合作流程</a> </li>
+                        <li><a href="/Public/Login.aspx?subsys=Company">商家登录</a></li>
+                    </ul>
+                </div>
+                <div class="dbw2">
+                    <h3>
+                        公司信息</h3>
+                    <ul>
+                        <li><a href="/Public/Help.aspx?h=s3&c=h1">关于乐多分</a> </li>
+                        <li><a href="/Public/Help.aspx?h=s3&c=h2">10分钟消费圈</a> </li>
+                        <li><a href="/Public/Help.aspx?h=s3&c=h3">加入我们</a> </li>
+                    </ul>
+                </div>
+                <div class="clear">
+                </div>
+            </div>
+        </div>
+        <div class="bottom-w_bg">
+            <div class="bottom-w">
+                <p>
+                    Copyright &copy;2012 乐多分 版权所有 All Rights Reserved. 粤ICP备12036243号</p>
+                <!-- Baidu Button BEGIN -->
+                <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" style="float: right;
+                    padding-top: 10px;">
+                    <a class="bds_qzone"></a><a class="bds_tsina"></a><a class="bds_tqq"></a><a class="bds_renren">
+                    </a><span class="bds_more" style="color: #fff;">更多</span> <a class="shareCount">
+                    </a>
+                </div>
+                <script type="text/javascript" id="bdshare_js" data="type=tools"></script>
+                <script type="text/javascript" id="bdshell_js"></script>
+                <script type="text/javascript">
+                    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();
+                </script>
+                <!-- Baidu Button END -->
+            </div>
+        </div>
+    </div>
+    <!--版权结束-->
+    <style type="text/css">
+            .flag{right:0px; bottom:20px; position:fixed;  background:url('/App_Themes/ThemesV2.1/images/review_sprite.png') -93px -71px; width:35px; height:123px;}
+            .flag a{ text-align:center; font-size:14px; font-weight:bold; color:#fff; padding-top:32px; display:block; width:20px; margin:0 auto;}
+            .flag span{background:url('/App_Themes/ThemesV2.1/images/48_tips.png') left top; display:block; width:15px; height:15px; margin:3px auto; text-align:center; font-size:12px; color:#fff;}
+    </style>
+    <div class="flag" id="myMessage" style="display: none;">
+        <a href="/Public/EleoooComment.aspx?act=1">我的消息</a> <span id="faceBookCountContainer">5</span>
+    </div>
+    <script type="text/javascript">
+        function getUnReadFaceBookCount() {
+            $.ajax(
+            {
+                type: "POST",
+                url: '/Public/RestHandler.ashx/FaceBook/GetUnReadCount',
+                dataType: "json",
+                success: function (result) {
+                    if (result.data > 0) {
+                        $("#myMessage").show().find("span").text(result.data);
+                    } else
+                        $("#myMessage").hide();
+                    setTimeout(getUnReadFaceBookCount, 10000);
+                }
+            });
+        }
+        $(document).ready(function () {
+            $("#myEleoooLink").hover(function () {
+                $(this).addClass("sub_selected");
+                $("#myEleoooSubMenu").show();
+            }, function () {
+                $("#myEleoooSubMenu").hide();
+                $(this).removeClass("sub_selected");
+            });
+            $("#<%=mealPageLink.ClientID%>").click(function () {
+                $.cookie('addr', $(this).attr('addr'));
+            });
+            if (isLogin)
+                getUnReadFaceBookCount();
+        });  
+    </script>
+    <script src="/Scripts/goTop.js" type="text/javascript"></script>
+    <asp:ContentPlaceHolder ID="ContentPlaceHolderBottom" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content8" ContentPlaceHolderID="dlgSupport" runat="server">
+    <asp:ContentPlaceHolder ID="dlgSupport" runat="server" />
+</asp:Content>

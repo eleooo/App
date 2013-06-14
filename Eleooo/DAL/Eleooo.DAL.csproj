@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{129F53F8-1B36-4D24-8007-EAE13842AE54}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Eleooo.DAL</RootNamespace>
+    <AssemblyName>Eleooo.DAL</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AllStructs.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\OrdersCashCompanyController.cs" />
+    <Compile Include="Controllers\OrdersDetailController.cs" />
+    <Compile Include="Controllers\OrdersLogController.cs" />
+    <Compile Include="Controllers\PaymentCashController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\PaymentRateCashController.cs" />
+    <Compile Include="Controllers\PaymentRateController.cs" />
+    <Compile Include="Controllers\SysAdsClickSettingController.cs" />
+    <Compile Include="Controllers\SysAreaController.cs" />
+    <Compile Include="Controllers\SysAreaMansionController.cs" />
+    <Compile Include="Controllers\SysArticleCategoryController.cs" />
+    <Compile Include="Controllers\SysArticleController.cs" />
+    <Compile Include="Controllers\SysCardController.cs" />
+    <Compile Include="Controllers\SysCompanyAdController.cs" />
+    <Compile Include="Controllers\SysCompanyAdsPointSettingController.cs" />
+    <Compile Include="Controllers\SysCompanyController.cs" />
+    <Compile Include="Controllers\SysCompanyFaceBookController.cs" />
+    <Compile Include="Controllers\SysCompanyFlagController.cs" />
+    <Compile Include="Controllers\SysCompanyItemController.cs" />
+    <Compile Include="Controllers\SysCompanyJoinController.cs" />
+    <Compile Include="Controllers\SysCompanyMansionController.cs" />
+    <Compile Include="Controllers\SysCompanyMemberController.cs" />
+    <Compile Include="Controllers\SysCompanyMemberGradeController.cs" />
+    <Compile Include="Controllers\SysDocController.cs" />
+    <Compile Include="Controllers\SysErrorLogController.cs" />
+    <Compile Include="Controllers\SysLocationController.cs" />
+    <Compile Include="Controllers\SysMemberAdController.cs" />
+    <Compile Include="Controllers\SysMemberCashController.cs" />
+    <Compile Include="Controllers\SysMemberCompanyController.cs" />
+    <Compile Include="Controllers\SysMemberCompanyRController.cs" />
+    <Compile Include="Controllers\SysMemberConfigController.cs" />
+    <Compile Include="Controllers\SysMemberController.cs" />
+    <Compile Include="Controllers\SysMemberItemController.cs" />
+    <Compile Include="Controllers\SysMemberMoveController.cs" />
+    <Compile Include="Controllers\SysMemberRewardController.cs" />
+    <Compile Include="Controllers\SysMessageController.cs" />
+    <Compile Include="Controllers\SysMessageTypeController.cs" />
+    <Compile Include="Controllers\SysMsnLogController.cs" />
+    <Compile Include="Controllers\SysNavigationController.cs" />
+    <Compile Include="Controllers\SysNoteController.cs" />
+    <Compile Include="Controllers\SysResourceController.cs" />
+    <Compile Include="Controllers\SysRewardController.cs" />
+    <Compile Include="Controllers\SysRoleAssignmentController.cs" />
+    <Compile Include="Controllers\SysRoleDefineController.cs" />
+    <Compile Include="Controllers\SysSubSyController.cs" />
+    <Compile Include="Controllers\SysSupportController.cs" />
+    <Compile Include="Controllers\SysSupportMessageController.cs" />
+    <Compile Include="Controllers\SysSupportTypeController.cs" />
+    <Compile Include="Controllers\SysTakeawayDirectoryController.cs" />
+    <Compile Include="Controllers\SysTakeawayMenuController.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrdersCashCompany.cs" />
+    <Compile Include="Models\OrdersDetail.cs" />
+    <Compile Include="Models\OrdersLog.cs" />
+    <Compile Include="Models\Payment.cs" />
+    <Compile Include="Models\PaymentCash.cs" />
+    <Compile Include="Models\PaymentRate.cs" />
+    <Compile Include="Models\PaymentRateCash.cs" />
+    <Compile Include="Models\SysAdsClickSetting.cs" />
+    <Compile Include="Models\SysArea.cs" />
+    <Compile Include="Models\SysAreaMansion.cs" />
+    <Compile Include="Models\SysArticle.cs" />
+    <Compile Include="Models\SysArticleCategory.cs" />
+    <Compile Include="Models\SysCard.cs" />
+    <Compile Include="Models\SysCompany.cs" />
+    <Compile Include="Models\SysCompanyAd.cs" />
+    <Compile Include="Models\SysCompanyAdsPointSetting.cs" />
+    <Compile Include="Models\SysCompanyFaceBook.cs" />
+    <Compile Include="Models\SysCompanyFlag.cs" />
+    <Compile Include="Models\SysCompanyItem.cs" />
+    <Compile Include="Models\SysCompanyJoin.cs" />
+    <Compile Include="Models\SysCompanyMansion.cs" />
+    <Compile Include="Models\SysCompanyMember.cs" />
+    <Compile Include="Models\SysCompanyMemberGrade.cs" />
+    <Compile Include="Models\SysDoc.cs" />
+    <Compile Include="Models\SysErrorLog.cs" />
+    <Compile Include="Models\SysLocation.cs" />
+    <Compile Include="Models\SysMember.cs" />
+    <Compile Include="Models\SysMemberAd.cs" />
+    <Compile Include="Models\SysMemberCash.cs" />
+    <Compile Include="Models\SysMemberCompany.cs" />
+    <Compile Include="Models\SysMemberCompanyR.cs" />
+    <Compile Include="Models\SysMemberConfig.cs" />
+    <Compile Include="Models\SysMemberItem.cs" />
+    <Compile Include="Models\SysMemberMove.cs" />
+    <Compile Include="Models\SysMemberReward.cs" />
+    <Compile Include="Models\SysMessage.cs" />
+    <Compile Include="Models\SysMessageType.cs" />
+    <Compile Include="Models\SysMsnLog.cs" />
+    <Compile Include="Models\SysNavigation.cs" />
+    <Compile Include="Models\SysNote.cs" />
+    <Compile Include="Models\SysResource.cs" />
+    <Compile Include="Models\SysReward.cs" />
+    <Compile Include="Models\SysRoleAssignment.cs" />
+    <Compile Include="Models\SysRoleDefine.cs" />
+    <Compile Include="Models\SysSubSy.cs" />
+    <Compile Include="Models\SysSupport.cs" />
+    <Compile Include="Models\SysSupportMessage.cs" />
+    <Compile Include="Models\SysSupportType.cs" />
+    <Compile Include="Models\SysTakeawayDirectory.cs" />
+    <Compile Include="Models\SysTakeawayMenu.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schemes\OrdersCashCompanySchema.cs" />
+    <Compile Include="Schemes\OrderSchema.cs" />
+    <Compile Include="Schemes\OrdersDetailSchema.cs" />
+    <Compile Include="Schemes\OrdersLogSchema.cs" />
+    <Compile Include="Schemes\PaymentCashSchema.cs" />
+    <Compile Include="Schemes\PaymentRateCashSchema.cs" />
+    <Compile Include="Schemes\PaymentRateSchema.cs" />
+    <Compile Include="Schemes\PaymentSchema.cs" />
+    <Compile Include="Schemes\SysAdsClickSettingSchema.cs" />
+    <Compile Include="Schemes\SysAreaMansionSchema.cs" />
+    <Compile Include="Schemes\SysAreaSchema.cs" />
+    <Compile Include="Schemes\SysArticleCategorySchema.cs" />
+    <Compile Include="Schemes\SysArticleSchema.cs" />
+    <Compile Include="Schemes\SysCardSchema.cs" />
+    <Compile Include="Schemes\SysCompanyAdSchema.cs" />
+    <Compile Include="Schemes\SysCompanyAdsPointSettingSchema.cs" />
+    <Compile Include="Schemes\SysCompanyFaceBookSchema.cs" />
+    <Compile Include="Schemes\SysCompanyFlagSchema.cs" />
+    <Compile Include="Schemes\SysCompanyItemSchema.cs" />
+    <Compile Include="Schemes\SysCompanyJoinSchema.cs" />
+    <Compile Include="Schemes\SysCompanyMansionSchema.cs" />
+    <Compile Include="Schemes\SysCompanyMemberGradeSchema.cs" />
+    <Compile Include="Schemes\SysCompanyMemberSchema.cs" />
+    <Compile Include="Schemes\SysCompanySchema.cs" />
+    <Compile Include="Schemes\SysDocSchema.cs" />
+    <Compile Include="Schemes\SysErrorLogSchema.cs" />
+    <Compile Include="Schemes\SysLocationSchema.cs" />
+    <Compile Include="Schemes\SysMemberAdSchema.cs" />
+    <Compile Include="Schemes\SysMemberCashSchema.cs" />
+    <Compile Include="Schemes\SysMemberCompanyRSchema.cs" />
+    <Compile Include="Schemes\SysMemberCompanySchema.cs" />
+    <Compile Include="Schemes\SysMemberConfigSchema.cs" />
+    <Compile Include="Schemes\SysMemberItemSchema.cs" />
+    <Compile Include="Schemes\SysMemberMoveSchema.cs" />
+    <Compile Include="Schemes\SysMemberRewardSchema.cs" />
+    <Compile Include="Schemes\SysMemberSchema.cs" />
+    <Compile Include="Schemes\SysMessageSchema.cs" />
+    <Compile Include="Schemes\SysMessageTypeSchema.cs" />
+    <Compile Include="Schemes\SysMsnLogSchema.cs" />
+    <Compile Include="Schemes\SysNavigationSchema.cs" />
+    <Compile Include="Schemes\SysNoteSchema.cs" />
+    <Compile Include="Schemes\SysResourceSchema.cs" />
+    <Compile Include="Schemes\SysRewardSchema.cs" />
+    <Compile Include="Schemes\SysRoleAssignmentSchema.cs" />
+    <Compile Include="Schemes\SysRoleDefineSchema.cs" />
+    <Compile Include="Schemes\SysSubSySchema.cs" />
+    <Compile Include="Schemes\SysSupportMessageSchema.cs" />
+    <Compile Include="Schemes\SysSupportSchema.cs" />
+    <Compile Include="Schemes\SysSupportTypeSchema.cs" />
+    <Compile Include="Schemes\SysTakeawayDirectorySchema.cs" />
+    <Compile Include="Schemes\SysTakeawayMenuSchema.cs" />
+    <Compile Include="Schemes\VCompanyLastThisMonthOrderAndCashSchema.cs" />
+    <Compile Include="Schemes\VCompanyMaxCashRateSchema.cs" />
+    <Compile Include="Schemes\VCompanyMemberCountSchema.cs" />
+    <Compile Include="Schemes\VEleooFaceBookSchema.cs" />
+    <Compile Include="Schemes\VFinancePayCashCashCompany1Schema.cs" />
+    <Compile Include="Schemes\VFinancePayCashCashCompany2Schema.cs" />
+    <Compile Include="Schemes\VFinancePayCashLastDateSchema.cs" />
+    <Compile Include="Schemes\VFinancePayLastDateSchema.cs" />
+    <Compile Include="Schemes\VFinancePayMemberCashSchema.cs" />
+    <Compile Include="Schemes\VFinancePayMemberOrderSchema.cs" />
+    <Compile Include="Schemes\VLatestSysMemberAdSchema.cs" />
+    <Compile Include="Schemes\VLatestSysMemberItemSchema.cs" />
+    <Compile Include="Schemes\VMealOrderSchema.cs" />
+    <Compile Include="Schemes\VOrdersCashCompanySchema.cs" />
+    <Compile Include="Schemes\VPaymentDateSchema.cs" />
+    <Compile Include="Schemes\VPaymentFirstSchema.cs" />
+    <Compile Include="Schemes\VPaymentRateDateSchema.cs" />
+    <Compile Include="Schemes\VPaymentSchema.cs" />
+    <Compile Include="Schemes\VPaymentSelfFirstSchema.cs" />
+    <Compile Include="Schemes\VPaymentSelfSchema.cs" />
+    <Compile Include="Schemes\VSysCompanyAdsMaxPointSchema.cs" />
+    <Compile Include="Schemes\VSysMemberAdsOuterSchema.cs" />
+    <Compile Include="Schemes\VSysMemberAdsSumSchema.cs" />
+    <Compile Include="Schemes\VSysMemberCashMoveSchema.cs" />
+    <Compile Include="Schemes\VSysMemberItemOuterSchema.cs" />
+    <Compile Include="Schemes\VSysMemberSchema.cs" />
+    <Compile Include="StoredProcedures.cs" />
+    <Compile Include="Views\VCompanyLastThisMonthOrderAndCash.cs" />
+    <Compile Include="Views\VCompanyMaxCashRate.cs" />
+    <Compile Include="Views\VCompanyMemberCount.cs" />
+    <Compile Include="Views\VEleooFaceBook.cs" />
+    <Compile Include="Views\VFinancePayCashCashCompany1.cs" />
+    <Compile Include="Views\VFinancePayCashCashCompany2.cs" />
+    <Compile Include="Views\VFinancePayCashLastDate.cs" />
+    <Compile Include="Views\VFinancePayLastDate.cs" />
+    <Compile Include="Views\VFinancePayMemberCash.cs" />
+    <Compile Include="Views\VFinancePayMemberOrder.cs" />
+    <Compile Include="Views\VLatestSysMemberAd.cs" />
+    <Compile Include="Views\VLatestSysMemberItem.cs" />
+    <Compile Include="Views\VMealOrder.cs" />
+    <Compile Include="Views\VOrdersCashCompany.cs" />
+    <Compile Include="Views\VPayment.cs" />
+    <Compile Include="Views\VPaymentDate.cs" />
+    <Compile Include="Views\VPaymentFirst.cs" />
+    <Compile Include="Views\VPaymentRateDate.cs" />
+    <Compile Include="Views\VPaymentSelf.cs" />
+    <Compile Include="Views\VPaymentSelfFirst.cs" />
+    <Compile Include="Views\VSysCompanyAdsMaxPoint.cs" />
+    <Compile Include="Views\VSysMember.cs" />
+    <Compile Include="Views\VSysMemberAdsOuter.cs" />
+    <Compile Include="Views\VSysMemberAdsSum.cs" />
+    <Compile Include="Views\VSysMemberCashMove.cs" />
+    <Compile Include="Views\VSysMemberItemOuter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\SubSonic\SubSonic.csproj">
+      <Project>{EE4A10E7-92C3-4EAC-B6DF-5DA1C26F4D1D}</Project>
+      <Name>SubSonic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

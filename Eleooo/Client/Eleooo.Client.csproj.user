@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PublishUrlHistory>..\..\..\Publish\Client\|F:\Asp.Net\MyWeb\eleooo.com\Publish\Client\|..\Web\publish\|F:\Asp.Net\MyWeb\eleooo.com\WebApp\Eleooo\Web\publish\|publish\</PublishUrlHistory>
+    <InstallUrlHistory>http://www.eleooo.com/Client/|http://www.eleooo.net/Client/|http://localhost:4726/Client/|http://localhost:4726/publish/|http://localhost:4726/</InstallUrlHistory>
+    <SupportUrlHistory>http://www.eleooo.com</SupportUrlHistory>
+    <UpdateUrlHistory>http://localhost:4726/</UpdateUrlHistory>
+    <BootstrapperUrlHistory />
+    <ErrorReportUrlHistory />
+    <FallbackCulture>zh-CN</FallbackCulture>
+    <VerifyUploadedFiles>false</VerifyUploadedFiles>
+  </PropertyGroup>
+</Project>

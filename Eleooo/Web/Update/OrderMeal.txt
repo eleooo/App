@@ -1,0 +1,96 @@
+﻿alter table sys_company add MsnPhoneNum nvarchar(15); --短信收发号码
+alter table sys_company add OrderElapsed nvarchar(10); --送餐速度
+alter table sys_company add OrderMaxAmount int; --峰值接单量 峰值时间段为11:00-12:00
+alter table sys_company add IsUseMsg bit;--是否使用短信功能
+alter table Sys_Company add OnSetSum decimal(18,2);--起送金额
+alter table Sys_Company add ServiceSum decimal(18,2); --送餐费用
+alter table Sys_Company add MenuDate datetime;--菜单更新时间
+
+alter table Sys_Member_Config add MyFavCompany nvarchar(4000);
+alter table  sys_member_config add MyAddress nvarchar(4000);
+alter table sys_member add MemberMsnPhone nvarchar(50);
+alter table sys_member_Item add OrderID int;
+
+alter table orders add MansionId int;
+alter table orders add ServiceSum decimal(18,2);
+alter table orders add IsNonOut bit;
+
+--外卖区域表
+CREATE TABLE [dbo].[Sys_Area_Mansion](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[AreaID] [int] NULL,
+	[Name] [nvarchar](250) COLLATE Chinese_PRC_CI_AS NULL,
+	[AreaDepth] [nvarchar](50) COLLATE Chinese_PRC_CI_AS NULL,
+	[Code] [nvarchar](50) COLLATE Chinese_PRC_CI_AS NULL,
+	[Address] [nvarchar](250),
+ CONSTRAINT [PK_Sys_Area_Mansion] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+--商家外卖区域表
+CREATE TABLE [dbo].[Sys_Company_Mansion](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[CompanyID] [int] NULL,
+	[MansionID] [int] NULL,
+ CONSTRAINT [PK_Sys_Company_Mansion] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+--外卖菜单目录表
+CREATE TABLE [dbo].[Sys_Takeaway_Directory](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[DirName] [nvarchar](250) COLLATE Chinese_PRC_CI_AS NULL,
+ CONSTRAINT [PK_Sys_Takeaway_Directory] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+CREATE TABLE [dbo].[Sys_Takeaway_Menu](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](250) COLLATE Chinese_PRC_CI_AS NULL,
+	[Price] [decimal](18, 2) NULL,
+	[DirID] [int] NULL,
+	[Code] [nvarchar](20) COLLATE Chinese_PRC_CI_AS NULL,
+	[CompanyID] [int] NULL,
+	[IsDeleted] [bit] NULL,
+	[IsOutOfStock] [bit] NULL,
+	[OutOfStockDate] [datetime] NULL,
+ CONSTRAINT [PK_Sys_Takeaway_Menu] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+CREATE TABLE [dbo].[Orders_Detail](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[MenuId] [int] NULL,
+	[MenuName] [nvarchar](250) COLLATE Chinese_PRC_CI_AS NULL,
+	[OrderId] [int] NULL,
+	[OrderQty] [int] NULL,
+	[OrderPrice] [decimal](18, 2) NULL,
+	[ChgPrice] [decimal](18, 2) NULL,
+	[IsOutOfStock] [bit] NULL,
+ CONSTRAINT [PK_Orders_Detail] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+CREATE TABLE [dbo].[Sys_Msn_Log](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[PhoneNumber] [nvarchar](15) COLLATE Chinese_PRC_CI_AS NULL,
+	[MsnContent] [nvarchar](500) COLLATE Chinese_PRC_CI_AS NULL,
+	[MsnDate] [datetime] NULL,
+	[MsnCode] [nvarchar](50) COLLATE Chinese_PRC_CI_AS NULL,
+	[IsChecked] [bit] NULL,
+	[OrderId] [int] NULL,
+ CONSTRAINT [PK_Sys_Msn_Log] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]

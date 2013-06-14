@@ -1,0 +1,259 @@
+BODY {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; FONT-FAMILY: Arial, Helvetica, sans-serif; FONT-SIZE: 12px; PADDING-TOP: 0px
+}
+.main_tab {
+	BACKGROUND-COLOR: #ffffff
+}
+INPUT.kuang {
+	BORDER-BOTTOM: #666666 1px solid; BORDER-LEFT: #666666 1px solid; HEIGHT: 16px; COLOR: #999999; FONT-SIZE: 12px; BORDER-TOP: #666666 1px solid; BORDER-RIGHT: #666666 1px solid
+}
+TD {
+	LINE-HEIGHT: 150%; FONT-FAMILY: Arial, Helvetica,sans-serif; FONT-SIZE: 12px
+}
+INPUT {
+	FONT-FAMILY: Arial, Helvetica,sans-serif; FONT-SIZE: 12px
+}
+SELECT {
+	FONT-FAMILY: Arial, Helvetica,sans-serif; FONT-SIZE: 12px
+}
+TEXTAREA {
+	FONT-FAMILY: Arial, Helvetica,sans-serif; FONT-SIZE: 12px
+}
+TD.road {
+	LINE-HEIGHT: 150%; FONT-FAMILY: "ËÎÌו"; COLOR: #666666; FONT-SIZE: 12px
+}
+TD.table_title {
+	TEXT-ALIGN: center; BACKGROUND-COLOR: #f1f1f1; FONT-FAMILY: Arial, Helvetica, sans-serif; COLOR: #ffffff; FONT-SIZE: 12px
+}
+TD.table_number {
+	TEXT-ALIGN: center; FONT-FAMILY: Arial, Helvetica, sans-serif; COLOR: #333333; FONT-SIZE: 12px; FONT-WEIGHT: bold
+}
+TD.table_buy {
+	TEXT-ALIGN: right; FONT-FAMILY: Arial, Helvetica, sans-serif; COLOR: #cd0100; FONT-SIZE: 12px
+}
+TD.leftmenu {
+	FONT-FAMILY: Arial, Helvetica, sans-serif; COLOR: #ffffff; FONT-SIZE: 12px; FONT-WEIGHT: bold
+}
+TD.buy {
+	LINE-HEIGHT: 20px; FONT-FAMILY: Arial, Helvetica, sans-serif; COLOR: #ff4e00; FONT-SIZE: 12px; FONT-WEIGHT: bold
+}
+TD.chaozhi {
+	LINE-HEIGHT: 20px; FONT-FAMILY: Arial, Helvetica, sans-serif; COLOR: #cc0000; FONT-SIZE: 12px; FONT-WEIGHT: bold
+}
+TD.content {
+	FONT-FAMILY: Arial, Helvetica, sans-serif; COLOR: #333333; FONT-SIZE: 12px
+}
+TD.table {
+	FONT-FAMILY: Arial, Helvetica, sans-serif; COLOR: #ffffff; FONT-SIZE: 12px
+}
+A.a01:link {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #ffffff; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+A:link {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #555555; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; TEXT-DECORATION: none
+}
+A:visited {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #555555; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; TEXT-DECORATION: none
+}
+A:active {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #cc0000; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; TEXT-DECORATION: none
+}
+A:hover {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #cc0000; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; TEXT-DECORATION: none
+}
+A.a01:visited {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #ffffff; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+A.a01:active {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #ff6600; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+A.a01:hover {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #ff6600; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+A.a02:link {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #000000; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; TEXT-DECORATION: none
+}
+A.a02:visited {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #000000; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; TEXT-DECORATION: none
+}
+A.a02:active {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; TEXT-DECORATION: none
+}
+A.a02:hover {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #bb0000; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; TEXT-DECORATION: none
+}
+A.a03:link {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #007700; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; TEXT-DECORATION: none
+}
+A.a03:visited {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #007700; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; TEXT-DECORATION: none
+}
+A.a03:active {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #00aa00; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; TEXT-DECORATION: none
+}
+A.a03:hover {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #00aa00; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; TEXT-DECORATION: none
+}
+A.a04:link {
+	LINE-HEIGHT: 17px; BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #cc0000; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+A.a04:visited {
+	LINE-HEIGHT: 17px; BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #cc0000; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+A.a04:active {
+	LINE-HEIGHT: 17px; BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #ff4e00; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+A.a04:hover {
+	LINE-HEIGHT: 17px; BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #ff4e00; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+A.a05:link {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #cc0000; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; TEXT-DECORATION: none
+}
+A.a05:visited {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #cc0000; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; TEXT-DECORATION: none
+}
+A.a05:active {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #ff6600; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; TEXT-DECORATION: none
+}
+A.a05:hover {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #ff6600; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; TEXT-DECORATION: none
+}
+A.a06:link {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #ff0000; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; TEXT-DECORATION: none
+}
+A.a06:visited {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #ff0000; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; TEXT-DECORATION: none
+}
+A.a06:active {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #ff6600; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; TEXT-DECORATION: none
+}
+A.a06:hover {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #ff6600; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; TEXT-DECORATION: none
+}
+A.a07:link {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #000000; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+A.a07:visited {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #000000; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; TEXT-DECORATION: none
+}
+A.a07:active {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #000000; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+A.a07:hover {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #770000; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+.tbl_body {
+	BORDER-BOTTOM: #cc2211 0px solid; BORDER-LEFT: #cc2211 0px solid; BACKGROUND-COLOR: #bbbbbb; BORDER-TOP: #cc2211 0px solid; BORDER-RIGHT: #cc2211 0px solid
+}
+.tbl_bg {
+	BORDER-BOTTOM: #cc2211 0px solid; BORDER-LEFT: #cc2211 0px solid; BACKGROUND-COLOR: #cccccc; BORDER-TOP: #cc2211 0px solid; BORDER-RIGHT: #cc2211 0px solid
+}
+.tbl_bg thead tr {color: #000000;background-color: #FFCC99; text-align:center;}
+.tbl_bg tbody tr {
+	BACKGROUND-COLOR: #ffffff
+}
+.tbl_head{color: #000000;background-color: #f0f2f6;}
+.tbl_row {
+	BACKGROUND-COLOR: #ffffff
+}
+.tbl_form_row {
+	BACKGROUND-COLOR: #ffffff
+}
+.tbl_form_row .validate_info{line-height: 18px;color:Red;}
+.tbl_form_row input{ width:200px;}
+.tbl_form_row .radio{width:20px; border:0px;}
+.tbl_form_row .button{width:90px;}
+
+.tbl_bgblack {
+	BACKGROUND-COLOR: #f1f1f1
+}
+.tbl_rows {
+	BACKGROUND-COLOR: #f0f0f0
+}
+#top {
+	TEXT-ALIGN: center; BACKGROUND-COLOR: #fff; MARGIN: 0px auto; WIDTH: 980px; HEIGHT: auto
+}
+#line {
+	MARGIN: 0px auto; WIDTH: 950px; BACKGROUND-REPEAT: repeat-y; HEIGHT: 25px; PADDING-TOP: 1px; background-imageF: url(../images/line.gif)
+}
+#home {
+	MARGIN-TOP: 5px; WIDTH: 65px; FLOAT: left; HEIGHT: 20px; COLOR: #666666; MARGIN-LEFT: 0px
+}
+#tel {
+	MARGIN-TOP: 1px; WIDTH: 14px; FLOAT: left; HEIGHT: 22px; MARGIN-LEFT: 294px
+}
+#telcontent {
+	MARGIN-TOP: 3px; WIDTH: 190px; FLOAT: left; HEIGHT: 22px; COLOR: #666666; MARGIN-LEFT: 0px
+}
+#question {
+	MARGIN-TOP: 0px; WIDTH: 62px; FLOAT: left; HEIGHT: 22px; MARGIN-LEFT: 20px
+}
+#exit {
+	MARGIN-TOP: 0px; WIDTH: 62px; FLOAT: left; HEIGHT: 22px; MARGIN-LEFT: 5px
+}
+#menu {
+	TEXT-ALIGN: center; BACKGROUND-COLOR: #fff; MARGIN: 0px auto; WIDTH: 980px; HEIGHT: auto; PADDING-TOP: 5px
+}
+#logo {
+	MARGIN-TOP: 10px; WIDTH: 138px; FLOAT: left; HEIGHT: 49px; MARGIN-LEFT: 10px
+}
+#menu-disc-001 {
+	MARGIN-TOP: 35px; WIDTH: 6px; FLOAT: left; HEIGHT: 7px; MARGIN-LEFT: 120px
+}
+#menu-disc-content-001 {
+	MARGIN-TOP: 31px; WIDTH: 70px; FLOAT: left; HEIGHT: 30px; MARGIN-LEFT: 0px
+}
+#menu-disc-002 {
+	MARGIN-TOP: 35px; WIDTH: 6px; FLOAT: left; HEIGHT: 7px; MARGIN-LEFT: 38px
+}
+#menu-disc-content-002 {
+	MARGIN-TOP: 31px; WIDTH: 70px; FLOAT: left; HEIGHT: 30px; MARGIN-LEFT: 0px
+}
+#menu-disc-003 {
+	MARGIN-TOP: 35px; WIDTH: 6px; FLOAT: left; HEIGHT: 7px; MARGIN-LEFT: 38px
+}
+#menu-disc-content-003 {
+	MARGIN-TOP: 31px; WIDTH: 90px; FLOAT: left; HEIGHT: 30px; MARGIN-LEFT: 0px
+}
+#content {
+	TEXT-ALIGN: center; BACKGROUND-COLOR: #fff; MARGIN: 0px auto; WIDTH: 980px; HEIGHT: auto; PADDING-TOP: 8px
+}
+.wvs {
+	MARGIN: 20px 4px 0px -4px; WIDTH: 960px; FLOAT: left; HEIGHT: auto
+}
+.wvs .left {
+	WIDTH: 320px; FLOAT: left; HEIGHT: auto
+}
+.wvs .center {
+	WIDTH: 320px; FLOAT: left; HEIGHT: 157px; PADDING-TOP: 0px
+}
+.wvs .right {
+	WIDTH: 320px; FLOAT: left; HEIGHT: 157px; PADDING-TOP: 0px
+}
+#center-bottom {
+	MARGIN: 12px 4px 0px -4px; WIDTH: 960px; FLOAT: left; HEIGHT: auto
+}
+#footer {
+	TEXT-ALIGN: center; BACKGROUND-COLOR: #fff; MARGIN: 0px auto; WIDTH: 980px; HEIGHT: auto; COLOR: #333333; PADDING-TOP: 10px
+}
+#footer-line {
+	WIDTH: 950px; MARGIN-BOTTOM: 0px; HEIGHT: 1px; MARGIN-LEFT: 0px; PADDING-TOP: 0px
+}
+.footer-back {
+	BACKGROUND-COLOR: #eeeeee; HEIGHT: 22px
+}
+.menu.footer-back {
+	WIDTH: 750px; FLOAT: left; MARGIN-LEFT: 0px
+}
+.links.footer-back {
+	MARGIN: 0px 0px 0px 20px; WIDTH: 150px; FLOAT: right
+}
+.footer-contact {
+	TEXT-ALIGN: center; LINE-HEIGHT: 20px; MARGIN: 10px 0px 20px; WIDTH: 950px; COLOR: #333333
+}
+.address.footer-contact {
+	WIDTH: 860px; FLOAT: left
+}
+.police.footer-contact {
+	MARGIN: 15px 0px 0px; WIDTH: 90px; FLOAT: left
+}

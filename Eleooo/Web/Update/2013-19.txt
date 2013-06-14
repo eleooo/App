@@ -1,0 +1,5 @@
+﻿alter table Sys_Company_Item add ItemPic3 nvarchar(300);
+alter table Sys_Company_Item add ItemPic4 nvarchar(300);
+alter table Sys_Company_Item add ItemPic5 nvarchar(300);
+alter table Sys_Company_Item add ItemPic6 nvarchar(300);
+alter table Sys_Company_Item add ItemPic7 nvarchar(300);

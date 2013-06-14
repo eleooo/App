@@ -1,0 +1,28 @@
+﻿insert into sys_member(
+memberfullname,
+memberemail,
+memberpwd,
+memberphonenumber,memberdate,membersum,memberbalance,memberbalancecash,company_id)
+select companyname,companycode,companypwd,companytel,companydate,companysalesum,companybalance,companybalancecash,id
+from sys_company
+
+delete Orders;
+delete dbo.Orders_CashCompany;
+delete dbo.Payment;
+delete dbo.PaymentCash;
+delete dbo.PaymentRate;
+delete dbo.PaymentRateCash
+delete dbo.Sys_Company where ID<>74;
+delete dbo.Sys_Company_FaceBook;
+delete dbo.Sys_Company_Join;
+delete dbo.Sys_Company_Member;
+delete dbo.Sys_Company_Member_Grade;
+delete dbo.Sys_Member where Company_ID <> 74;
+delete dbo.Sys_Member_Cash
+delete dbo.Sys_Member_Company;
+delete dbo.Sys_Member_CompanyR;
+delete dbo.Sys_Member_Move;
+delete dbo.Sys_Message;
+delete dbo.Sys_Support;
+delete dbo.Sys_Support_Message;
+exec UpdateSaleBalance;

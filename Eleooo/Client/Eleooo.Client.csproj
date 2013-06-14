@@ -1,0 +1,737 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2D70548E-EAFD-43B9-849E-14B1DF218341}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Eleooo.Client</RootNamespace>
+    <AssemblyName>Eleooo.Client</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <PublishUrl>..\..\..\Publish\Client\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>false</MapFileExtensions>
+    <InstallUrl>http://www.eleooo.com/Client/</InstallUrl>
+    <SupportUrl>http://www.eleooo.com</SupportUrl>
+    <TargetCulture>zh-CN</TargetCulture>
+    <ProductName>乐多分-客户端程序</ProductName>
+    <PublisherName>乐多分</PublisherName>
+    <WebPage>Install.aspx</WebPage>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <TrustUrlParameters>true</TrustUrlParameters>
+    <ApplicationRevision>20</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>false</BootstrapperEnabled>
+    <BootstrapperComponentsLocation>Relative</BootstrapperComponentsLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>F45F7F3EFE811AFD821B5BBBA9052A01ABBB48FE</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Eleooo.Client_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>Internet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Eleooo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevComponents.DotNetBar.Keyboard, Version=10.3.0.1, Culture=neutral, PublicKeyToken=c39c3242a43eee2b, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevComponents.DotNetBar.SuperGrid, Version=10.3.0.1, Culture=neutral, PublicKeyToken=c39c3242a43eee2b, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevComponents.DotNetBar2, Version=10.3.0.1, Culture=neutral, PublicKeyToken=c39c3242a43eee2b, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevComponents.Instrumentation, Version=10.3.0.1, Culture=neutral, PublicKeyToken=bc4a9d761ea44ef0">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Interop.FingerActivex, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\Library\Interop.FingerActivex.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLL\AreaBLL.cs" />
+    <Compile Include="Common\AppContext.cs" />
+    <Compile Include="BLL\CashEntity.cs" />
+    <Compile Include="BLL\CashBLL.cs" />
+    <Compile Include="Common\Commands.cs" />
+    <Compile Include="Common\FingerPrint.cs" />
+    <Compile Include="BLL\GradeBLL.cs" />
+    <Compile Include="Common\Formatter.cs" />
+    <Compile Include="Common\PageManager.cs" />
+    <Compile Include="BLL\RoleBLL.cs" />
+    <Compile Include="Common\TypeHelper.cs" />
+    <Compile Include="BLL\UserEntity.cs" />
+    <Compile Include="BLL\UserBLL.cs" />
+    <Compile Include="CompanyInfo\UcPwdInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CompanyInfo\UcPwdInfo.Designer.cs">
+      <DependentUpon>UcPwdInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\CompanyItemOrderButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Control\BindingButtonItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Common\CompanyInfoAdapter.cs" />
+    <Compile Include="FingerTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FingerTest.Designer.cs">
+      <DependentUpon>FingerTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FlushForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FlushForm.Designer.cs">
+      <DependentUpon>FlushForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainMetroForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainMetroForm.Designer.cs">
+      <DependentUpon>MainMetroForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberReg\UcMemberReg.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MemberReg\UcMemberReg.Designer.cs">
+      <DependentUpon>UcMemberReg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BLL\OrderEntity.cs" />
+    <Compile Include="BLL\OrderBLL.cs" />
+    <Compile Include="MetroIcon.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MetroIcon.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MemberOrder\UcOrder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MemberOrder\UcOrder.Designer.cs">
+      <DependentUpon>UcOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberOrder\UcMemberOrder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MemberOrder\UcMemberOrder.Designer.cs">
+      <DependentUpon>UcMemberOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCash\UcMemberCash.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MemberCash\UcMemberCash.Designer.cs">
+      <DependentUpon>UcMemberCash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberOrder\UcNonMemberOrder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MemberOrder\UcNonMemberOrder.Designer.cs">
+      <DependentUpon>UcNonMemberOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Common\ServiceProvider.cs" />
+    <Compile Include="Common\AppVersion.cs" />
+    <Compile Include="Control\UserControlBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\UserControlBase.Designer.cs">
+      <DependentUpon>UserControlBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Utilities.cs" />
+    <Compile Include="Control\UserControlContainer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\UserControlContainer.Designer.cs">
+      <DependentUpon>UserControlContainer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\UcHome.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\UcHome.Designer.cs">
+      <DependentUpon>UcHome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyInfo\UcCompanyInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CompanyInfo\UcCompanyInfo.Designer.cs">
+      <DependentUpon>UcCompanyInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyInfo\UcSystem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CompanyInfo\UcSystem.Designer.cs">
+      <DependentUpon>UcSystem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\UcDateCombox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\UcDateCombox.Designer.cs">
+      <DependentUpon>UcDateCombox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberOrder\UcCompanyItemOrder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MemberOrder\UcCompanyItemOrder.Designer.cs">
+      <DependentUpon>UcCompanyItemOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyItem\UcCompanyItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CompanyItem\UcCompanyItem.Designer.cs">
+      <DependentUpon>UcCompanyItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\UcAreaCombox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\UcAreaCombox.Designer.cs">
+      <DependentUpon>UcAreaCombox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyAds\UcCompanyAds.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CompanyAds\UcCompanyAds.Designer.cs">
+      <DependentUpon>UcCompanyAds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\UcAdsSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\UcAdsSettings.Designer.cs">
+      <DependentUpon>UcAdsSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\WebServiceProvider\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Common\WinApi.cs" />
+    <EmbeddedResource Include="CompanyInfo\UcPwdInfo.resx">
+      <DependentUpon>UcPwdInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\UcAreaCombox.resx">
+      <DependentUpon>UcAreaCombox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FingerTest.resx">
+      <DependentUpon>FingerTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FlushForm.resx">
+      <DependentUpon>FlushForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainMetroForm.resx">
+      <DependentUpon>MainMetroForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberOrder\UcMemberOrder.resx">
+      <DependentUpon>UcMemberOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberOrder\UcNonMemberOrder.resx">
+      <DependentUpon>UcNonMemberOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberOrder\UcOrder.resx">
+      <DependentUpon>UcOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCash\UcMemberCash.resx">
+      <DependentUpon>UcMemberCash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberReg\UcMemberReg.resx">
+      <DependentUpon>UcMemberReg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MetroIcon.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MetroIcon.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\UserControlBase.resx">
+      <DependentUpon>UserControlBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\UserControlContainer.resx">
+      <DependentUpon>UserControlContainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\UcHome.resx">
+      <DependentUpon>UcHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CompanyInfo\UcCompanyInfo.resx">
+      <DependentUpon>UcCompanyInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CompanyInfo\UcSystem.resx">
+      <DependentUpon>UcSystem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\UcDateCombox.resx">
+      <DependentUpon>UcDateCombox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberOrder\UcCompanyItemOrder.resx">
+      <DependentUpon>UcCompanyItemOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CompanyItem\UcCompanyItem.resx">
+      <DependentUpon>UcCompanyItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CompanyAds\UcCompanyAds.resx">
+      <DependentUpon>UcCompanyAds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\UcAdsSettings.resx">
+      <DependentUpon>UcAdsSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.config" />
+    <None Include="Eleooo.Client_TemporaryKey.pfx" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\WebServiceProvider\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\WebServiceProvider\WebRestService.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\SubSonic\SubSonic.csproj">
+      <Project>{EE4A10E7-92C3-4EAC-B6DF-5DA1C26F4D1D}</Project>
+      <Name>SubSonic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\Eleooo.DAL.csproj">
+      <Project>{129F53F8-1B36-4D24-8007-EAE13842AE54}</Project>
+      <Name>Eleooo.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ARTH_DLL.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Eleooo.ico" />
+    <Content Include="FingerActivex.ocx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MetroIcon\Cash.png" />
+    <Content Include="MetroIcon\CheckMark.png" />
+    <Content Include="MetroIcon\Delete.png" />
+    <Content Include="MetroIcon\Delete1.png" />
+    <Content Include="MetroIcon\Edit Data.png" />
+    <Content Include="MetroIcon\Eleooo_Cash.png" />
+    <Content Include="MetroIcon\Eleooo_home.png" />
+    <Content Include="MetroIcon\Eleooo_MyInfo.png" />
+    <Content Include="MetroIcon\Eleooo_Order.png" />
+    <Content Include="MetroIcon\Eleooo_Pwd.png" />
+    <Content Include="MetroIcon\Eleooo_Reg.png" />
+    <Content Include="MetroIcon\Follow.png" />
+    <Content Include="MetroIcon\Home.png" />
+    <Content Include="MetroIcon\Key.png" />
+    <Content Include="MetroIcon\Logout.png" />
+    <Content Include="MetroIcon\MarkAsPaid.png" />
+    <Content Include="MetroIcon\Order.png" />
+    <Content Include="MetroIcon\Refresh.png" />
+    <Content Include="MetroIcon\Stationery.png" />
+    <Content Include="MetroIcon\User.png" />
+    <None Include="Resources\loading.gif" />
+    <None Include="Resources\ItemImage.png" />
+    <None Include="Resources\LoginImage.png" />
+    <None Include="Resources\MemberImage.png" />
+    <None Include="Resources\OrderImage.png" />
+    <None Include="Resources\SystemImage.png" />
+    <None Include="Resources\AdsImage.png" />
+    <None Include="Resources\CashImage.png" />
+    <None Include="Resources\EleoooImage.png" />
+    <None Include="Resources\LogoutImage.png" />
+    <None Include="Resources\HeadLogo.png" />
+    <None Include="Resources\login.png" />
+    <None Include="Resources\login-out.png" />
+    <Content Include="ZAZAPIt.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Web References\WebServiceProvider\WebRestService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://localhost:4726/WebRestServices/WebRestService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WebServiceProvider\</RelPath>
+      <UpdateFromURL>http://localhost:4726/WebRestServices/WebRestService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>ServiceUrl</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="Interop.DAO">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="MetroIcon\Cash.png">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="MetroIcon\CheckMark.png">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="MetroIcon\Delete.png">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="MetroIcon\Delete1.png">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="MetroIcon\Edit Data.png">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="MetroIcon\Eleooo_Cash.png">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="MetroIcon\Eleooo_home.png">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="MetroIcon\Eleooo_MyInfo.png">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="MetroIcon\Eleooo_Order.png">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="MetroIcon\Eleooo_Pwd.png">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="MetroIcon\Eleooo_Reg.png">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="MetroIcon\Follow.png">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="MetroIcon\Home.png">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="MetroIcon\Key.png">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="MetroIcon\Logout.png">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="MetroIcon\MarkAsPaid.png">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="MetroIcon\Order.png">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="MetroIcon\Refresh.png">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="MetroIcon\Stationery.png">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="MetroIcon\User.png">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.Practices.EnterpriseLibrary.Common">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.Practices.EnterpriseLibrary.Data">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="MySql.Data">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="System.Data.SQLite">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="System.Data.SqlServerCe">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="zh-CHS\System.Data.SqlServerCe.resources">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Satellite</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

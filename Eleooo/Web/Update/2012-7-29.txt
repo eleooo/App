@@ -1,0 +1,31 @@
+﻿-- create new table Sys_Ads_ClickSetting
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Sys_Ads_ClickSetting](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[OrderSumLimit] [decimal](18, 2) NULL,
+	[ClickCountLimit] [int] NULL,
+ CONSTRAINT [PK_Sys_Ads_ClickSetting] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+-- create new field form sys_company_ads
+alter table Sys_Company_Ads add AdsClickLimit int; --1限一次 2本期限一次
+alter table Sys_Company_Ads add AdsMemberLimit int;--0所有会员 1本店会员 2外来会员
+alter table Sys_Company_Ads add AdsDayLimitAmount int;
+alter table Sys_Company_Ads add AdsDayLimitSum decimal(18,2)
+alter table Sys_Company_Ads add AdsQuestion nvarchar(500);
+alter table Sys_Company_Ads add AdsAnswer1 nvarchar(500);
+alter table Sys_Company_Ads add AdsAnswer2 nvarchar(500);
+alter table Sys_Company_Ads add AdsAnswer3 nvarchar(500);
+alter table Sys_Company_Ads add AdsAnswer4 nvarchar(500);
+alter table Sys_Company_Ads add AdsRightAnswer int;
+
+--drop old click settings table
+drop table dbo.Sys_Company_Ads_ClickSetting
+
+--add new web page SysAdsClickSettings.aspx

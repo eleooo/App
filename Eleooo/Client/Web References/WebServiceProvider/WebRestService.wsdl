@@ -1,0 +1,1251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ClientLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userPass" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="subSys" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ClientLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ClientLoginResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="loginUser">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMemberInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNum" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMemberInfoResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMemberFinger">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNum" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMemberFingerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMemberFingerResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMemberForOrder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNum" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMemberForOrderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetMemberForOrderResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="dtUser">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="dtUserInfo">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="dtUserCash">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMemberForCash">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNum" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMemberForCashResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetMemberForCashResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="dtUser">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="dtUserInfo">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataTable">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cmdSql" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataTableResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDataTableResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataTableByParam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cmdSql" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cmdParam">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataTableByParamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDataTableByParamResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecuteQuery">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cmdSql" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cmdParam">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecuteQueryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ExecuteQueryResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecuteScalar">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cmdSql" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cmdParam">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecuteScalarResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExecuteScalarResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveCompanyAdForClient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dtCompanyAd">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="dtPointSetting">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="fileData" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="fileName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveCompanyAdForClientResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SaveCompanyAdForClientResult" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="adsID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveOrderForClient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dtOrder">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="1" maxOccurs="1" name="userID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="userPwd" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveOrderForClientResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SaveOrderForClientResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveCashForClient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dtCash">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="1" maxOccurs="1" name="userID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveCashForClientResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SaveCashForClientResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCompanyInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="companyID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCompanyInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCompanyInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="fileData" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="fileName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="fileType" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="saveType" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="folderName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UploadFileResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSaveFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="fileName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="saveType" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSaveFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSaveFileResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGenCompanyCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="areaID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGenCompanyCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGenCompanyCodeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsOwnerUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="companyID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsOwnerUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsOwnerUserResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserCompanyItems">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNum" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userPwd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userFinger" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="companyID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserCompanyItemsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserCompanyItemsResult" type="s:base64Binary" />
+            <s:element minOccurs="1" maxOccurs="1" name="flag" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OrderCompanyItem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="companyID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="itemID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="MemberPwd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MemberFinger" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OrderCompanyItemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OrderCompanyItemResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="base64Binary" nillable="true" type="s:base64Binary" />
+      <s:element name="DataTable" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+            <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="boolean" type="s:boolean" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ClientLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:ClientLogin" />
+  </wsdl:message>
+  <wsdl:message name="ClientLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:ClientLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMemberInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMemberInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberFingerSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMemberFinger" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberFingerSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMemberFingerResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberForOrderSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMemberForOrder" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberForOrderSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMemberForOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberForCashSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMemberForCash" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberForCashSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMemberForCashResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDataTableSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetDataTableSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDataTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDataTableByParamSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDataTableByParam" />
+  </wsdl:message>
+  <wsdl:message name="GetDataTableByParamSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDataTableByParamResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteQuerySoapIn">
+    <wsdl:part name="parameters" element="tns:ExecuteQuery" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteQuerySoapOut">
+    <wsdl:part name="parameters" element="tns:ExecuteQueryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteScalarSoapIn">
+    <wsdl:part name="parameters" element="tns:ExecuteScalar" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteScalarSoapOut">
+    <wsdl:part name="parameters" element="tns:ExecuteScalarResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveCompanyAdForClientSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveCompanyAdForClient" />
+  </wsdl:message>
+  <wsdl:message name="SaveCompanyAdForClientSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveCompanyAdForClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveOrderForClientSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveOrderForClient" />
+  </wsdl:message>
+  <wsdl:message name="SaveOrderForClientSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveOrderForClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveCashForClientSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveCashForClient" />
+  </wsdl:message>
+  <wsdl:message name="SaveCashForClientSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveCashForClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCompanyInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCompanyInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadFileSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadFile" />
+  </wsdl:message>
+  <wsdl:message name="UploadFileSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSaveFileSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSaveFile" />
+  </wsdl:message>
+  <wsdl:message name="GetSaveFileSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSaveFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGenCompanyCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGenCompanyCode" />
+  </wsdl:message>
+  <wsdl:message name="GetGenCompanyCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGenCompanyCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsOwnerUserSoapIn">
+    <wsdl:part name="parameters" element="tns:IsOwnerUser" />
+  </wsdl:message>
+  <wsdl:message name="IsOwnerUserSoapOut">
+    <wsdl:part name="parameters" element="tns:IsOwnerUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserCompanyItemsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserCompanyItems" />
+  </wsdl:message>
+  <wsdl:message name="GetUserCompanyItemsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserCompanyItemsResponse" />
+  </wsdl:message>
+  <wsdl:message name="OrderCompanyItemSoapIn">
+    <wsdl:part name="parameters" element="tns:OrderCompanyItem" />
+  </wsdl:message>
+  <wsdl:message name="OrderCompanyItemSoapOut">
+    <wsdl:part name="parameters" element="tns:OrderCompanyItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberInfoHttpGetIn">
+    <wsdl:part name="id" type="s:string" />
+    <wsdl:part name="phoneNum" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberInfoHttpGetOut" />
+  <wsdl:message name="GetMemberFingerHttpGetIn">
+    <wsdl:part name="id" type="s:string" />
+    <wsdl:part name="phoneNum" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberFingerHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataTableHttpGetIn">
+    <wsdl:part name="cmdSql" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataTableHttpGetOut">
+    <wsdl:part name="Body" element="tns:base64Binary" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyInfoHttpGetIn">
+    <wsdl:part name="companyID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetSaveFileHttpGetIn">
+    <wsdl:part name="fileName" type="s:string" />
+    <wsdl:part name="saveType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSaveFileHttpGetOut">
+    <wsdl:part name="Body" element="tns:base64Binary" />
+  </wsdl:message>
+  <wsdl:message name="GetGenCompanyCodeHttpGetIn">
+    <wsdl:part name="areaID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetGenCompanyCodeHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="IsOwnerUserHttpGetIn">
+    <wsdl:part name="userID" type="s:string" />
+    <wsdl:part name="companyID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsOwnerUserHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberInfoHttpPostIn">
+    <wsdl:part name="id" type="s:string" />
+    <wsdl:part name="phoneNum" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberInfoHttpPostOut" />
+  <wsdl:message name="GetMemberFingerHttpPostIn">
+    <wsdl:part name="id" type="s:string" />
+    <wsdl:part name="phoneNum" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberFingerHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataTableHttpPostIn">
+    <wsdl:part name="cmdSql" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataTableHttpPostOut">
+    <wsdl:part name="Body" element="tns:base64Binary" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyInfoHttpPostIn">
+    <wsdl:part name="companyID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetSaveFileHttpPostIn">
+    <wsdl:part name="fileName" type="s:string" />
+    <wsdl:part name="saveType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSaveFileHttpPostOut">
+    <wsdl:part name="Body" element="tns:base64Binary" />
+  </wsdl:message>
+  <wsdl:message name="GetGenCompanyCodeHttpPostIn">
+    <wsdl:part name="areaID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetGenCompanyCodeHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="IsOwnerUserHttpPostIn">
+    <wsdl:part name="userID" type="s:string" />
+    <wsdl:part name="companyID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsOwnerUserHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:portType name="WebRestServiceSoap">
+    <wsdl:operation name="ClientLogin">
+      <wsdl:input message="tns:ClientLoginSoapIn" />
+      <wsdl:output message="tns:ClientLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberInfo">
+      <wsdl:input message="tns:GetMemberInfoSoapIn" />
+      <wsdl:output message="tns:GetMemberInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberFinger">
+      <wsdl:input message="tns:GetMemberFingerSoapIn" />
+      <wsdl:output message="tns:GetMemberFingerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberForOrder">
+      <wsdl:input message="tns:GetMemberForOrderSoapIn" />
+      <wsdl:output message="tns:GetMemberForOrderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberForCash">
+      <wsdl:input message="tns:GetMemberForCashSoapIn" />
+      <wsdl:output message="tns:GetMemberForCashSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataTable">
+      <wsdl:input message="tns:GetDataTableSoapIn" />
+      <wsdl:output message="tns:GetDataTableSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataTableByParam">
+      <wsdl:input message="tns:GetDataTableByParamSoapIn" />
+      <wsdl:output message="tns:GetDataTableByParamSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteQuery">
+      <wsdl:input message="tns:ExecuteQuerySoapIn" />
+      <wsdl:output message="tns:ExecuteQuerySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteScalar">
+      <wsdl:input message="tns:ExecuteScalarSoapIn" />
+      <wsdl:output message="tns:ExecuteScalarSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveCompanyAdForClient">
+      <wsdl:input message="tns:SaveCompanyAdForClientSoapIn" />
+      <wsdl:output message="tns:SaveCompanyAdForClientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveOrderForClient">
+      <wsdl:input message="tns:SaveOrderForClientSoapIn" />
+      <wsdl:output message="tns:SaveOrderForClientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveCashForClient">
+      <wsdl:input message="tns:SaveCashForClientSoapIn" />
+      <wsdl:output message="tns:SaveCashForClientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyInfo">
+      <wsdl:input message="tns:GetCompanyInfoSoapIn" />
+      <wsdl:output message="tns:GetCompanyInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadFile">
+      <wsdl:input message="tns:UploadFileSoapIn" />
+      <wsdl:output message="tns:UploadFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSaveFile">
+      <wsdl:input message="tns:GetSaveFileSoapIn" />
+      <wsdl:output message="tns:GetSaveFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGenCompanyCode">
+      <wsdl:input message="tns:GetGenCompanyCodeSoapIn" />
+      <wsdl:output message="tns:GetGenCompanyCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsOwnerUser">
+      <wsdl:input message="tns:IsOwnerUserSoapIn" />
+      <wsdl:output message="tns:IsOwnerUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserCompanyItems">
+      <wsdl:input message="tns:GetUserCompanyItemsSoapIn" />
+      <wsdl:output message="tns:GetUserCompanyItemsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderCompanyItem">
+      <wsdl:input message="tns:OrderCompanyItemSoapIn" />
+      <wsdl:output message="tns:OrderCompanyItemSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WebRestServiceHttpGet">
+    <wsdl:operation name="GetMemberInfo">
+      <wsdl:input message="tns:GetMemberInfoHttpGetIn" />
+      <wsdl:output message="tns:GetMemberInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberFinger">
+      <wsdl:input message="tns:GetMemberFingerHttpGetIn" />
+      <wsdl:output message="tns:GetMemberFingerHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataTable">
+      <wsdl:input message="tns:GetDataTableHttpGetIn" />
+      <wsdl:output message="tns:GetDataTableHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyInfo">
+      <wsdl:input message="tns:GetCompanyInfoHttpGetIn" />
+      <wsdl:output message="tns:GetCompanyInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSaveFile">
+      <wsdl:input message="tns:GetSaveFileHttpGetIn" />
+      <wsdl:output message="tns:GetSaveFileHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGenCompanyCode">
+      <wsdl:input message="tns:GetGenCompanyCodeHttpGetIn" />
+      <wsdl:output message="tns:GetGenCompanyCodeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsOwnerUser">
+      <wsdl:input message="tns:IsOwnerUserHttpGetIn" />
+      <wsdl:output message="tns:IsOwnerUserHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WebRestServiceHttpPost">
+    <wsdl:operation name="GetMemberInfo">
+      <wsdl:input message="tns:GetMemberInfoHttpPostIn" />
+      <wsdl:output message="tns:GetMemberInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberFinger">
+      <wsdl:input message="tns:GetMemberFingerHttpPostIn" />
+      <wsdl:output message="tns:GetMemberFingerHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataTable">
+      <wsdl:input message="tns:GetDataTableHttpPostIn" />
+      <wsdl:output message="tns:GetDataTableHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyInfo">
+      <wsdl:input message="tns:GetCompanyInfoHttpPostIn" />
+      <wsdl:output message="tns:GetCompanyInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSaveFile">
+      <wsdl:input message="tns:GetSaveFileHttpPostIn" />
+      <wsdl:output message="tns:GetSaveFileHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGenCompanyCode">
+      <wsdl:input message="tns:GetGenCompanyCodeHttpPostIn" />
+      <wsdl:output message="tns:GetGenCompanyCodeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsOwnerUser">
+      <wsdl:input message="tns:IsOwnerUserHttpPostIn" />
+      <wsdl:output message="tns:IsOwnerUserHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebRestServiceSoap" type="tns:WebRestServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ClientLogin">
+      <soap:operation soapAction="http://tempuri.org/ClientLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberInfo">
+      <soap:operation soapAction="http://tempuri.org/GetMemberInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberFinger">
+      <soap:operation soapAction="http://tempuri.org/GetMemberFinger" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberForOrder">
+      <soap:operation soapAction="http://tempuri.org/GetMemberForOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberForCash">
+      <soap:operation soapAction="http://tempuri.org/GetMemberForCash" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataTable">
+      <soap:operation soapAction="http://tempuri.org/GetDataTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataTableByParam">
+      <soap:operation soapAction="http://tempuri.org/GetDataTableByParam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteQuery">
+      <soap:operation soapAction="http://tempuri.org/ExecuteQuery" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteScalar">
+      <soap:operation soapAction="http://tempuri.org/ExecuteScalar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveCompanyAdForClient">
+      <soap:operation soapAction="http://tempuri.org/SaveCompanyAdForClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveOrderForClient">
+      <soap:operation soapAction="http://tempuri.org/SaveOrderForClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveCashForClient">
+      <soap:operation soapAction="http://tempuri.org/SaveCashForClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyInfo">
+      <soap:operation soapAction="http://tempuri.org/GetCompanyInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadFile">
+      <soap:operation soapAction="http://tempuri.org/UploadFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSaveFile">
+      <soap:operation soapAction="http://tempuri.org/GetSaveFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGenCompanyCode">
+      <soap:operation soapAction="http://tempuri.org/GetGenCompanyCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsOwnerUser">
+      <soap:operation soapAction="http://tempuri.org/IsOwnerUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserCompanyItems">
+      <soap:operation soapAction="http://tempuri.org/GetUserCompanyItems" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderCompanyItem">
+      <soap:operation soapAction="http://tempuri.org/OrderCompanyItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebRestServiceSoap12" type="tns:WebRestServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ClientLogin">
+      <soap12:operation soapAction="http://tempuri.org/ClientLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetMemberInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberFinger">
+      <soap12:operation soapAction="http://tempuri.org/GetMemberFinger" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberForOrder">
+      <soap12:operation soapAction="http://tempuri.org/GetMemberForOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberForCash">
+      <soap12:operation soapAction="http://tempuri.org/GetMemberForCash" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataTable">
+      <soap12:operation soapAction="http://tempuri.org/GetDataTable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataTableByParam">
+      <soap12:operation soapAction="http://tempuri.org/GetDataTableByParam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteQuery">
+      <soap12:operation soapAction="http://tempuri.org/ExecuteQuery" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteScalar">
+      <soap12:operation soapAction="http://tempuri.org/ExecuteScalar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveCompanyAdForClient">
+      <soap12:operation soapAction="http://tempuri.org/SaveCompanyAdForClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveOrderForClient">
+      <soap12:operation soapAction="http://tempuri.org/SaveOrderForClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveCashForClient">
+      <soap12:operation soapAction="http://tempuri.org/SaveCashForClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetCompanyInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadFile">
+      <soap12:operation soapAction="http://tempuri.org/UploadFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSaveFile">
+      <soap12:operation soapAction="http://tempuri.org/GetSaveFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGenCompanyCode">
+      <soap12:operation soapAction="http://tempuri.org/GetGenCompanyCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsOwnerUser">
+      <soap12:operation soapAction="http://tempuri.org/IsOwnerUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserCompanyItems">
+      <soap12:operation soapAction="http://tempuri.org/GetUserCompanyItems" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderCompanyItem">
+      <soap12:operation soapAction="http://tempuri.org/OrderCompanyItem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebRestServiceHttpGet" type="tns:WebRestServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetMemberInfo">
+      <http:operation location="/GetMemberInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberFinger">
+      <http:operation location="/GetMemberFinger" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataTable">
+      <http:operation location="/GetDataTable" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyInfo">
+      <http:operation location="/GetCompanyInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSaveFile">
+      <http:operation location="/GetSaveFile" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGenCompanyCode">
+      <http:operation location="/GetGenCompanyCode" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsOwnerUser">
+      <http:operation location="/IsOwnerUser" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebRestServiceHttpPost" type="tns:WebRestServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetMemberInfo">
+      <http:operation location="/GetMemberInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberFinger">
+      <http:operation location="/GetMemberFinger" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataTable">
+      <http:operation location="/GetDataTable" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyInfo">
+      <http:operation location="/GetCompanyInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSaveFile">
+      <http:operation location="/GetSaveFile" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGenCompanyCode">
+      <http:operation location="/GetGenCompanyCode" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsOwnerUser">
+      <http:operation location="/IsOwnerUser" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebRestService">
+    <wsdl:port name="WebRestServiceSoap" binding="tns:WebRestServiceSoap">
+      <soap:address location="http://localhost:4726/WebRestServices/WebRestService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebRestServiceSoap12" binding="tns:WebRestServiceSoap12">
+      <soap12:address location="http://localhost:4726/WebRestServices/WebRestService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebRestServiceHttpGet" binding="tns:WebRestServiceHttpGet">
+      <http:address location="http://localhost:4726/WebRestServices/WebRestService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebRestServiceHttpPost" binding="tns:WebRestServiceHttpPost">
+      <http:address location="http://localhost:4726/WebRestServices/WebRestService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,52 @@
+﻿<%@ Page Title="优惠管理-我要提供优惠" Language="C#" MasterPageFile="~/MasterPage/MainMaster.Master"
+    AutoEventWireup="true" CodeBehind="CompanyItemEdit.aspx.cs" Inherits="Eleooo.Web.Company.CompanyItemEdit" %>
+
+<%@ Register Src="~/Controls/UcPagePosition.ascx" TagName="UcPagePosition" TagPrefix="uc" %>
+<%@ Register Src="~/Controls/UcFormView.ascx" TagName="UcFormView" TagPrefix="uc" %>
+<%@ Register Src="~/Controls/UcMemberInfo.ascx" TagPrefix="uc" TagName="UcMemberInfo" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <script src="/Scripts/jquery-selector.js" type="text/javascript"></script>
+    <script src="/Scripts/TextboxList/TextboxList.js" type="text/javascript"></script>
+    <link href="/Scripts/TextboxList/TextboxList.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/jquery.TextboxList.area.js" type="text/javascript"></script>
+    <script src="/Scripts/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+    <link href="/Scripts/jquery.tipswindown/jquery.tipswindown.css" rel="stylesheet"
+        type="text/css" />
+    <script src="/Scripts/jquery.tipswindown/jquery.tipswindown.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".btnUpload").click(function () {
+                var url = "/SiteAppPage/UploadFile.aspx?saveType=5&fileType=1&txt=" + $(this).attr("txt") + "&img=" + $(this).attr("img");
+                tipsWindown("上传图片", "iframe:" + url, 500, 150, "true", "", "true", "");
+            })
+        });
+    </script>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderMain" runat="Server">
+    <table border="0" cellspacing="0" cellpadding="5" width="99%">
+        <tbody>
+            <tr>
+                <td style="line-height: 23px">
+                    <uc:UcPagePosition ID="UcPagePosition1" runat="server" />
+                </td>
+            </tr>
+            <tr>
+                <td style="line-height: 23px" width="50%">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <uc:UcFormView ID="formView" runat="server" />
+    <table class="tbl_body" border="0" cellspacing="1" cellpadding="5" width="99%">
+        <tbody>
+            <tr>
+                <td class="tbl_row">
+                    <span id="txtMessage" runat="server"></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</asp:Content>
+<asp:Content runat="server" ID="Content3" ContentPlaceHolderID="ContentPlaceHolderMemberInfo">
+    <uc:UcMemberInfo ID="UcMemberInfo1" runat="server" />
+</asp:Content>
