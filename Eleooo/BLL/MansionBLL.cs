@@ -123,9 +123,9 @@ namespace Eleooo.Web
 
         public static IEnumerable<IDataReader> QueryMansionByWord(string word, int page_num, int page_size, out int total)
         {
-            word = Utilities.GetAllLikeQuery(word);
+            //word = Utilities.GetAllLikeQuery(word);
             var query = DB.Select( ).From<SysAreaMansion>( )
-                          .Where(SysAreaMansion.NameColumn).Like(word);
+                          .ConstraintExpression(BLL.DbCommonFn.FnCompare("WHERE", SysAreaMansion.NameColumn, word, 1));
             total = query.GetRecordCount( );
             query.Paged(page_num, page_size);
             return query.GetDataReaderEnumerator( );

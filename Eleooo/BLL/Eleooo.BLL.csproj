@@ -49,6 +49,7 @@
     <Compile Include="CompanyAdsBLL.cs" />
     <Compile Include="CompanyBLL.cs" />
     <Compile Include="CompanyItemBLL.cs" />
+    <Compile Include="DbCommonFn.cs" />
     <Compile Include="FaceBookBLL.cs" />
     <Compile Include="GradeBLL.cs" />
     <Compile Include="MansionBLL.cs" />
