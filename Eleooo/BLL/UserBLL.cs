@@ -155,7 +155,7 @@ namespace Eleooo.Web
             SqlQuery query = null;
             if (id > 0)
                 query = DB.Select( ).From<SysMember>( )
-                                .Where(SysMember.IdColumn).IsEqualTo(id);
+                                    .Where(SysMember.IdColumn).IsEqualTo(id);
             else
                 query = DB.Select( ).From<SysMember>( )
                                 .Where(SysMember.MemberPhoneNumberColumn).IsEqualTo(txtUserName);

@@ -12,7 +12,7 @@ namespace Eleooo.Web.Controls
         protected void Page_Load(object sender, EventArgs e)
         {
             int good, bad, normal;
-            FaceBookBLL.GetOrderMealRateCount(CompanyID, out good, out normal, out bad);
+            FaceBookBLL.GetOrderMealRateCount(CompanyID,null,null, out good, out normal, out bad);
             FbGoodCount = good;
             FbBadCount = bad;
             FbNormalCount = normal;

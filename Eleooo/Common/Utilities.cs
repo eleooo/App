@@ -228,24 +228,24 @@ namespace Eleooo.Common
                 cookie.Value = null;
             }
         }
-        public static void AutoLogin( )
+        public static void AutoLogin(string sAuthCookie)
         {
-            string sAuthCookie = HttpContext.Current.Request.Params["authCookie"];
-            string sSessionId = HttpContext.Current.Request.Params["sessionid"];
+            //string sAuthCookie = HttpContext.Current.Request.Params["authCookie"];
+            //string sSessionId = HttpContext.Current.Request.Params["sessionid"];
             string sCookieName = FormsAuthentication.FormsCookieName;
-            string sSessionName = "ASP.NET_SessionId";
+            //string sSessionName = "ASP.NET_SessionId";
             HttpCookie loginCookie = HttpContext.Current.Request.Cookies.Get(sCookieName);
             if (loginCookie == null && !string.IsNullOrEmpty(sAuthCookie))
             {
                 loginCookie = new HttpCookie(sCookieName, sAuthCookie);
                 HttpContext.Current.Request.Cookies.Add(loginCookie);
             }
-            HttpCookie sessionCookie = HttpContext.Current.Request.Cookies.Get(sSessionName);
-            if (sessionCookie == null && !string.IsNullOrEmpty(sSessionId))
-            {
-                sessionCookie = new HttpCookie(sSessionName, sSessionId);
-                HttpContext.Current.Request.Cookies.Add(sessionCookie);
-            }
+            //HttpCookie sessionCookie = HttpContext.Current.Request.Cookies.Get(sSessionName);
+            //if (sessionCookie == null && !string.IsNullOrEmpty(sSessionId))
+            //{
+            //    sessionCookie = new HttpCookie(sSessionName, sSessionId);
+            //    HttpContext.Current.Request.Cookies.Add(sessionCookie);
+            //}
         }
 
         public static string GetSiteUrl( )
@@ -634,6 +634,15 @@ namespace Eleooo.Common
         public static string ConcatAddres(object addr)
         {
             return ToString(addr).Replace("||", string.Empty).Replace('|', '楼');
+        }
+
+        public static int CalcPageCount(int pageSize, int total)
+        {
+            int result;
+            int pageCount = Math.DivRem(total, pageSize, out result);
+            if (result > 0)
+                pageCount++;
+            return pageCount;
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ReplyFaceBook.aspx.cs"
-    Inherits="Eleooo.Web.SiteAppPage.ReplyFaceBook" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ReplyFaceBook.aspx.cs" Inherits="Eleooo.Web.SiteAppPage.ReplyFaceBook" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -11,12 +10,7 @@
     <link href="/App_Themes/Admin/content.css" rel="stylesheet" type="text/css" />
     <link href="/App_Themes/Admin/inc.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
-        .i_input
-        {
-            border: 1px solid #b9b9b9;
-            padding: 5px;
-            width: 410px;
-        }
+        .i_input { border: 1px solid #b9b9b9; padding: 5px; width: 410px; }
     </style>
 </head>
 <body>
@@ -42,8 +36,7 @@
                     评价星级
                 </td>
                 <td>
-                    <img src="/App_Themes/ThemesV2.1/images/start<%=this.FaceBook.FaceBookRate %>.gif"
-                        alt="" />
+                    <img src="/App_Themes/ThemesV2.1/images/start<%=this.FaceBook.FaceBookRate %>.gif" alt="" />
                 </td>
             </tr>
             <tr class="tbl_form_row">
@@ -64,8 +57,7 @@
             </tr>
             <tr bgcolor="#f0f0f5" class="tbl_form_row">
                 <td bgcolor="#f0f0f5" align="center" colspan="2">
-                    <input type="button" value="点击回复(S)" id="btnSubmit" style="line-height: 18px; width: 100px;
-                        height: 25px; font-size: 14px; font-weight: bold" />
+                    <input type="button" value="点击回复(S)" id="btnSubmit" style="line-height: 18px; width: 100px; height: 25px; font-size: 14px; font-weight: bold" />
                 </td>
             </tr>
         </tbody>

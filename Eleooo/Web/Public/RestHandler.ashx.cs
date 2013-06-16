@@ -64,9 +64,7 @@ namespace Eleooo.Web.Public
         {
             context.Response.ContentType = "text/html";
             var caller = Utilities.GetServicesAction(context);
-            //context.Response.Write(caller.Name);
-            //context.Response.Write("<br />");
-            //context.Response.Write(caller.Method);
+
             HandlerContainer container;
             if (!string.IsNullOrEmpty(caller.Name) && _handler.TryGetValue(caller.Name, out container))
             {
@@ -76,6 +74,11 @@ namespace Eleooo.Web.Public
                     HandlerMethodInfo mi;
                     if (container.Methods.TryGetValue(caller.Method, out mi))
                     {
+                        var eleMobileAuth = context.Request["eleMobileAuth"];
+                        if (!string.IsNullOrEmpty(eleMobileAuth))
+                        {
+                            Utilities.AutoLogin(eleMobileAuth);
+                        }
                         object obj;
                         if (mi.IsHttpContextArg && mi.ArgCount == 1)
                             obj = mi.Method.Invoke(container.Handler, new object[] { context });

@@ -14,16 +14,19 @@ namespace Eleooo.Web
         {
             return ResBLL.GetRes("FaceBookFilterResource", "我操|屌|我叼|你老母", "评价过滤关键字");
         }
-        public static void GetOrderMealRateCount(int bizID, out int good, out int normal, out int bad)
+        public static void GetOrderMealRateCount(int bizID, DateTime? d1, DateTime? d2, out int good, out int normal, out int bad)
         {
             good = 0; normal = 0; bad = 0;
             var cmd = new QueryCommand(@"
 select SUM(case when FaceBookRate <= 1 then 1 else 0 end) as bad,
        SUM(case when FaceBookRate > 1 and FaceBookRate < 5 then 1 else 0 end) as normal,
        SUM(case when FaceBookRate >= 5 then 1 else 0 end) as good
-from dbo.Sys_Company_FaceBook where FaceBookBizID = @FaceBookBizID and FaceBookBizType = @FaceBookBizType;");
-            cmd.AddParameter("@FaceBookBizID", bizID);
-            cmd.AddParameter("@FaceBookBizType", (int)FaceBookType.OrderMeal);
+from dbo.Sys_Company_FaceBook WHERE FaceBookDate BETWEEN @d1 AND @d2 AND FaceBookBizID = @FaceBookBizID and FaceBookBizType = @FaceBookBizType;");
+            cmd.AddParameter("@FaceBookBizID", bizID, System.Data.DbType.Int32);
+            cmd.AddParameter("@FaceBookBizType", (int)FaceBookType.OrderMeal, System.Data.DbType.Int32);
+            cmd.AddParameter("@d1", d1 ?? System.Data.SqlTypes.SqlDateTime.MinValue, System.Data.DbType.DateTime);
+            cmd.AddParameter("@d2", d2 ?? DateTime.Now, System.Data.DbType.DateTime);
+
             using (var dr = DataService.GetReader(cmd))
             {
                 if (dr.Read( ))
@@ -136,7 +139,7 @@ from dbo.Sys_Company_FaceBook where FaceBookBizID = @FaceBookBizID and FaceBookB
             cmd.AddParameter("@FaceBookBizType", (int)FaceBookType.Eleooo);
             return DataService.ExecuteScalar(cmd);
         }
-        public static void SetTopDateValue(object faceBookID,bool isTop)
+        public static void SetTopDateValue(object faceBookID, bool isTop)
         {
             QueryCommand cmd;
             if (isTop)
