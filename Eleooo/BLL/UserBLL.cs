@@ -10,7 +10,7 @@ namespace Eleooo.Web
 {
     public class UserBLL
     {
-        private static readonly List<string> _PhoneBeginWith = new List<string> { "13", "15", "18","16" };
+        private static readonly List<string> _PhoneBeginWith = new List<string> { "13", "15", "18", "16" };
         public static bool CheckUserName(string userName, out string message)
         {
             message = string.Empty;
@@ -44,12 +44,12 @@ namespace Eleooo.Web
             }
             return true;
         }
-        public static void UserWebLogin( )
+        public static void UserWebLogin()
         {
             var p = AppContextBase.Page;
-            string txtUserName = p.Request.Form["edtUserName"].Trim( );
-            string txtPassWord = p.Request.Form["edtPassWord"].Trim( );
-            string txtLoginCode = p.Request.Params["edtCheckOut"].Trim( );
+            string txtUserName = p.Request.Form["edtUserName"].Trim();
+            string txtPassWord = p.Request.Form["edtPassWord"].Trim();
+            string txtLoginCode = p.Request.Params["edtCheckOut"].Trim();
             string CheckCode = p.Request.Cookies["CheckCode"].Value;
             string message;
             if (!CheckUserName(txtUserName, out message))
@@ -79,7 +79,7 @@ namespace Eleooo.Web
                 return;
             }
             SysMember user;
-            int state = UserLogin(txtUserName, txtPassWord, AppContextBase.Context.ParamSubSys, out user);
+            int state = UserLogin(txtUserName, txtPassWord, AppContextBase.Context.ParamSubSys, LoginSystem.Web, out user);
             if (state == 1)
             {
                 AppContextBase.Context.AddMessage("check_userName", ResBLL.Get("check_UserName_notexist"));
@@ -109,13 +109,13 @@ namespace Eleooo.Web
                         strRedirectUrl = user.AdminRoleId == 4 ? "/Admin/SysOrderMeal.aspx" : "/Admin/SaleList.aspx";
                         //if (AppContextBase.Context.User.AdminRoleId > 0)
                         if (!string.IsNullOrEmpty(HttpContext.Current.Request.QueryString["debug"]))
-                            NavigationBLL.RefreshNavigation( );
+                            NavigationBLL.RefreshNavigation();
                         ResBLL.LoadRes(true);
                         break;
                     case SubSystem.Member:
                         strRedirectUrl = "/Member/MyCompany.aspx";
                         if (AppContextBase.Context.User.MemberCity.HasValue)
-                            Utilities.AddCookie(AreaBLL.CITY_COOKIE, AppContextBase.Context.User.MemberCity.ToString( ));
+                            Utilities.AddCookie(AreaBLL.CITY_COOKIE, AppContextBase.Context.User.MemberCity.ToString());
                         if (!UserHasArea(user))
                             strRedirectUrl = "/Member/MyArea.aspx";
                         break;
@@ -136,7 +136,7 @@ namespace Eleooo.Web
                 if (uFavAddr.Count > 0)
                 {
                     if (uFavAddr.Count == 1)
-                        strRedirectUrl = "/Public/OrderMealPage.aspx?MansionId=" + uFavAddr[0].id.ToString( );
+                        strRedirectUrl = "/Public/OrderMealPage.aspx?MansionId=" + uFavAddr[0].id.ToString();
                     Utilities.AddCookie("addr", HttpUtility.UrlEncodeUnicode(uFavAddr[0].name));
                 }
             }
@@ -146,7 +146,7 @@ namespace Eleooo.Web
         {
             return !(string.IsNullOrEmpty(user.AreaDepth1) && string.IsNullOrEmpty(user.AreaDepth2) && string.IsNullOrEmpty(user.AreaDepth3));
         }
-        public static int UserLogin(string txtUserName, string txtUserPass, SubSystem subSys, out SysMember loginUser)
+        public static int UserLogin(string txtUserName, string txtUserPass, SubSystem subSys, LoginSystem sys, out SysMember loginUser)
         {
             loginUser = null;
             int id = 0;
@@ -154,14 +154,14 @@ namespace Eleooo.Web
                 int.TryParse(txtUserName, out id);
             SqlQuery query = null;
             if (id > 0)
-                query = DB.Select( ).From<SysMember>( )
+                query = DB.Select().From<SysMember>()
                                     .Where(SysMember.IdColumn).IsEqualTo(id);
             else
-                query = DB.Select( ).From<SysMember>( )
+                query = DB.Select().From<SysMember>()
                                 .Where(SysMember.MemberPhoneNumberColumn).IsEqualTo(txtUserName);
             if (subSys == SubSystem.Company)
                 query.And(SysMember.CompanyIdColumn).IsGreaterThan(0);
-            SysMemberCollection users = query.ExecuteAsCollection<SysMemberCollection>( );
+            SysMemberCollection users = query.ExecuteAsCollection<SysMemberCollection>();
             if (users == null || users.Count == 0)
                 return 1;
             bool bPass = false;
@@ -213,7 +213,8 @@ namespace Eleooo.Web
             user.LastLoginSubSys = (int)subSys;
             user.LastLoginDate = DateTime.Now;
             user.Save(user.Id);
-            Utilities.LoginSigIn(user.Id, subSys);
+            if (sys != LoginSystem.Mobile)
+                Utilities.LoginSigIn(user.Id, subSys, sys);
             loginUser = user;
             return 0;
         }
@@ -232,19 +233,19 @@ namespace Eleooo.Web
 
         public static bool CheckUserIsOnline(int userID)
         {
-            SysMember user = DB.Select( ).From<SysMember>( )
+            SysMember user = DB.Select().From<SysMember>()
                                .Where(SysMember.IdColumn).IsEqualTo(userID)
                                .ConstraintExpression("AND (GETDATE() - LastLoginDate < 1.0/24.0)")
-                               .ExecuteSingle<SysMember>( );
+                               .ExecuteSingle<SysMember>();
             return user != null;
         }
 
-        public static bool CheckAdminIsOnline( )
+        public static bool CheckAdminIsOnline()
         {
-            SysMember user = DB.Select( ).From<SysMember>( )
+            SysMember user = DB.Select().From<SysMember>()
                                .Where(SysMember.AdminRoleIdColumn).IsGreaterThan(0)
                                .ConstraintExpression("AND (GETDATE() - LastLoginDate < 1.0/24.0)")
-                               .ExecuteSingle<SysMember>( );
+                               .ExecuteSingle<SysMember>();
             return user != null;
         }
         public static bool CheckUserPwd(SysMember user, string strPwd)
@@ -257,15 +258,15 @@ namespace Eleooo.Web
 
         public static bool CheckUserExist(string phoneNum)
         {
-            int n = DB.Select("Count(*)").From<SysMember>( )
+            int n = DB.Select("Count(*)").From<SysMember>()
                       .Where(SysMember.MemberPhoneNumberColumn).IsEqualTo(phoneNum)
-                      .ExecuteScalar<int>( );
+                      .ExecuteScalar<int>();
             bool bExist = n > 0;
             if (!bExist)
             {
-                n = DB.Select("Count(*)").From<SysCompany>( )
+                n = DB.Select("Count(*)").From<SysCompany>()
                       .Where(SysCompany.CompanyTelColumn).IsEqualTo(phoneNum)
-                      .ExecuteScalar<int>( );
+                      .ExecuteScalar<int>();
                 bExist = n > 0;
             }
             return bExist;
@@ -276,35 +277,35 @@ namespace Eleooo.Web
         }
         public static SysMemberCash GetUserLatestCash(int userID, int companyID)
         {
-            return DB.Select( ).Top("1").From<SysMemberCash>( )
+            return DB.Select().Top("1").From<SysMemberCash>()
                                                .Where(SysMemberCash.CashMemberIDColumn).IsEqualTo(userID)
                                                .And(SysMemberCash.CashCompanyIDColumn).IsEqualTo(companyID)
                                                .And(SysMemberCash.CashSumColumn).IsGreaterThanOrEqualTo(0)
                                                .OrderDesc(SysMemberCash.Columns.CashID)
-                                               .ExecuteSingle<SysMemberCash>( );
+                                               .ExecuteSingle<SysMemberCash>();
         }
         public static decimal GetUserBalanceCash(int userID, int companyID)
         {
-            return DB.Select("sum(CashSum)").From<SysMemberCash>( )
+            return DB.Select("sum(CashSum)").From<SysMemberCash>()
                                      .Where(SysMemberCash.CashMemberIDColumn).IsEqualTo(userID)
                                      .And(SysMemberCash.CashCompanyIDColumn).IsEqualTo(companyID)
-                                     .ExecuteScalar<decimal>( );
+                                     .ExecuteScalar<decimal>();
         }
         public static SysMember GetUserByPhoneNum(string phoneNum)
         {
-            return DB.Select( ).From<SysMember>( )
+            return DB.Select().From<SysMember>()
                      .Where(SysMember.MemberPhoneNumberColumn).IsEqualTo(phoneNum)
-                     .ExecuteSingle<SysMember>( );
+                     .ExecuteSingle<SysMember>();
         }
 
         public static SysMember GetMember(int id, string phoneNum)
         {
-            var query = DB.Select( ).From<SysMember>( );
+            var query = DB.Select().From<SysMember>();
             if (!string.IsNullOrEmpty(phoneNum))
                 query = query.Where(SysMember.MemberPhoneNumberColumn).IsEqualTo(phoneNum);
             else
                 query = query.Where(SysMember.IdColumn).IsEqualTo(id);
-            return query.ExecuteSingle<SysMember>( );
+            return query.ExecuteSingle<SysMember>();
         }
 
         //public static string MemberCash_info(decimal cashSum)
@@ -405,7 +406,7 @@ namespace Eleooo.Web
         }
         public static DataTable GetUserInfoDataTable(SysMember user)
         {
-            DataTable dtUserInfo = SubSonic.Utilities.EntityFormat.GetUserInfoTable( );
+            DataTable dtUserInfo = SubSonic.Utilities.EntityFormat.GetUserInfoTable();
             dtUserInfo.Rows.Add(ResBLL.GetColumnRes(SysMember.MemberPhoneNumberColumn), user.MemberPhoneNumber);
             dtUserInfo.Rows.Add(ResBLL.GetColumnRes(SysMember.MemberFullnameColumn), user.MemberFullname);
 
@@ -426,7 +427,7 @@ namespace Eleooo.Web
         {
             if (company == null)
                 return null;
-            DataTable dtUserInfo = SubSonic.Utilities.EntityFormat.GetUserInfoTable( );
+            DataTable dtUserInfo = SubSonic.Utilities.EntityFormat.GetUserInfoTable();
             //TODO add userinfo
             dtUserInfo.Rows.Add(ResBLL.GetColumnRes(SysCompany.CompanyTelColumn)
                                 , company.CompanyTel);
@@ -448,17 +449,17 @@ namespace Eleooo.Web
         }
         public static decimal GetCompanyMonthSaleSum(int companyID)
         {
-            var query = DB.Select("sum(OrderSumOk)").From<Order>( )
+            var query = DB.Select("sum(OrderSumOk)").From<Order>()
                           .Where(Order.OrderDateColumn).IsBetweenAnd(DateTime.Today.AddDays((double)(1 - DateTime.Today.Day)), DateTime.Today.AddDays(1))
                           .And(Order.OrderSellerIDColumn).IsEqualTo(companyID);
-            return query.ExecuteScalar<decimal>( );
+            return query.ExecuteScalar<decimal>();
         }
         public static int GetDefaultUseRole(int SubSysID)
         {
-            var query = DB.Select("max(ID)").From<SysRoleDefine>( )
+            var query = DB.Select("max(ID)").From<SysRoleDefine>()
                           .Where(SysRoleDefine.IsDefaultColumn).IsEqualTo(true)
                           .And(SysRoleDefine.SubSysIdColumn).IsEqualTo(SubSysID);
-            return query.ExecuteScalar<int>( );
+            return query.ExecuteScalar<int>();
         }
         private static SysMember _mainAccount;
         public static SysMember MainAccount
@@ -502,8 +503,8 @@ namespace Eleooo.Web
                 if (company == null)
                     goto lbl_null;
                 if (company.DirtyColumns.Count > 0)
-                    company.MarkClean( );
-                company.MarkOld( );
+                    company.MarkClean();
+                company.MarkOld();
                 company.CompanyAddress = member.MemberAddress1;
                 company.CompanyCity = member.MemberCity;
                 company.CompanyLocation = member.MemberLocation;
@@ -517,15 +518,15 @@ namespace Eleooo.Web
         }
         public static SysMember CompanyToMember(SysCompany company)
         {
-            var query = DB.Select( ).From<SysMember>( )
+            var query = DB.Select().From<SysMember>()
               .Where(SysMember.CompanyIdColumn).IsEqualTo(company.Id);
-            SysMember user = query.ExecuteSingle<SysMember>( );
+            SysMember user = query.ExecuteSingle<SysMember>();
             if (user != null)
             {
                 if (user.DirtyColumns.Count > 0)
-                    user.MarkClean( );
+                    user.MarkClean();
                 user.MemberPhoneNumber = company.CompanyTel;
-                user.MarkOld( );
+                user.MarkOld();
                 user.MemberEmail = company.CompanyEmail;
                 user.MemberAddress1 = company.CompanyAddress;
                 user.MemberCity = company.CompanyCity;
@@ -539,8 +540,8 @@ namespace Eleooo.Web
             }
             else
             {
-                user = new SysMember( );
-                user.MarkNew( );
+                user = new SysMember();
+                user.MarkNew();
                 user.MemberAddress1 = company.CompanyAddress;
                 user.MemberAddress2 = string.Empty;
                 user.MemberBalance = 0;
@@ -581,27 +582,27 @@ namespace Eleooo.Web
 
         public static decimal GetUserLastMonthOrderSum(int userID)
         {
-            var query = DB.Select("SUM(OrderSum)").From<Order>( )
+            var query = DB.Select("SUM(OrderSum)").From<Order>()
                          .Where(Order.OrderMemberIDColumn).IsEqualTo(userID)
                          .And(Order.OrderStatusColumn).In(1, 6)
                          .And(Order.OrderDateColumn).IsBetweenAnd(Formatter.GetMonthFirstDate(-1), Formatter.GetMonthFirstDate(0));
-            return query.ExecuteScalar<decimal>( );
+            return query.ExecuteScalar<decimal>();
         }
         public static decimal GetUserAvgOrderSum(int userId)
         {
             return DB.Select("SUM(OrderSumOK) / Count(*)").From<Order>()
                           .Where(Order.OrderMemberIDColumn).IsEqualTo(userId)
                           .And(Order.OrderStatusColumn).In(1, 6)
-                          .ExecuteScalar<decimal>( );
+                          .ExecuteScalar<decimal>();
         }
         public static bool CheckUserIsOrderInCompany(int userID, int companyID)
         {
-            var query = DB.Select( ).From<VPayment>( )
+            var query = DB.Select().From<VPayment>()
                           .Where(VPayment.PaymentMemberIDColumn).IsEqualTo(userID)
                           .And(VPayment.PaymentCompanyIDColumn).IsEqualTo(companyID);
-            return query.GetRecordCount( ) > 0;
+            return query.GetRecordCount() > 0;
         }
-        public static NameIDResult? GetUserDefFavAddress(int userId,int mansionId)
+        public static NameIDResult? GetUserDefFavAddress(int userId, int mansionId)
         {
             var favAddr = UserBLL.GetUserFavAddress(userId);
             NameIDResult? result = null;
@@ -620,7 +621,7 @@ namespace Eleooo.Web
         {
             SysMemberConfig config = GetUserConfig(userId);
             if (string.IsNullOrEmpty(config.MyAddress))
-                return new List<NameIDResult>( );
+                return new List<NameIDResult>();
             else
                 return Utilities.JSONToObj<List<NameIDResult>>(config.MyAddress);
         }
@@ -641,7 +642,7 @@ namespace Eleooo.Web
             }
             SysMemberConfig config = GetUserConfig(userId);
             config.MyAddress = Utilities.ObjToJSON(favAddress);
-            config.Save( );
+            config.Save();
             return true;
         }
         public static bool AddUserFavAddress(int userId, int mansionId, string address)
@@ -653,7 +654,7 @@ namespace Eleooo.Web
                 favAddress.Insert(0, addr);
                 SysMemberConfig config = GetUserConfig(userId);
                 config.MyAddress = Utilities.ObjToJSON(favAddress);
-                config.Save( );
+                config.Save();
                 return true;
             }
             else if (!favAddress.Contains(addr))
@@ -662,7 +663,7 @@ namespace Eleooo.Web
                 favAddress.Insert(0, addr);
                 SysMemberConfig config = GetUserConfig(userId);
                 config.MyAddress = Utilities.ObjToJSON(favAddress);
-                config.Save( );
+                config.Save();
                 return true;
             }
             return false;
@@ -676,7 +677,7 @@ namespace Eleooo.Web
                 favAddress.Remove(addr);
                 SysMemberConfig config = GetUserConfig(userId);
                 config.MyAddress = Utilities.ObjToJSON(favAddress);
-                config.Save( );
+                config.Save();
             }
         }
 
@@ -684,7 +685,7 @@ namespace Eleooo.Web
         {
             SysMemberConfig config = GetUserConfig(userId);
             if (string.IsNullOrEmpty(config.MyFavCompany))
-                return new List<int>( );
+                return new List<int>();
             else
                 return Utilities.JSONToObj<List<int>>(config.MyFavCompany);
         }
@@ -698,7 +699,7 @@ namespace Eleooo.Web
                 favCompanys.Add(companyId);
                 SysMemberConfig config = GetUserConfig(userId);
                 config.MyFavCompany = Utilities.ObjToJSON(favCompanys);
-                config.Save( );
+                config.Save();
                 return 0;
             }
             return 1;
@@ -711,7 +712,7 @@ namespace Eleooo.Web
                 favCompanys.Remove(companyId);
                 SysMemberConfig config = GetUserConfig(userId);
                 config.MyFavCompany = Utilities.ObjToJSON(favCompanys);
-                config.Save( );
+                config.Save();
             }
         }
         public static SysMemberConfig GetUserConfig(int userID)
@@ -719,12 +720,12 @@ namespace Eleooo.Web
             SysMemberConfig config = SysMemberConfig.FetchByID(userID);
             if (config == null)
             {
-                config = new SysMemberConfig( );
+                config = new SysMemberConfig();
                 config.AreaModifyCount = 0;
                 config.AreaModifyDate = null;
                 config.MyFavCompany = null;
                 config.MemberId = userID;
-                config.Save( );
+                config.Save();
             }
             return config;
         }
@@ -734,7 +735,7 @@ namespace Eleooo.Web
             isNew = user == null;
             if (isNew)
             {
-                user = new SysMember( )
+                user = new SysMember()
                 {
                     MemberPhoneNumber = phoneNumber,
                     MemberPwd = phoneNumber.Substring(phoneNumber.Length - 6, 6),
@@ -772,18 +773,18 @@ namespace Eleooo.Web
                     LastLoginSubSys = 0,
 
                 };
-                user.Save( );
+                user.Save();
             }
             else if (!Utilities.Compare(user.MemberMsnPhone, phoneNumber))
             {
                 user.MemberMsnPhone = phoneNumber;
-                user.Save( );
+                user.Save();
             }
             return user;
         }
         public static string GetUserPhoneById(int id)
         {
-            var sql = "Select MemberPhoneNumber from Sys_Member where id=" + id.ToString( );
+            var sql = "Select MemberPhoneNumber from Sys_Member where id=" + id.ToString();
             return Utilities.ToString(DataService.ExecuteScalar(new QueryCommand(sql)));
         }
     }

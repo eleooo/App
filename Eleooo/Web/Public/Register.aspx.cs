@@ -40,12 +40,12 @@ namespace Eleooo.Web.Public
 
         protected override void On_ActionAdd(object sender, EventArgs e)
         {
-            if (this.CheckData( ))
+            if (this.CheckData())
             {
                 bool isSucc = false;
                 try
                 {
-                    isSucc = SaveData( );
+                    isSucc = SaveData();
                 }
                 catch (Exception exception)
                 {
@@ -56,16 +56,16 @@ namespace Eleooo.Web.Public
                     Utilities.ShowMessageRedirect("注册成功^_^", "/Public/OrderMealPage.aspx");
             }
         }
-        private SysMember GetRUser( )
+        private SysMember GetRUser()
         {
             if (RUser != null)
                 return RUser;
             else
                 return UserBLL.GetUserByPhoneNum(txtMyFriend.Text);
         }
-        protected bool SaveData( )
+        protected bool SaveData()
         {
-            SysMember rUser = GetRUser( );
+            SysMember rUser = GetRUser();
             int pid = rUser != null ? rUser.Id : 0;
             SysMember user = new SysMember
             {
@@ -82,9 +82,9 @@ namespace Eleooo.Web.Public
                 MemberFullname = null,
                 MemberGrade = 0,
                 MemberMemo = null,
-                MemberPhoneNumber = txtMemberPhone.Text.Trim( ),
+                MemberPhoneNumber = txtMemberPhone.Text.Trim(),
                 MemberPid = pid,
-                MemberPwd = Utilities.DESEncrypt(txtMemberPwd1.Text.Trim( )),
+                MemberPwd = Utilities.DESEncrypt(txtMemberPwd1.Text.Trim()),
                 MemberRoleId = UserBLL.GetDefaultUseRole((int)SubSystem.Member),
                 MemberSex = null,
                 MemberState = null,
@@ -101,15 +101,15 @@ namespace Eleooo.Web.Public
                 AreaDepth3 = null,
                 AreaModifyDate = null,
                 MemberCity = Utilities.ToInt(AreaSelector.Selector1.GetSelectedValue(0)),
-                MemberArea = AreaSelector.GetSelectedLocation2( ),
-                MemberLocation = AreaSelector.GetSelectedLocation3( ),
+                MemberArea = AreaSelector.GetSelectedLocation2(),
+                MemberLocation = AreaSelector.GetSelectedLocation3(),
                 ValidateWhenSaving = false,
-                MemberMsnPhone = txtMemberPhone.Text.Trim( )
+                MemberMsnPhone = txtMemberPhone.Text.Trim()
             };
             user.Save(0);
             //auto login website
             SysMember loginUser;
-            UserBLL.UserLogin(user.Id.ToString( ), txtMemberPwd1.Text.Trim( ), SubSystem.Member, out loginUser);
+            UserBLL.UserLogin(user.Id.ToString(), txtMemberPwd1.Text.Trim(), SubSystem.Member, LoginSystem.Web, out loginUser);
             return true;
         }
 
@@ -118,13 +118,13 @@ namespace Eleooo.Web.Public
             if (string.IsNullOrEmpty(control.Style[HtmlTextWriterStyle.Color]))
                 control.Style.Add(HtmlTextWriterStyle.Color, "Red");
         }
-        protected bool CheckData( )
+        protected bool CheckData()
         {
             string message;
             bool isSuccess = true;
             if (!string.IsNullOrEmpty(txtMyFriend.Text))
             {
-                _rUser = UserBLL.GetUserByPhoneNum(txtMyFriend.Text.Trim( ));
+                _rUser = UserBLL.GetUserByPhoneNum(txtMyFriend.Text.Trim());
                 if (_rUser == null)
                 {
 

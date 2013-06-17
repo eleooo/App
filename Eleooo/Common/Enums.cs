@@ -173,6 +173,13 @@ namespace Eleooo.Common
         All = 32  //All
     }
 
+    public enum LoginSystem
+    {
+        Web,
+        Client,
+        Mobile
+    }
+
     public enum ViewCompanyAdsViews
     {
         Default, AnswerQuestion, AnswerRight, AnswerWrong, Message

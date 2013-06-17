@@ -29,24 +29,24 @@ namespace Eleooo.Web.Public
             public System.Reflection.MethodInfo Method { get; set; }
         }
         private static readonly Dictionary<string, HandlerContainer> _handler;
-        static RestHandler( )
+        static RestHandler()
         {
 
             Type t = typeof(IHandlerServices);
             Type ctxType = typeof(HttpContext);
-            _handler = t.Assembly.GetTypes( ).Where(type => !type.IsInterface && !type.IsAbstract && t.IsAssignableFrom(type)).ToDictionary(type => Regex.Replace(type.Name, "(\\w+)Handler", "$1").ToLower( ), type =>
+            _handler = t.Assembly.GetTypes().Where(type => !type.IsInterface && !type.IsAbstract && t.IsAssignableFrom(type)).ToDictionary(type => Regex.Replace(type.Name, "(\\w+)Handler", "$1").ToLower(), type =>
             {
                 var container = new HandlerContainer
                 {
                     Handler = Activator.CreateInstance(type),
-                    Methods = new Dictionary<string, HandlerMethodInfo>( )
+                    Methods = new Dictionary<string, HandlerMethodInfo>()
                 };
                 foreach (var method in type.GetMethods(System.Reflection.BindingFlags.InvokeMethod | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public))
                 {
-                    var name = method.Name.ToLower( );
+                    var name = method.Name.ToLower();
                     if (!container.Methods.ContainsKey(name))
                     {
-                        var args = method.GetParameters( );
+                        var args = method.GetParameters();
                         var mi = new HandlerMethodInfo
                         {
                             ResultType = ServicesResult.GetResultType(method.ReturnType),
@@ -74,10 +74,10 @@ namespace Eleooo.Web.Public
                     HandlerMethodInfo mi;
                     if (container.Methods.TryGetValue(caller.Method, out mi))
                     {
-                        var eleMobileAuth = context.Request["eleMobileAuth"];
-                        if (!string.IsNullOrEmpty(eleMobileAuth))
+                        var ticket = context.Request["__t"];
+                        if (!string.IsNullOrEmpty(ticket))
                         {
-                            Utilities.AutoLogin(eleMobileAuth);
+                            AppContextBase.SetFormsAuthenticationTicket(ticket);
                         }
                         object obj;
                         if (mi.IsHttpContextArg && mi.ArgCount == 1)

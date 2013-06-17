@@ -18,10 +18,11 @@ namespace Eleooo.BLL.Services
         }
         public Common.ServicesResult Login(HttpContext context)
         {
-            var phone = context.Request["userPhone"];
-            var pwd = context.Request["userPwd"];
+            var phone = context.Request["u"];
+            var pwd = context.Request["p"];
+            var loginSys = Formatter.ToEnum<LoginSystem>(context.Request["s"]);
             SysMember user;
-            var state = UserBLL.UserLogin(phone, pwd, SubSystem.Company, out user);
+            var state = UserBLL.UserLogin(phone, pwd, SubSystem.Company, loginSys, out user);
             string message = string.Empty;
             if (state == 1)
                 message = ResBLL.Get("check_UserName_notexist");
@@ -33,16 +34,20 @@ namespace Eleooo.BLL.Services
                 message = ResBLL.GetRes("check_login_lock", "账号处于审核状态", "账号处于审核状态");
             else if (state == 0)
             {
-                var data = new
+                object result = null;
+                if (loginSys == LoginSystem.Mobile)
                 {
-                    UserID = user.Id,
-                    UserPhone = user.MemberPhoneNumber,
-                    WebAuthKey = Utilities.GetCookieValue(System.Web.Security.FormsAuthentication.FormsCookieName),
-                    CompanyID = user.CompanyId
-                };
-                return ServicesResult.GetInstance(data);
+                    result = new
+                    {
+                        id = user.Id,
+                        p = user.MemberPhoneNumber,
+                        t = Utilities.GenFormsAuthenticationTicketValue(user.Id, SubSystem.Company, loginSys),
+                        c = user.CompanyId
+                    };
+                }
+                return ServicesResult.GetInstance(result);
             }
-            return ServicesResult.GetInstance(-state, message, null); 
+            return ServicesResult.GetInstance(-state, message, null);
         }
         public Common.ServicesResult SendPassword(HttpContext context)
         {
@@ -67,7 +72,7 @@ namespace Eleooo.BLL.Services
                 if (MsnBLL.SendMessage(user.MemberPhoneNumber, "亲爱的用户：您的登录密码为" + pwd + "，请妥善保管。【乐多分】", 0, out message, out logId))
                 {
                     config.MsnPwdCount = count + 1;
-                    config.Save( );
+                    config.Save();
                     result.message = "你的登录密码已经发送到:" + phone;
                     result.code = 0;
                 }

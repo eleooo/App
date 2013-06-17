@@ -8,3 +8,13 @@ F:\Asp.Net\MyWeb\eleooo.com\WebApp\SubSonic\bin\Release\System.Data.SQLite.dll
 F:\Asp.Net\MyWeb\eleooo.com\WebApp\SubSonic\obj\Release\ResolveAssemblyReference.cache
 F:\Asp.Net\MyWeb\eleooo.com\WebApp\SubSonic\obj\Release\SubSonic.dll
 F:\Asp.Net\MyWeb\eleooo.com\WebApp\SubSonic\obj\Release\SubSonic.pdb
+D:\eleApp\SubSonic\bin\Release\SubSonic.dll
+D:\eleApp\SubSonic\bin\Release\SubSonic.pdb
+D:\eleApp\SubSonic\bin\Release\Interop.DAO.dll
+D:\eleApp\SubSonic\bin\Release\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\eleApp\SubSonic\bin\Release\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\eleApp\SubSonic\bin\Release\MySql.Data.dll
+D:\eleApp\SubSonic\bin\Release\System.Data.SQLite.dll
+D:\eleApp\SubSonic\obj\Release\ResolveAssemblyReference.cache
+D:\eleApp\SubSonic\obj\Release\SubSonic.dll
+D:\eleApp\SubSonic\obj\Release\SubSonic.pdb

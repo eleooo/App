@@ -25,7 +25,7 @@ namespace Eleooo.Web.WebRestServices
         {
             loginUser = null;
             SysMember user;
-            int state = UserBLL.UserLogin(userName, userPass, (SubSystem)subSys, out user);
+            int state = UserBLL.UserLogin(userName, userPass, (SubSystem)subSys, LoginSystem.Client, out user);
             if (state == 0 && user != null)
             {
                 loginUser = SubSonic.Utilities.EntityFormat.EntityToTable<SysMember>(user);
@@ -36,7 +36,7 @@ namespace Eleooo.Web.WebRestServices
         [WebMethod]
         public void GetMemberInfo(int id, string phoneNum)
         {
-            var query = DB.Select( ).From<SysMember>( );
+            var query = DB.Select().From<SysMember>();
             if (id > 0)
                 query = query.Where(SysMember.IdColumn).IsEqualTo(id);
             else if (!string.IsNullOrEmpty(phoneNum))
@@ -53,14 +53,14 @@ namespace Eleooo.Web.WebRestServices
         [WebMethod]
         public string GetMemberFinger(int id, string phoneNum)
         {
-            var query = DB.Select( ).From<SysMember>( );
+            var query = DB.Select().From<SysMember>();
             if (id > 0)
                 query = query.Where(SysMember.IdColumn).IsEqualTo(id);
             else if (!string.IsNullOrEmpty(phoneNum))
                 query = query.Where(SysMember.MemberPhoneNumberColumn).IsEqualTo(phoneNum);
             else
                 return "-1";
-            SysMember member = query.ExecuteSingle<SysMember>( );
+            SysMember member = query.ExecuteSingle<SysMember>();
             if (member == null)
                 return "-1";
             else
@@ -83,13 +83,13 @@ namespace Eleooo.Web.WebRestServices
             bool bRet = UserBLL.GetMemberForOrder(user, out message);
             if (bRet)
             {
-                user.MarkClean( );
+                user.MarkClean();
                 SysMemberCash cash = UserBLL.GetUserLatestCash(user.Id, AppContext.Context.Company.Id);
                 decimal dBalance = Utilities.ToDecimal(user.MemberBalance);
                 if (AppContext.Context.CompanyType.HasValue &&
                         AppContext.Context.CompanyType.Value != CompanyType.UnionCompany)
                     user.MemberBalance = 0M;
-                user.MarkClean( );
+                user.MarkClean();
                 dtUser = SubSonic.Utilities.EntityFormat.EntityToTable<SysMember>(user);
                 user.MemberBalance = dBalance;
                 dtUserCash = SubSonic.Utilities.EntityFormat.EntityToTable<SysMemberCash>(cash);
@@ -113,7 +113,7 @@ namespace Eleooo.Web.WebRestServices
             bool bRet = UserBLL.GetMemberForCash(user, out message);
             if (bRet)
             {
-                user.MarkClean( );
+                user.MarkClean();
                 dtUser = SubSonic.Utilities.EntityFormat.EntityToTable<SysMember>(user);
                 dtUserInfo = UserBLL.GetUserInfoDataTable(user);
             }
@@ -155,8 +155,8 @@ namespace Eleooo.Web.WebRestServices
         {
             message = string.Empty;
             adsID = 0;
-            TransactionScope ts = new TransactionScope( );
-            SharedDbConnectionScope ss = new SharedDbConnectionScope( );
+            TransactionScope ts = new TransactionScope();
+            SharedDbConnectionScope ss = new SharedDbConnectionScope();
             try
             {
                 SysCompanyAd ad = SubSonic.Utilities.EntityFormat.TableToEntity<SysCompanyAd>(dtCompanyAd);
@@ -175,25 +175,25 @@ namespace Eleooo.Web.WebRestServices
                 ad.ValidateWhenSaving = false;
                 ad.AdsDate = DateTime.Now;
                 ad.AdsPic = null;
-                ad.MarkNew( );
-                ad.Save( );
+                ad.MarkNew();
+                ad.Save();
                 adsID = ad.AdsID;
                 if (fileData != null && fileData.Length > 0 && !string.IsNullOrEmpty(fileName))
                 {
                     string phyPath;
-                    ad.AdsPic = FileUpload.SaveUploadFile(fileData, FileType.Image, SaveType.CompanyAds, fileName, out phyPath, out message, true, adsID.ToString( ));
-                    ad.Save( );
+                    ad.AdsPic = FileUpload.SaveUploadFile(fileData, FileType.Image, SaveType.CompanyAds, fileName, out phyPath, out message, true, adsID.ToString());
+                    ad.Save();
                 }
                 foreach (DataRow row in dtPointSetting.Rows)
                 {
-                    SysCompanyAdsPointSetting p = new SysCompanyAdsPointSetting( );
+                    SysCompanyAdsPointSetting p = new SysCompanyAdsPointSetting();
                     p.AdsID = ad.AdsID;
                     p.OrderSumLimit = Utilities.ToDecimal(row[0]);
                     p.AdsPoint = Utilities.ToDecimal(row[1]);
                     p.ValidateWhenSaving = false;
-                    p.Save( );
+                    p.Save();
                 }
-                ts.Complete( );
+                ts.Complete();
                 message = "保存成功";
                 return true;
             }
@@ -205,8 +205,8 @@ namespace Eleooo.Web.WebRestServices
             }
             finally
             {
-                ss.Dispose( );
-                ts.Dispose( );
+                ss.Dispose();
+                ts.Dispose();
             }
         }
         [WebMethod]
@@ -244,7 +244,7 @@ namespace Eleooo.Web.WebRestServices
                 orderData.OrderRateSale = orderData.OrderRateSale.Value / 100M;
             if (AppContext.Context.CompanyType.Value != CompanyType.UnionCompany)
                 orderData.OrderRate = 0;
-            orderData.MarkNew( );
+            orderData.MarkNew();
             orderData.IsNew = true;
             orderData.IsLoaded = false;
             orderData.OrderCode = OrderBLL.GetOrderCode(AppContext.Context.Company);
@@ -259,16 +259,16 @@ namespace Eleooo.Web.WebRestServices
             orderData.OrderQty = 0;
             try
             {
-                using (TransactionScope ts = new TransactionScope( ))
+                using (TransactionScope ts = new TransactionScope())
                 {
-                    using (SubSonic.SharedDbConnectionScope ss = new SubSonic.SharedDbConnectionScope( ))
+                    using (SubSonic.SharedDbConnectionScope ss = new SubSonic.SharedDbConnectionScope())
                     {
                         orderData.ValidateWhenSaving = false;
                         //orderData.Save( );
                         if (!OrderBLL.SaveSaleRate(orderData, orderUser, out message))
                             return 1;
-                        OrderBLL.UpdateBalance( );
-                        ts.Complete( );
+                        OrderBLL.UpdateBalance();
+                        ts.Complete();
                         message = "结算成功!";
                         return 0;
                     }
@@ -307,7 +307,7 @@ namespace Eleooo.Web.WebRestServices
                 cashData.CashPoint = 0;
                 cashData.CashRateSale = null;
             }
-            cashData.MarkNew( );
+            cashData.MarkNew();
             cashData.CashDate = DateTime.Now;
             cashData.CashCompanyID = AppContext.Context.Company.Id;
             cashData.CashMemberID = userID;
@@ -319,9 +319,9 @@ namespace Eleooo.Web.WebRestServices
                 cashData.CashRate = 0;
             try
             {
-                using (TransactionScope ts = new TransactionScope( ))
+                using (TransactionScope ts = new TransactionScope())
                 {
-                    using (SubSonic.SharedDbConnectionScope ss = new SubSonic.SharedDbConnectionScope( ))
+                    using (SubSonic.SharedDbConnectionScope ss = new SubSonic.SharedDbConnectionScope())
                     {
                         //int gradeID = string.IsNullOrEmpty(cashData.CashMemo) ? 0 : Convert.ToInt32(cashData.CashMemo);
                         //SysCompanyMemberGrade grade = SysCompanyMemberGrade.FetchByID(gradeID);
@@ -334,8 +334,8 @@ namespace Eleooo.Web.WebRestServices
                         //cashData.Save( );
                         if (!OrderBLL.SaveMemberCash(cashData, user, out message))
                             return 1;
-                        OrderBLL.UpdateBalance( );
-                        ts.Complete( );
+                        OrderBLL.UpdateBalance();
+                        ts.Complete();
 
                         message = string.Format("{0}储值{1}元成功，现储值余额为{2}元", user.MemberFullname, cashData.CashSum, UserBLL.GetUserBalanceCash(userID, AppContext.Context.Company.Id));
                         return 0;
@@ -384,7 +384,7 @@ namespace Eleooo.Web.WebRestServices
         public byte[] GetUserCompanyItems(string phoneNum, string userPwd, string userFinger, int companyID, out int flag, out string message)
         {
             var query = CompanyItemBLL.GetOrderCompanyItemQuery(phoneNum, userPwd, userFinger, companyID, out flag, out message);
-            DataTable dt = query.ExecuteDataTable( );
+            DataTable dt = query.ExecuteDataTable();
             return SubSonic.Utilities.DataFormat.GetBinFormatDataZip(dt);
         }
         [WebMethod]

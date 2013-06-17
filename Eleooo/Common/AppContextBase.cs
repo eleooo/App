@@ -9,12 +9,24 @@ namespace Eleooo.Common
 {
     public class AppContextBase
     {
-        private static readonly string CURRENTSUBSYSID = "CurrentSubSysID";
+        private static readonly string __CURRENTSUBSYSID = "CurrentSubSysID";
+        private static readonly string __FormsAuthenticationTicket = "__FormsAuthenticationTicket";
 
         const string CONTEXT_KEY = "AppContext";
 
+        private static FormsAuthenticationTicket _unAuthTicket;
         protected static AppContextBase _unAuthContext;
         protected static Type _contextType;
+
+        static AppContextBase()
+        {
+            _unAuthTicket = new FormsAuthenticationTicket((int)LoginSystem.Web,
+                "0",
+                DateTime.Now,
+                DateTime.Now.AddHours(60),
+                false,
+                ((int)SubSystem.ALL).ToString());
+        }
 
         protected SysMember _user;
         public SysMember User
@@ -40,7 +52,7 @@ namespace Eleooo.Common
             }
         }
         public virtual SysMemberConfig UserConfig { get { return null; } }
-        
+
         public int CurrentSubSysID
         {
             get
@@ -110,11 +122,11 @@ namespace Eleooo.Common
                 {
                     if (userID > 0)
                     {
-                        _context =(AppContextBase)Activator.CreateInstance(_contextType);
+                        _context = (AppContextBase)Activator.CreateInstance(_contextType);
                         _context._user = SysMember.FetchByID(userID);
                         if (_context._user == null)
                         {
-                            Utilities.LoginOutSigOut( );
+                            Utilities.LoginOutSigOut();
                             return _unAuthContext;
                         }
                         else
@@ -152,17 +164,25 @@ namespace Eleooo.Common
                 int sysID = 0;
                 if (HttpContext.Current != null)
                 {
-                    if (!HttpContext.Current.Items.Contains(CURRENTSUBSYSID))
+                    if (!HttpContext.Current.Items.Contains(__CURRENTSUBSYSID))
                     {
-                        FormsAuthenticationTicket ticket = Utilities.GetTicket( );
+                        FormsAuthenticationTicket ticket = GetTicket();
                         if (ticket != null)
                             sysID = Utilities.ToInt(ticket.UserData);
-                        HttpContext.Current.Items.Add(CURRENTSUBSYSID, sysID);
+                        HttpContext.Current.Items.Add(__CURRENTSUBSYSID, sysID);
                     }
                     else
-                        sysID = (int)HttpContext.Current.Items[CURRENTSUBSYSID];
+                        sysID = (int)HttpContext.Current.Items[__CURRENTSUBSYSID];
                 }
                 return sysID;
+            }
+        }
+
+        public static int CurrentLoginSystem
+        {
+            get
+            {
+                return GetTicket().Version;
             }
         }
 
@@ -170,13 +190,7 @@ namespace Eleooo.Common
         {
             get
             {
-                string result = "0";
-                if (HttpContext.Current.User != null &&
-                        HttpContext.Current.User.Identity != null &&
-                        HttpContext.Current.Request.IsAuthenticated)
-                    result = HttpContext.Current.User.Identity.Name;
-                //HttpContext.Current.Response.Write(result + "<br />");
-                return Convert.ToInt32(result);
+                return Convert.ToInt32(GetTicket().Name);
             }
         }
 
@@ -188,9 +202,31 @@ namespace Eleooo.Common
             }
         }
 
-        public static AppContextBase GetUnAuthContext( )
+        public static AppContextBase GetUnAuthContext()
         {
             return _unAuthContext;
+        }
+
+        public static FormsAuthenticationTicket GetTicket()
+        {
+            if (HttpContext.Current.Items.Contains(__FormsAuthenticationTicket))
+                return (FormsAuthenticationTicket)HttpContext.Current.Items[__FormsAuthenticationTicket];
+            else if (HttpContext.Current.User != null &&
+                        HttpContext.Current.User.Identity != null &&
+                        HttpContext.Current.Request.IsAuthenticated)
+            {
+                var ticket = Utilities.GetTicket();
+                HttpContext.Current.Items.Add(__FormsAuthenticationTicket, ticket);
+                return ticket;
+            }
+            else
+                return _unAuthTicket;
+        }
+
+        public static void SetFormsAuthenticationTicket(string ticketVal)
+        {
+            var ticket = System.Web.Security.FormsAuthentication.Decrypt(ticketVal);
+            HttpContext.Current.Items[__FormsAuthenticationTicket] = ticket;
         }
     }
 }
