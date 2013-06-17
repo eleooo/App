@@ -9,6 +9,34 @@ namespace Eleooo.Web
 {
     public class CompanyBLL
     {
+        #region _HotCompanyQuery
+        private static readonly string __CompanyOrderRankingQuery = @"
+select
+  *
+from 
+  (
+    select
+      ROW_NUMBER()
+      over(order by count(*) desc)
+      as RowNum,
+      t2.ID,
+      count(*)
+      as Amount
+    from
+      orders
+      as t1,
+      sys_company as t2
+    where
+      t1.OrderSellerID= t2.ID
+    and
+      t1.OrderStatus <> 5
+    and
+      t2.CompanyLocation= @CompanyArea
+    group by
+      t2.ID
+  ) t WHERE t.ID=@ID;";
+        #endregion
+        private static readonly string __CompanyOrderElapsedRankingQuery = "SELECT RowNum FROM ( SELECT ROW_NUMBER() OVER(order by OrderElapsed ASC ) as RowNum,  ID, OrderElapsed FROM SYS_COMPANY WHERE DATALENGTH( OrderElapsed) > 0) t WHERE t.ID = @ID";
         private const string __FuncCheckIsWorkingTime = "([dbo].[CheckIsWorkingTime]({0},{1})={2})";
         private const string __FuncIsWorkingTime = "[dbo].[CheckIsWorkingTime]({0},{1}) as IsWorkingTime";
         public const string IS_OWNER = "Is_Owner";
@@ -19,13 +47,56 @@ namespace Eleooo.Web
                 return Utilities.ToDecimal(ResBLL.GetRes("MaxPointLimit", "499", "最大累计赠送积分限制!"));
             }
         }
+
+        public static object GetCompanyInfo(SysCompany company)
+        {
+            int ranking1, ranking2;
+            int amount;
+            GetCompanyOrderRankingInfo(company, out ranking1, out amount);
+            ranking2 = GetCompanyOrderElapsedRankingInfo(company);
+            var result = new
+            {
+                OrderElapsed = company.OrderElapsed,
+                Ranking2 = ranking2,
+                CompanyWorkTime = company.CompanyWorkTime,
+                OnSetSum = company.OnSetSum,
+                IsSuspend = company.IsSuspend,
+                Ranking1 = ranking1,
+                Amount = amount,
+                Area = company.CompanyLocation
+            };
+            return result;
+        }
+
+        public static void GetCompanyOrderRankingInfo(SysCompany company, out int ranking, out int amount)
+        {
+            ranking = amount = 0;
+            QueryCommand cmd = new QueryCommand(__CompanyOrderRankingQuery);
+            cmd.AddParameter("@ID", company.Id, System.Data.DbType.Int32);
+            cmd.AddParameter("@CompanyArea", company.CompanyLocation, System.Data.DbType.String);
+            using (var dr = DataService.GetReader(cmd))
+            {
+                if (dr.Read( ))
+                {
+                    ranking = Utilities.ToInt(dr["RowNum"]);
+                    amount = Utilities.ToInt(dr["Amount"]);
+                }
+            }
+        }
+        public static int GetCompanyOrderElapsedRankingInfo(SysCompany company)
+        {
+            QueryCommand cmd = new QueryCommand(__CompanyOrderElapsedRankingQuery);
+            cmd.AddParameter("@ID", company.Id, System.Data.DbType.Int32);
+            return Utilities.ToInt(DataService.ExecuteScalar(cmd));
+        }
+
         public static string FuncIsWorkingTime( )
         {
             return string.Format(__FuncIsWorkingTime, SysCompany.Columns.CompanyWorkTime, SysCompany.Columns.CompanyType);
         }
         public static bool CheckIsWorkingTime(string workTime, int companyType)
         {
-            string vSql = string.Format("Select "+__FuncIsWorkingTime, "'" + workTime + "'", companyType);
+            string vSql = string.Format("Select " + __FuncIsWorkingTime, "'" + workTime + "'", companyType);
             var r = DataService.ExecuteScalar(new QueryCommand(vSql));
             return Convert.ToInt32(r) == 1;
         }
@@ -226,7 +297,7 @@ namespace Eleooo.Web
             return query.ExecuteScalar<int>( );
         }
 
-        
+
         public static bool IsMaxPointLevel(int companyID, decimal point)
         {
             string vSql = string.Format("SELECT SUM(PAYMENTSUM) FROM PAYMENT WHERE PAYMENTCOMPANYID = {0} AND  paymentStatus=1", companyID);

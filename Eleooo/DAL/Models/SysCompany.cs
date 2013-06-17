@@ -525,6 +525,14 @@ namespace Eleooo.DAL
 			get { return GetColumnValue<bool?>(Columns.IsOnSale); }
 			set { SetColumnValue(Columns.IsOnSale, value); }
 		}
+		  
+		[XmlAttribute("IsSuspend")]
+		[Bindable(true)]
+		public bool? IsSuspend 
+		{
+			get { return GetColumnValue<bool?>(Columns.IsSuspend); }
+			set { SetColumnValue(Columns.IsSuspend, value); }
+		}
 		
 		#endregion
 		
@@ -545,7 +553,7 @@ namespace Eleooo.DAL
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varCompanyCode,string varCompanyName,string varCompanyPwd,string varCompanyEmail,string varCompanyProvince,int? varCompanyCity,string varCompanyArea,string varCompanyLocation,string varAreaDepth,string varCompanyAddress,string varCompanyTel,string varCompanyPhone,string varCompanyMsn,string varCompanySkype,string varCompanyPhoto,string varCompanyIntro,string varCompanyContent,bool? varIsUseFinger,DateTime? varCompanyDate,DateTime? varCompanyDateView,int? varCompanyStatus,string varCompanyMemo,string varCompanyRate,string varCompanyRateSale,decimal? varCompanyRateMaster,int? varCompanySaleCount,decimal? varCompanySaleSum,decimal? varCompanyBalance,decimal? varCompanyBalanceCash,int? varCompanyFacebookCount,string varCompanyToken,int? varCompanyType,string varCompanyItem,int? varCreatedBy,DateTime? varCreatedOn,int? varModifiedBy,DateTime? varModifiedOn,string varCompanyWorkTime,string varCompanyServices,string varMsnPhoneNum,string varOrderElapsed,int? varOrderMaxAmount,bool? varIsUseMsg,decimal? varOnSetSum,decimal? varServiceSum,DateTime? varMenuDate,DateTime? varSetTopDate,bool? varIsPoint,bool? varIsOnSale)
+		public static void Insert(string varCompanyCode,string varCompanyName,string varCompanyPwd,string varCompanyEmail,string varCompanyProvince,int? varCompanyCity,string varCompanyArea,string varCompanyLocation,string varAreaDepth,string varCompanyAddress,string varCompanyTel,string varCompanyPhone,string varCompanyMsn,string varCompanySkype,string varCompanyPhoto,string varCompanyIntro,string varCompanyContent,bool? varIsUseFinger,DateTime? varCompanyDate,DateTime? varCompanyDateView,int? varCompanyStatus,string varCompanyMemo,string varCompanyRate,string varCompanyRateSale,decimal? varCompanyRateMaster,int? varCompanySaleCount,decimal? varCompanySaleSum,decimal? varCompanyBalance,decimal? varCompanyBalanceCash,int? varCompanyFacebookCount,string varCompanyToken,int? varCompanyType,string varCompanyItem,int? varCreatedBy,DateTime? varCreatedOn,int? varModifiedBy,DateTime? varModifiedOn,string varCompanyWorkTime,string varCompanyServices,string varMsnPhoneNum,string varOrderElapsed,int? varOrderMaxAmount,bool? varIsUseMsg,decimal? varOnSetSum,decimal? varServiceSum,DateTime? varMenuDate,DateTime? varSetTopDate,bool? varIsPoint,bool? varIsOnSale,bool? varIsSuspend)
 		{
 			SysCompany item = new SysCompany();
 			
@@ -647,6 +655,8 @@ namespace Eleooo.DAL
 			
 			item.IsOnSale = varIsOnSale;
 			
+			item.IsSuspend = varIsSuspend;
+			
 		
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -657,7 +667,7 @@ namespace Eleooo.DAL
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varId,string varCompanyCode,string varCompanyName,string varCompanyPwd,string varCompanyEmail,string varCompanyProvince,int? varCompanyCity,string varCompanyArea,string varCompanyLocation,string varAreaDepth,string varCompanyAddress,string varCompanyTel,string varCompanyPhone,string varCompanyMsn,string varCompanySkype,string varCompanyPhoto,string varCompanyIntro,string varCompanyContent,bool? varIsUseFinger,DateTime? varCompanyDate,DateTime? varCompanyDateView,int? varCompanyStatus,string varCompanyMemo,string varCompanyRate,string varCompanyRateSale,decimal? varCompanyRateMaster,int? varCompanySaleCount,decimal? varCompanySaleSum,decimal? varCompanyBalance,decimal? varCompanyBalanceCash,int? varCompanyFacebookCount,string varCompanyToken,int? varCompanyType,string varCompanyItem,int? varCreatedBy,DateTime? varCreatedOn,int? varModifiedBy,DateTime? varModifiedOn,string varCompanyWorkTime,string varCompanyServices,string varMsnPhoneNum,string varOrderElapsed,int? varOrderMaxAmount,bool? varIsUseMsg,decimal? varOnSetSum,decimal? varServiceSum,DateTime? varMenuDate,DateTime? varSetTopDate,bool? varIsPoint,bool? varIsOnSale)
+		public static void Update(int varId,string varCompanyCode,string varCompanyName,string varCompanyPwd,string varCompanyEmail,string varCompanyProvince,int? varCompanyCity,string varCompanyArea,string varCompanyLocation,string varAreaDepth,string varCompanyAddress,string varCompanyTel,string varCompanyPhone,string varCompanyMsn,string varCompanySkype,string varCompanyPhoto,string varCompanyIntro,string varCompanyContent,bool? varIsUseFinger,DateTime? varCompanyDate,DateTime? varCompanyDateView,int? varCompanyStatus,string varCompanyMemo,string varCompanyRate,string varCompanyRateSale,decimal? varCompanyRateMaster,int? varCompanySaleCount,decimal? varCompanySaleSum,decimal? varCompanyBalance,decimal? varCompanyBalanceCash,int? varCompanyFacebookCount,string varCompanyToken,int? varCompanyType,string varCompanyItem,int? varCreatedBy,DateTime? varCreatedOn,int? varModifiedBy,DateTime? varModifiedOn,string varCompanyWorkTime,string varCompanyServices,string varMsnPhoneNum,string varOrderElapsed,int? varOrderMaxAmount,bool? varIsUseMsg,decimal? varOnSetSum,decimal? varServiceSum,DateTime? varMenuDate,DateTime? varSetTopDate,bool? varIsPoint,bool? varIsOnSale,bool? varIsSuspend)
 		{
 			SysCompany item = new SysCompany();
 			
@@ -760,6 +770,8 @@ namespace Eleooo.DAL
 				item.IsPoint = varIsPoint;
 			
 				item.IsOnSale = varIsOnSale;
+			
+				item.IsSuspend = varIsSuspend;
 			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
@@ -1124,6 +1136,13 @@ namespace Eleooo.DAL
         
         
         
+        public static TableSchema.TableColumn IsSuspendColumn
+        {
+            get { return Schema.Columns[50]; }
+        }
+        
+        
+        
         #endregion
 		#region Columns Struct
 		public struct Columns
@@ -1178,6 +1197,7 @@ namespace Eleooo.DAL
 			 public static string SetTopDate = @"SetTopDate";
 			 public static string IsPoint = @"IsPoint";
 			 public static string IsOnSale = @"IsOnSale";
+			 public static string IsSuspend = @"IsSuspend";
 						
 		}
 		#endregion

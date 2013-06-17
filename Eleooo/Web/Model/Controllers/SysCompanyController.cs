@@ -80,7 +80,7 @@ namespace Eleooo.DAL
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(string CompanyCode,string CompanyName,string CompanyPwd,string CompanyEmail,string CompanyProvince,int? CompanyCity,string CompanyArea,string CompanyLocation,string AreaDepth,string CompanyAddress,string CompanyTel,string CompanyPhone,string CompanyMsn,string CompanySkype,string CompanyPhoto,string CompanyIntro,string CompanyContent,bool? IsUseFinger,DateTime? CompanyDate,DateTime? CompanyDateView,int? CompanyStatus,string CompanyMemo,string CompanyRate,string CompanyRateSale,decimal? CompanyRateMaster,int? CompanySaleCount,decimal? CompanySaleSum,decimal? CompanyBalance,decimal? CompanyBalanceCash,int? CompanyFacebookCount,string CompanyToken,int? CompanyType,string CompanyItem,int? CreatedBy,DateTime? CreatedOn,int? ModifiedBy,DateTime? ModifiedOn,string CompanyWorkTime,string CompanyServices,string MsnPhoneNum,string OrderElapsed,int? OrderMaxAmount,bool? IsUseMsg,decimal? OnSetSum,decimal? ServiceSum,DateTime? MenuDate,DateTime? SetTopDate,bool? IsPoint,bool? IsOnSale)
+	    public void Insert(string CompanyCode,string CompanyName,string CompanyPwd,string CompanyEmail,string CompanyProvince,int? CompanyCity,string CompanyArea,string CompanyLocation,string AreaDepth,string CompanyAddress,string CompanyTel,string CompanyPhone,string CompanyMsn,string CompanySkype,string CompanyPhoto,string CompanyIntro,string CompanyContent,bool? IsUseFinger,DateTime? CompanyDate,DateTime? CompanyDateView,int? CompanyStatus,string CompanyMemo,string CompanyRate,string CompanyRateSale,decimal? CompanyRateMaster,int? CompanySaleCount,decimal? CompanySaleSum,decimal? CompanyBalance,decimal? CompanyBalanceCash,int? CompanyFacebookCount,string CompanyToken,int? CompanyType,string CompanyItem,int? CreatedBy,DateTime? CreatedOn,int? ModifiedBy,DateTime? ModifiedOn,string CompanyWorkTime,string CompanyServices,string MsnPhoneNum,string OrderElapsed,int? OrderMaxAmount,bool? IsUseMsg,decimal? OnSetSum,decimal? ServiceSum,DateTime? MenuDate,DateTime? SetTopDate,bool? IsPoint,bool? IsOnSale,bool? IsSuspend)
 	    {
 		    SysCompany item = new SysCompany();
 		    
@@ -182,6 +182,8 @@ namespace Eleooo.DAL
             
             item.IsOnSale = IsOnSale;
             
+            item.IsSuspend = IsSuspend;
+            
 	    
 		    item.Save(UserName);
 	    }
@@ -190,7 +192,7 @@ namespace Eleooo.DAL
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(int Id,string CompanyCode,string CompanyName,string CompanyPwd,string CompanyEmail,string CompanyProvince,int? CompanyCity,string CompanyArea,string CompanyLocation,string AreaDepth,string CompanyAddress,string CompanyTel,string CompanyPhone,string CompanyMsn,string CompanySkype,string CompanyPhoto,string CompanyIntro,string CompanyContent,bool? IsUseFinger,DateTime? CompanyDate,DateTime? CompanyDateView,int? CompanyStatus,string CompanyMemo,string CompanyRate,string CompanyRateSale,decimal? CompanyRateMaster,int? CompanySaleCount,decimal? CompanySaleSum,decimal? CompanyBalance,decimal? CompanyBalanceCash,int? CompanyFacebookCount,string CompanyToken,int? CompanyType,string CompanyItem,int? CreatedBy,DateTime? CreatedOn,int? ModifiedBy,DateTime? ModifiedOn,string CompanyWorkTime,string CompanyServices,string MsnPhoneNum,string OrderElapsed,int? OrderMaxAmount,bool? IsUseMsg,decimal? OnSetSum,decimal? ServiceSum,DateTime? MenuDate,DateTime? SetTopDate,bool? IsPoint,bool? IsOnSale)
+	    public void Update(int Id,string CompanyCode,string CompanyName,string CompanyPwd,string CompanyEmail,string CompanyProvince,int? CompanyCity,string CompanyArea,string CompanyLocation,string AreaDepth,string CompanyAddress,string CompanyTel,string CompanyPhone,string CompanyMsn,string CompanySkype,string CompanyPhoto,string CompanyIntro,string CompanyContent,bool? IsUseFinger,DateTime? CompanyDate,DateTime? CompanyDateView,int? CompanyStatus,string CompanyMemo,string CompanyRate,string CompanyRateSale,decimal? CompanyRateMaster,int? CompanySaleCount,decimal? CompanySaleSum,decimal? CompanyBalance,decimal? CompanyBalanceCash,int? CompanyFacebookCount,string CompanyToken,int? CompanyType,string CompanyItem,int? CreatedBy,DateTime? CreatedOn,int? ModifiedBy,DateTime? ModifiedOn,string CompanyWorkTime,string CompanyServices,string MsnPhoneNum,string OrderElapsed,int? OrderMaxAmount,bool? IsUseMsg,decimal? OnSetSum,decimal? ServiceSum,DateTime? MenuDate,DateTime? SetTopDate,bool? IsPoint,bool? IsOnSale,bool? IsSuspend)
 	    {
 		    SysCompany item = new SysCompany();
 	        item.MarkOld();
@@ -295,6 +297,8 @@ namespace Eleooo.DAL
 			item.IsPoint = IsPoint;
 				
 			item.IsOnSale = IsOnSale;
+				
+			item.IsSuspend = IsSuspend;
 				
 	        item.Save(UserName);
 	    }

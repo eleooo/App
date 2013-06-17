@@ -138,7 +138,7 @@ namespace Eleooo.Web.Controls
             Dictionary<string, object> userData = new Dictionary<string, object>( );
             data.Add("companyId", Company.Id);
             data.Add("isLogin", isLogin);
-            data.Add("isWorkingTime", CompanyBLL.CheckIsWorkingTime(Company.CompanyWorkTime, Company.CompanyType.Value));
+            data.Add("isWorkingTime", (Company.IsSuspend.HasValue && Company.IsSuspend.Value) || CompanyBLL.CheckIsWorkingTime(Company.CompanyWorkTime, Company.CompanyType.Value));
             data.Add("menus", menuDict);
             data.Add("userData", userData);
             data.Add("companyRate", RewardBLL.OrderMealRewardRate(Company) / 100M);
@@ -155,7 +155,7 @@ namespace Eleooo.Web.Controls
                                             .Select(detail =>
                                                 {
                                                     OrderMealMenu m;
-                                                    bool isCompanyItem = detail.MenuId.Value < 0 ;
+                                                    bool isCompanyItem = detail.MenuId.Value < 0;
                                                     if (!isCompanyItem && menuDict.TryGetValue(detail.MenuId.ToString( ), out m) &&
                                                         !MealDirIds.Contains(m.dirId))
                                                         MealDirIds.Add(m.dirId);
