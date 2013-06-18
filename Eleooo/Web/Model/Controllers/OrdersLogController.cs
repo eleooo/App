@@ -80,7 +80,7 @@ namespace Eleooo.DAL
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(DateTime? DateX,string Desc,int? IsCurrent,int? OrderId)
+	    public void Insert(DateTime? DateX,string Desc,int? IsCurrent,int? OrderId,string Voice,bool? IsPlay,int? FromUser,int? ToUser)
 	    {
 		    OrdersLog item = new OrdersLog();
 		    
@@ -92,6 +92,14 @@ namespace Eleooo.DAL
             
             item.OrderId = OrderId;
             
+            item.Voice = Voice;
+            
+            item.IsPlay = IsPlay;
+            
+            item.FromUser = FromUser;
+            
+            item.ToUser = ToUser;
+            
 	    
 		    item.Save(UserName);
 	    }
@@ -100,7 +108,7 @@ namespace Eleooo.DAL
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(int Id,DateTime? DateX,string Desc,int? IsCurrent,int? OrderId)
+	    public void Update(int Id,DateTime? DateX,string Desc,int? IsCurrent,int? OrderId,string Voice,bool? IsPlay,int? FromUser,int? ToUser)
 	    {
 		    OrdersLog item = new OrdersLog();
 	        item.MarkOld();
@@ -115,6 +123,14 @@ namespace Eleooo.DAL
 			item.IsCurrent = IsCurrent;
 				
 			item.OrderId = OrderId;
+				
+			item.Voice = Voice;
+				
+			item.IsPlay = IsPlay;
+				
+			item.FromUser = FromUser;
+				
+			item.ToUser = ToUser;
 				
 	        item.Save(UserName);
 	    }

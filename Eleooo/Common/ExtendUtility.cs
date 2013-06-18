@@ -76,7 +76,7 @@ namespace Eleooo
         {
             if (instance == null)
                 goto lbl_def;
-            Type type = instance.GetType();
+            Type type = instance.GetType( );
             return type.GetTypePrivateField<T>(instance, fieldName);
         lbl_def:
             return default(T);
@@ -89,7 +89,7 @@ namespace Eleooo
         {
             if (instance == null)
                 goto lbl_def;
-            Type type = instance.GetType();
+            Type type = instance.GetType( );
             return type.GetTypePrivateProperty<T>(instance, propertyName, index);
         lbl_def:
             return default(T);
@@ -98,7 +98,7 @@ namespace Eleooo
         {
             if (instance != null)
             {
-                Type type = instance.GetType();
+                Type type = instance.GetType( );
                 type.SetTypePrivateField(instance, fieldName, value);
             }
         }
@@ -110,7 +110,7 @@ namespace Eleooo
         {
             if (instance != null)
             {
-                Type type = instance.GetType();
+                Type type = instance.GetType( );
                 type.SetTypePrivateProperty(instance, propertyName, value, index);
             }
         }
@@ -126,7 +126,7 @@ namespace Eleooo
         {
             if (instance == null)
                 goto lbl_def;
-            Type type = instance.GetType();
+            Type type = instance.GetType( );
             return type.CallTypePrivateMethod<T>(instance, name, types, param);
         lbl_def:
             return default(T);
@@ -138,7 +138,7 @@ namespace Eleooo
                 return Type.EmptyTypes;
             Type[] types = new Type[len];
             for (int i = 0; i < param.Length; i++)
-                types[i] = param[i] == null ? typeof(object) : param[i].GetType();
+                types[i] = param[i] == null ? typeof(object) : param[i].GetType( );
             return types;
         }
 
@@ -149,7 +149,7 @@ namespace Eleooo
             {
                 return string.Empty;
             }
-            StringBuilder builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder( );
             for (int i = 0; i < count; i++)
             {
                 string key = instance.GetKey(i);
@@ -197,16 +197,16 @@ namespace Eleooo
                     }
                 }
             }
-            return builder.ToString();
+            return builder.ToString( );
         }
 
         public static IEnumerable<IDataReader> GetDataReaderEnumerator(this SqlQuery query)
         {
             if (query != null)
             {
-                using (var dr = query.ExecuteReader())
+                using (var dr = query.ExecuteReader( ))
                 {
-                    while (dr.Read())
+                    while (dr.Read( ))
                         yield return dr;
                 }
             }
@@ -224,16 +224,16 @@ namespace Eleooo
             }
         }
 
-        public static Dictionary<string, object> ToDictionary<T>(this ReadOnlyRecord<T> item) where T : RecordBase<T>, new()
+        public static Dictionary<string, object> ToDictionary<T>(this ReadOnlyRecord<T> item, bool isLowercase = false) where T : RecordBase<T>, new( )
         {
-            Dictionary<string, object> result = new Dictionary<string, object>();
+            Dictionary<string, object> result = new Dictionary<string, object>( );
             if (item != null)
             {
-                var columns = item.GetColumnSettings();
+                var columns = item.GetColumnSettings( );
                 if (columns != null)
                 {
                     foreach (var col in columns)
-                        result.Add(col.ColumnName, col.CurrentValue);
+                        result.Add(isLowercase ? col.ColumnName.ToLower( ) : col.ColumnName, col.CurrentValue);
                 }
             }
             return result;

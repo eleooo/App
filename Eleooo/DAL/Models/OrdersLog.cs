@@ -165,6 +165,38 @@ namespace Eleooo.DAL
 			get { return GetColumnValue<int?>(Columns.OrderId); }
 			set { SetColumnValue(Columns.OrderId, value); }
 		}
+		  
+		[XmlAttribute("Voice")]
+		[Bindable(true)]
+		public string Voice 
+		{
+			get { return GetColumnValue<string>(Columns.Voice); }
+			set { SetColumnValue(Columns.Voice, value); }
+		}
+		  
+		[XmlAttribute("IsPlay")]
+		[Bindable(true)]
+		public bool? IsPlay 
+		{
+			get { return GetColumnValue<bool?>(Columns.IsPlay); }
+			set { SetColumnValue(Columns.IsPlay, value); }
+		}
+		  
+		[XmlAttribute("FromUser")]
+		[Bindable(true)]
+		public int? FromUser 
+		{
+			get { return GetColumnValue<int?>(Columns.FromUser); }
+			set { SetColumnValue(Columns.FromUser, value); }
+		}
+		  
+		[XmlAttribute("ToUser")]
+		[Bindable(true)]
+		public int? ToUser 
+		{
+			get { return GetColumnValue<int?>(Columns.ToUser); }
+			set { SetColumnValue(Columns.ToUser, value); }
+		}
 		
 		#endregion
 		
@@ -185,7 +217,7 @@ namespace Eleooo.DAL
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(DateTime? varDateX,string varDesc,int? varIsCurrent,int? varOrderId)
+		public static void Insert(DateTime? varDateX,string varDesc,int? varIsCurrent,int? varOrderId,string varVoice,bool? varIsPlay,int? varFromUser,int? varToUser)
 		{
 			OrdersLog item = new OrdersLog();
 			
@@ -197,6 +229,14 @@ namespace Eleooo.DAL
 			
 			item.OrderId = varOrderId;
 			
+			item.Voice = varVoice;
+			
+			item.IsPlay = varIsPlay;
+			
+			item.FromUser = varFromUser;
+			
+			item.ToUser = varToUser;
+			
 		
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -207,7 +247,7 @@ namespace Eleooo.DAL
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varId,DateTime? varDateX,string varDesc,int? varIsCurrent,int? varOrderId)
+		public static void Update(int varId,DateTime? varDateX,string varDesc,int? varIsCurrent,int? varOrderId,string varVoice,bool? varIsPlay,int? varFromUser,int? varToUser)
 		{
 			OrdersLog item = new OrdersLog();
 			
@@ -220,6 +260,14 @@ namespace Eleooo.DAL
 				item.IsCurrent = varIsCurrent;
 			
 				item.OrderId = varOrderId;
+			
+				item.Voice = varVoice;
+			
+				item.IsPlay = varIsPlay;
+			
+				item.FromUser = varFromUser;
+			
+				item.ToUser = varToUser;
 			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
@@ -269,6 +317,34 @@ namespace Eleooo.DAL
         
         
         
+        public static TableSchema.TableColumn VoiceColumn
+        {
+            get { return Schema.Columns[5]; }
+        }
+        
+        
+        
+        public static TableSchema.TableColumn IsPlayColumn
+        {
+            get { return Schema.Columns[6]; }
+        }
+        
+        
+        
+        public static TableSchema.TableColumn FromUserColumn
+        {
+            get { return Schema.Columns[7]; }
+        }
+        
+        
+        
+        public static TableSchema.TableColumn ToUserColumn
+        {
+            get { return Schema.Columns[8]; }
+        }
+        
+        
+        
         #endregion
 		#region Columns Struct
 		public struct Columns
@@ -278,6 +354,10 @@ namespace Eleooo.DAL
 			 public static string Desc = @"Desc";
 			 public static string IsCurrent = @"IsCurrent";
 			 public static string OrderId = @"OrderId";
+			 public static string Voice = @"Voice";
+			 public static string IsPlay = @"IsPlay";
+			 public static string FromUser = @"FromUser";
+			 public static string ToUser = @"ToUser";
 						
 		}
 		#endregion

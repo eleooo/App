@@ -63,14 +63,14 @@ namespace Eleooo.Web.Company
             {
                 if (!Utilities.IsNull(txtSupportPhoto.Value) && !string.IsNullOrEmpty(txtSupportPhoto.PostedFile.FileName))
                 {
-                    string message, phyPath;
-                    string filePath = Eleooo.Common.FileUpload.SaveUploadFile(txtSupportPhoto.PostedFile, FileType.Image | FileType.Zip | FileType.Zip, SaveType.Support, out phyPath, out message, true);
-                    if (!string.IsNullOrEmpty(message))
+                    string message;
+                    var result = Eleooo.Common.FileUpload.SaveUploadFile(txtSupportPhoto.PostedFile, FileType.Image | FileType.Zip | FileType.Zip, SaveType.Support, out message, true);
+                    if (result == null)
                     {
                         txtMessage.InnerHtml = message;
                         return;
                     }
-                    support.SupportPhoto = filePath;
+                    support.SupportPhoto = result.PhyPath;
                 }
                 support.SupportSubject = txtSupportSubject.Text;
                 support.SupportContent = HttpUtility.HtmlEncode(txtSupportContent.Text);

@@ -33,10 +33,10 @@ namespace Eleooo.Web.SiteAppPage
             FileType fileType = FileType.Image;
             if (!string.IsNullOrEmpty(pFileType))
                 fileType = (FileType)Utilities.ToInt(pFileType);
-            string message, phyPath;
-            string fileName = Eleooo.Common.FileUpload.SaveUploadFile(uploadify, fileType, saveType, out phyPath, out message, true);
-            if (!string.IsNullOrEmpty(fileName))
-                base.ClientScript.RegisterStartupScript(base.GetType( ), "upload", string.Format("closeForm('{0}','{1}','{2}','{3}')", this.Txt, fileName, this.Img, fileName), true);
+            string message;
+            var result = Eleooo.Common.FileUpload.SaveUploadFile(uploadify, fileType, saveType, out message, true);
+            if (result != null && !string.IsNullOrEmpty(result.RelPath))
+                base.ClientScript.RegisterStartupScript(base.GetType( ), "upload", string.Format("closeForm('{0}','{1}','{2}','{3}')", this.Txt, result.RelPath, this.Img, result.RelPath), true);
             else
                 lblMessage.InnerHtml = message;
         }

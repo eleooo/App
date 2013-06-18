@@ -180,8 +180,8 @@ namespace Eleooo.Web.WebRestServices
                 adsID = ad.AdsID;
                 if (fileData != null && fileData.Length > 0 && !string.IsNullOrEmpty(fileName))
                 {
-                    string phyPath;
-                    ad.AdsPic = FileUpload.SaveUploadFile(fileData, FileType.Image, SaveType.CompanyAds, fileName, out phyPath, out message, true, adsID.ToString());
+                    var result = FileUpload.SaveUploadFile(fileData, FileType.Image, SaveType.CompanyAds, fileName, out message, true, adsID.ToString( ));
+                    ad.AdsPic = result != null ? result.RelPath : string.Empty;
                     ad.Save();
                 }
                 foreach (DataRow row in dtPointSetting.Rows)
@@ -360,8 +360,8 @@ namespace Eleooo.Web.WebRestServices
         [WebMethod]
         public string UploadFile(byte[] fileData, string fileName, int fileType, int saveType, string folderName, out string message)
         {
-            string phyPath;
-            return FileUpload.SaveUploadFile(fileData, (FileType)fileType, (SaveType)saveType, fileName, out phyPath, out message, true, folderName);
+            var result = FileUpload.SaveUploadFile(fileData, (FileType)fileType, (SaveType)saveType, fileName, out message, true, folderName);
+            return result != null ? result.RelPath : string.Empty;
         }
 
         [WebMethod]

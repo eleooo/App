@@ -123,9 +123,9 @@ namespace Eleooo.Web.SiteAppPage
                 lblMessage.InnerHtml = string.Format("最多允许上传{0}个文件.", maxLimit);
                 goto lbl_end;
             }
-            string message, phyPath;
-            string fileName = Eleooo.Common.FileUpload.SaveUploadFile(uploadify, fileType, saveType, out phyPath, out message, true, folderName);
-            if (!string.IsNullOrEmpty(fileName))
+            string message;
+            var result = Eleooo.Common.FileUpload.SaveUploadFile(uploadify, fileType, saveType, out message, true, folderName);
+            if (result == null)
             {
                 message = "上传成功!";
                 _data = null;

@@ -34,7 +34,7 @@ namespace Eleooo.BLL.Services
             orders = context.Request["orders"];
             string result;
             int code = OrderMealBLL.ConfirmOrder(orderId, ref orderSessionVal, msnType, message, orders, out result);
-            return Common.ServicesResult.GetInstance(code, result, code < 0 ? null : new { orderSessionVal = orderSessionVal.ToString() });
+            return Common.ServicesResult.GetInstance(code, result, code < 0 ? null : new { orderSessionVal = orderSessionVal.ToString( ) });
         }
 
         public Common.ServicesResult GetOrders(HttpContext context)
@@ -51,7 +51,7 @@ namespace Eleooo.BLL.Services
             var query = DB.Select(Utilities.GetTableColumns(Order.Schema),
                                       SysMember.Columns.MemberPhoneNumber,
                                       SysMember.Columns.MemberFullname)
-                              .From<Order>()
+                              .From<Order>( )
                               .InnerJoin(SysMember.IdColumn, Order.OrderMemberIDColumn)
                               .Where(Order.OrderDateColumn).IsBetweenAnd(d1, d2)
                               .OrderDesc(Order.OrderUpdateOnColumn.QualifiedName);
@@ -61,13 +61,13 @@ namespace Eleooo.BLL.Services
             {
                 if (!string.IsNullOrEmpty(phone))
                     query.And(SysMember.MemberPhoneNumberColumn).IsEqualTo(phone);
-                var total = query.GetRecordCount();
+                var total = query.GetRecordCount( );
                 pageCount = Utilities.CalcPageCount(_PageSize, total);
                 query.Paged(pageIndex, _PageSize);
             }
             else
                 query.And(Order.OrderUpdateOnColumn).IsGreaterThan(Utilities.ToDateTime(t));
-            return ServicesResult.GetInstance(new { pageCount = pageCount, orders = query.ExecuteDataTable() });
+            return ServicesResult.GetInstance(new { pageCount = pageCount, orders = query.ExecuteDataTable( ) });
         }
 
         public Common.ServicesResult GetDetail(HttpContext context)
@@ -90,11 +90,34 @@ namespace Eleooo.BLL.Services
         }
         public Common.ServicesResult GetTemps(HttpContext context)
         {
-            return new ServicesResult();
+            var id = Utilities.ToInt(context.Request["id"]);
+            int code = -1;
+            Order order = Order.FetchByID(id);
+            object result = null;
+            if (order != null)
+            {
+                result = new
+                {
+                    MemberPhoneNumber = UserBLL.GetUserPhoneById(order.OrderMemberID),
+                    Timespan = OrderMealBLL.GetOrderTimespan(order),
+                    temps = OrderProgressBLL.GetOrderLog(order)
+                };
+                code = 0;
+            }
+            return Common.ServicesResult.GetInstance(code, string.Empty, result);
         }
         public Common.ServicesResult SendTemps(HttpContext context)
         {
-            return new ServicesResult();
+            var id = Utilities.ToInt(context.Request["id"]);
+            int code = -1;
+            Order order = Order.FetchByID(id);
+            object result = null;
+            string message;
+            if (order != null)
+                code = OrderProgressBLL.AddOrderTempLog(context, order, out result, out message) ? 0 : code;
+            else
+                message = "订单不存在.";
+            return Common.ServicesResult.GetInstance(code, message, result);
         }
     }
 }

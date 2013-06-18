@@ -576,8 +576,8 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
                 order.OrderDateUpload = DateTime.Now;
                 order.Save();
                 DateTime dt = DateTime.Now;
-                OrderProgressBLL.AddOrderConfirmLog(order.Id, dt.AddSeconds(2), "正在帮您跟餐厅联系，请稍候。");
-                OrderProgressBLL.AddOrderConfirmLog(order.Id, dt.AddSeconds(35), "餐厅表示：您的餐点正在配送途中，请耐心等一会儿。");
+                OrderProgressBLL.AddOrderConfirmLog(order, dt.AddSeconds(2), "正在帮您跟餐厅联系，请稍候。");
+                OrderProgressBLL.AddOrderConfirmLog(order, dt.AddSeconds(35), "餐厅表示：您的餐点正在配送途中，请耐心等一会儿。");
                 message = "我们会尽快的了.";
                 result = 0;
             lbl_return:
@@ -1000,7 +1000,7 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
                                 CompanyItemBLL.UpdateCompanyItemSum(itemDetail.MenuId, itemChgSum);
                             dSum = itemDetail.OrderPrice.Value;
                         }
-                        bool isOutOfStock;
+                        //bool isOutOfStock;
                         foreach (var item in chgData.Values)
                         {
                             isChanged = false;

@@ -23,9 +23,9 @@ namespace Eleooo.Web.SiteAppPage
                 if (!string.IsNullOrEmpty(pSaveType))
                     saveType = (SaveType)Utilities.ToInt(pSaveType);
                 HttpPostedFile file = context.Request.Files[0];
-                string message, phyPath;
-                string fileName = FileUpload.SaveUploadFile(file, FileType.All, saveType, out phyPath, out message, true);
-                context.Response.Write(GetResult(fileName, message));
+                string message;
+                var result = FileUpload.SaveUploadFile(file, FileType.All, saveType, out message, true);
+                context.Response.Write(GetResult(result != null ? result.RelPath : string.Empty, message));
             }
             catch (Exception ex)
             {

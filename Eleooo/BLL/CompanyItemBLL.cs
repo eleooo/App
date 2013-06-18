@@ -192,7 +192,7 @@ namespace Eleooo.Web
         public static string RenderCheckItemFuncInVals(int userID, decimal lastOrderSum, params string[] inVals)
         {
             List<string> lstParam = GetParamList(userID, lastOrderSum);
-            return string.Format("And ({0} IN ({1}))", string.Format(CHECK_COMPANY_ITEM_FUNC, string.Join(",", lstParam.ToArray( ))), string.Join(",",inVals));
+            return string.Format("And ({0} IN ({1}))", string.Format(CHECK_COMPANY_ITEM_FUNC, string.Join(",", lstParam.ToArray( ))), string.Join(",", inVals));
         }
         public static int ExecuteCheckFunc(int userID, int itemID, decimal lastOrderSum, int orderId = 0)
         {
@@ -558,7 +558,7 @@ namespace Eleooo.Web
                 goto lbl_end;
             }
             userLastOrderSum = UserBLL.GetUserAvgOrderSum(user.Id);
-            int result = CompanyItemBLL.ExecuteCheckFunc(user.Id, item.ItemID, userLastOrderSum,orderId);
+            int result = CompanyItemBLL.ExecuteCheckFunc(user.Id, item.ItemID, userLastOrderSum, orderId);
             if (result < 0)
             {
                 message = ItemCheckResult.ContainsKey(result) ? ItemCheckResult[result] : "你无权抢购此优惠项目!";
@@ -695,8 +695,8 @@ namespace Eleooo.Web
         public static void UpdateCompanyItemSum(int? itemID, decimal itemSum)
         {
             QueryCommand cmd = new QueryCommand("UPDATE Sys_Company_Item SET [ItemSum]=@ItemSum WHERE ItemID = @ItemID AND  [ItemSum]<>@ItemSum;");
-            cmd.AddParameter("@ItemSum", itemID, DbType.Decimal);
-            cmd.AddParameter("@ItemID", itemID, DbType.Int32);
+            cmd.AddParameter("@ItemSum", itemSum, DbType.Decimal);
+            cmd.AddParameter("@ItemID", Math.Abs(itemID.Value), DbType.Int32);
             DataService.ExecuteQuery(cmd);
         }
         public static void SetCookieRecViewItem(int itemID)

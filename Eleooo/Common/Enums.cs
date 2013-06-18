@@ -159,7 +159,8 @@ namespace Eleooo.Common
         Support = 3,
         Doc = 4,
         CompanyItem = 5,
-        CompanyAds = 6
+        CompanyAds = 6,
+        Voice = 7
     }
 
     [Flags]

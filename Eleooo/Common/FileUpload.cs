@@ -87,41 +87,41 @@ namespace Eleooo.Common
             return HttpContext.Current.Server.MapPath(GetSaveRelDir(saveType));
         }
 
-        public static string SaveUploadFile(HtmlInputFile file, FileType fileType, SaveType saveType, out string phyPath, out string message, bool isAutoName, string folderName = "")
+        public static UploadFileInfo SaveUploadFile(HtmlInputFile file, FileType fileType, SaveType saveType, out string message, bool isAutoName, string folderName = "")
         {
-            return SaveUploadFile(file.PostedFile, fileType, saveType, out phyPath, out message, isAutoName, folderName);
+            return SaveUploadFile(file.PostedFile, fileType, saveType, out message, isAutoName, folderName);
         }
-        public static string SaveUploadFile(HttpPostedFile file, FileType fileType, SaveType saveType, out string phyPath, out string message, bool isAutoName, string folderName = "")
+        public static UploadFileInfo SaveUploadFile(HttpPostedFile file, FileType fileType, SaveType saveType, out string message, bool isAutoName, string folderName = "")
         {
-            return SaveUploadFile(file.InputStream, fileType, saveType, file.FileName, out phyPath, out message, isAutoName, folderName);
+            return SaveUploadFile(file.InputStream, fileType, saveType, file.FileName, out message, isAutoName, folderName);
         }
-        public static string SaveUploadFile(Stream fileStream, FileType fileType, SaveType saveType, string fileName, out string phyPath, out string message, bool isAutoName, string folderName = "")
+        public static UploadFileInfo SaveUploadFile(Stream fileStream, FileType fileType, SaveType saveType, string fileName, out string message, bool isAutoName, string folderName = "")
         {
             byte[] buff = new byte[fileStream.Length];
             fileStream.Position = 0L;
             fileStream.Read(buff, 0, buff.Length);
-            return SaveUploadFile(buff, fileType, saveType, fileName, out phyPath, out message, isAutoName, folderName);
+            return SaveUploadFile(buff, fileType, saveType, fileName, out message, isAutoName, folderName);
         }
-        public static string SaveUploadFile(byte[] buff, FileType fileType, SaveType saveType, string fileName, out string phyPath, out string message, bool isAutoName, string folderName = "")
+        public static UploadFileInfo SaveUploadFile(byte[] buff, FileType fileType, SaveType saveType, string fileName, out string message, bool isAutoName, string folderName = "")
         {
-            phyPath = string.Empty;
+            string phyPath = string.Empty;
             try
             {
                 message = string.Empty;
                 if (!IsAllowFileType(fileType, fileName))
                 {
                     message = "文件格式不合法!";
-                    return string.Empty;
+                    return null;
                 }
                 if (buff == null || buff.Length == 0)
                 {
                     message = "文件内容不能为空!";
-                    return string.Empty;
+                    return null;
                 }
                 if (buff.Length > MAX_ALLOW_SIZE)
                 {
                     message = string.Format("文件大小超过了限制{0}", GetMaxAllowSize( ));
-                    return string.Empty;
+                    return null;
                 }
                 if (isAutoName)
                     fileName = FormatFileName(fileName);
@@ -136,14 +136,20 @@ namespace Eleooo.Common
                     stream.Flush( );
                 }
                 phyPath = absFilePath;
-                return relPath;
+                return new UploadFileInfo
+                {
+                    FileName = fileName,
+                    RelPath = relPath,
+                    PhyPath = phyPath
+                };
+                //return relPath;
             }
             catch (Exception ex)
             {
                 Logging.Log("FileUpload->SaveUploadFile", ex);
                 message = ex.Message;
-                return string.Empty;
             }
+            return null;
         }
         public static byte[] GetSaveFile(string fileName, SaveType saveType)
         {
@@ -262,6 +268,13 @@ namespace Eleooo.Common
             }
             catch { }
             return result;
+        }
+
+        public class UploadFileInfo
+        {
+            public string FileName { get; set; }
+            public string RelPath { get; set; }
+            public string PhyPath { get; set; }
         }
     }
 }

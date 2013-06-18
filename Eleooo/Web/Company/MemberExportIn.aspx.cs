@@ -115,11 +115,11 @@ namespace Eleooo.Web.Company
         {
             try
             {
-                string message, absPath;
-                Eleooo.Common.FileUpload.SaveUploadFile(txtCustomer.PostedFile, FileType.Doc, SaveType.Custome, out absPath, out message, true);
-                if (!string.IsNullOrEmpty(message))
+                string message;
+                var result = Eleooo.Common.FileUpload.SaveUploadFile(txtCustomer.PostedFile, FileType.Doc, SaveType.Custome, out message, true);
+                if (result == null)
                     throw new Exception(message);
-                DataTable dt = ExcelHelper.ExportExcelInDT(absPath, out message);
+                DataTable dt = ExcelHelper.ExportExcelInDT(result.PhyPath, out message);
                 if (!string.IsNullOrEmpty(message))
                     throw new Exception(message);
                 if (dt == null)

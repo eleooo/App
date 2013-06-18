@@ -644,5 +644,12 @@ namespace Eleooo.Common
                 pageCount++;
             return pageCount;
         }
+        public static void LowerCaseDataTable(DataTable dt)
+        {
+            foreach (DataColumn col in dt.Columns)
+            {
+                col.ColumnName = col.ColumnName.ToLower( );
+            }
+        }
     }
 }
