@@ -110,25 +110,20 @@ namespace Eleooo.Web.SiteAppPage
             return _initData;
         }
 
-        protected DateTime GetMealCurrentDate( )
-        {
-            var status = Meal.OrderStatus;
-            if (status == (int)OrderStatus.Completed)
-                return Meal.OrderDateDeliver;
-            else if (status == (int)OrderStatus.Canceled)
-                return (Meal.OrderUpdateOn ?? Meal.ModifiedOn).Value;
-            else
-                return DateTime.Now;
-        }
+        //protected DateTime GetMealCurrentDate( )
+        //{
+        //    var status = Meal.OrderStatus;
+        //    if (status == (int)OrderStatus.Completed)
+        //        return Meal.OrderDateDeliver;
+        //    else if (status == (int)OrderStatus.Canceled)
+        //        return (Meal.OrderUpdateOn ?? Meal.ModifiedOn).Value;
+        //    else
+        //        return DateTime.Now;
+        //}
 
-        protected string GetTimespan( )
+        protected string GetTimespan()
         {
-            var span = (GetMealCurrentDate( ) - Meal.OrderDate).ToString( );
-            var index = span.IndexOf(".");
-            if (index > 0)
-                return span.Substring(0, span.IndexOf("."));
-            else
-                return span;
+            return OrderMealBLL.GetOrderTimespan(Meal);
         }
     }
 }

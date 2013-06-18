@@ -13,7 +13,7 @@ namespace Eleooo.BLL.Services
     {
         #region IHandlerServices 成员
 
-        public Common.ServicesResult Query(System.Web.HttpContext context)
+        public Common.ServicesResult Get(System.Web.HttpContext context)
         {
             if (AppContextBase.CurrentSysId == (int)SubSystem.Company && AppContextBase.Context.Company != null)
                 return Common.ServicesResult.GetInstance(CompanyBLL.GetCompanyInfo(AppContextBase.Context.Company));

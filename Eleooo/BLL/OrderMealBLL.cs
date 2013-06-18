@@ -21,24 +21,24 @@ set @ItemInfo = N'select @OrderQty as OrderQty,@OrderSum as OrderSum,t2.DirName,
 exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @OrderQty,@OrderSum=@OrderSum";
 
         private const string COLOR_FORMAT = "<span style=\"color:{0}\">{1}</span>";
-        private static readonly object __Locker = new object( );
+        private static readonly object __Locker = new object();
 
-        private static readonly Dictionary<int, object> __orderLocker = new Dictionary<int, object>( );
+        private static readonly Dictionary<int, object> __orderLocker = new Dictionary<int, object>();
         private static readonly Dictionary<string, string> _orderStatusSoruce;
         private static readonly Dictionary<OrderStatus, string> _orderStatusFontColor;
 
-        static OrderMealBLL( )
+        static OrderMealBLL()
         {
             if (_orderStatusSoruce == null)
             {
-                _orderStatusSoruce = new Dictionary<string, string>( );
+                _orderStatusSoruce = new Dictionary<string, string>();
                 _orderStatusSoruce.Add("2", "待处理");
                 _orderStatusSoruce.Add("3", "已修改");
                 _orderStatusSoruce.Add("4", "处理中");
                 _orderStatusSoruce.Add("5", "已取消");
                 _orderStatusSoruce.Add("6", "订餐成功");
             }
-            _orderStatusFontColor = new Dictionary<OrderStatus, string>( );
+            _orderStatusFontColor = new Dictionary<OrderStatus, string>();
             _orderStatusFontColor.Add(OrderStatus.NotStart, "#FF0000");
             _orderStatusFontColor.Add(OrderStatus.Modified, "#FFC000");
             _orderStatusFontColor.Add(OrderStatus.InProgress, "green");
@@ -55,7 +55,7 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
                     return objLock;
                 else
                 {
-                    objLock = new object( );
+                    objLock = new object();
                     __orderLocker.Add(orderId, objLock);
                     return objLock;
                 }
@@ -86,14 +86,14 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
         }
         public static IEnumerable<OrdersDetail> GetOutOfStockDeitalByOrderId(int orderId)
         {
-            var query = DB.Select( ).From<OrdersDetail>( )
+            var query = DB.Select().From<OrdersDetail>()
                                     .Where(OrdersDetail.OrderIdColumn).IsEqualTo(orderId)
                                     .And(OrdersDetail.IsOutOfStockColumn).IsEqualTo(true);
-            using (var dr = query.ExecuteReader( ))
+            using (var dr = query.ExecuteReader())
             {
-                while (dr.Read( ))
+                while (dr.Read())
                 {
-                    OrdersDetail d = new OrdersDetail( );
+                    OrdersDetail d = new OrdersDetail();
                     d.Load(dr);
                     yield return d;
                 }
@@ -101,7 +101,7 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
         }
         public static Dictionary<object, OrderDetailItem> GetOrderItemMenus(int orderId)
         {
-            Dictionary<object, OrderDetailItem> result = new Dictionary<object, OrderDetailItem>( );
+            Dictionary<object, OrderDetailItem> result = new Dictionary<object, OrderDetailItem>();
             var cmd = new QueryCommand(ItemDetailMenusCmd);
             cmd.AddParameter("@OrderId", orderId, DbType.Int32);
             using (var dr = DataService.GetReader(cmd))
@@ -109,7 +109,7 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
                 //decimal orderSum = 0, allSum = 0;
                 bool isFirst = true;
                 OrderDetailItem item;
-                while (dr.Read( ))
+                while (dr.Read())
                 {
                     var id = Utilities.ToInt(dr[SysTakeawayMenu.Columns.Id]);
                     if (!result.TryGetValue(id, out item))
@@ -138,15 +138,15 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
         public static Dictionary<object, OrderDetailItem> GetOrderDetailByOrder(Order order)
         {
             if (order == null)
-                return new Dictionary<object, OrderDetailItem>( );
+                return new Dictionary<object, OrderDetailItem>();
             var data = GetOrderItemMenus(order.Id);
             var query = DB.Select(Utilities.GetTableColumns(OrdersDetail.Schema),
                                   SysTakeawayDirectory.DirNameColumn.QualifiedName)
-                           .From<OrdersDetail>( )
+                           .From<OrdersDetail>()
                            .InnerJoin(SysTakeawayMenu.IdColumn, OrdersDetail.MenuIdColumn)
                            .InnerJoin(SysTakeawayDirectory.IdColumn, SysTakeawayMenu.DirIDColumn)
                            .Where(OrdersDetail.OrderIdColumn).IsEqualTo(order.Id);
-            query.GetDataReaderEnumerator( ).ForEach<IDataReader>(dr =>
+            query.GetDataReaderEnumerator().ForEach<IDataReader>(dr =>
                 {
                     var menuId = Utilities.ToInt(dr[OrdersDetail.Columns.MenuId]);
                     OrderDetailItem item;
@@ -178,13 +178,13 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
         }
         public static IEnumerable<OrdersDetail> GetOrderAllDetailByOrderId(int orderId)
         {
-            var query = DB.Select( ).From<OrdersDetail>( )
+            var query = DB.Select().From<OrdersDetail>()
                         .Where(OrdersDetail.OrderIdColumn).IsEqualTo(orderId);
-            using (var dr = query.ExecuteReader( ))
+            using (var dr = query.ExecuteReader())
             {
-                while (dr.Read( ))
+                while (dr.Read())
                 {
-                    OrdersDetail d = new OrdersDetail( );
+                    OrdersDetail d = new OrdersDetail();
                     d.Load(dr);
                     yield return d;
                 }
@@ -193,15 +193,15 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
 
         public static IEnumerable<OrdersDetail> GetOrderNonOutOfStockDetailByOrderId(int orderId)
         {
-            var query = DB.Select(Utilities.GetTableColumns(OrdersDetail.Schema)).From<OrdersDetail>( )
+            var query = DB.Select(Utilities.GetTableColumns(OrdersDetail.Schema)).From<OrdersDetail>()
                                     .Where(OrdersDetail.OrderIdColumn).IsEqualTo(orderId)
                                     .And(OrdersDetail.IsOutOfStockColumn).IsEqualTo(false)
                                     .OrderAsc(OrdersDetail.IdColumn.QualifiedName);
-            using (var dr = query.ExecuteReader( ))
+            using (var dr = query.ExecuteReader())
             {
-                while (dr.Read( ))
+                while (dr.Read())
                 {
-                    OrdersDetail d = new OrdersDetail( );
+                    OrdersDetail d = new OrdersDetail();
                     d.Load(dr);
                     yield return d;
                 }
@@ -209,33 +209,33 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
         }
         public static Payment GetOrderMealPayment(Order order, int userId)
         {
-            return DB.Select( ).Top("1").From<Payment>( )
+            return DB.Select().Top("1").From<Payment>()
                         .Where(Payment.PaymentOrderIDColumn).IsEqualTo(order.Id)
                         .And(Payment.PaymentCompanyIDColumn).IsEqualTo(UserBLL.MainCompanyAccount.Id)
                         .And(Payment.PaymentTypeColumn).IsEqualTo((int)PaymentType.ConsumeGive)
                         .And(Payment.PaymentMemberIDColumn).IsEqualTo(userId)
-                        .ExecuteSingle<Payment>( );
+                        .ExecuteSingle<Payment>();
         }
         public static bool UserIsFirstOrder(int userId)
         {
-            var query = DB.Select( ).Top("1").From<Order>( )
+            var query = DB.Select().Top("1").From<Order>()
               .Where(Order.OrderMemberIDColumn).IsEqualTo(userId)
               .And(Order.OrderTypeColumn).IsEqualTo((int)OrderType.OrderMeal)
               .And(Order.OrderStatusColumn).IsEqualTo((int)OrderStatus.Completed);
-            return query.GetRecordCount( ) < 1;
+            return query.GetRecordCount() < 1;
         }
         public static Order GetUserLatestMealOrder(int userId)
         {
-            var query = DB.Select( ).Top("1").From<Order>( )
+            var query = DB.Select().Top("1").From<Order>()
                          .Where(Order.OrderMemberIDColumn).IsEqualTo(userId)
                          .And(Order.OrderTypeColumn).IsEqualTo((int)OrderType.OrderMeal)
                          .OrderDesc(Order.IdColumn.ColumnName);
-            using (var dr = query.ExecuteReader( ))
+            using (var dr = query.ExecuteReader())
             {
                 Order order = null;
-                if (dr.Read( ))
+                if (dr.Read())
                 {
-                    order = new Order( );
+                    order = new Order();
                     order.Load(dr);
                 }
                 return order;
@@ -254,7 +254,7 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
                              SysCompany.CompanyNameColumn.QualifiedName,
                              SysCompany.CompanyPhoneColumn.QualifiedName,
                              SysMember.MemberPhoneNumberColumn.QualifiedName)
-                          .From<VMealOrder>( )
+                          .From<VMealOrder>()
                           .InnerJoin(SysCompany.IdColumn, VMealOrder.OrderSellerIDColumn)
                           .InnerJoin(SysMember.IdColumn, VMealOrder.OrderMemberIDColumn)
                           .Where(VMealOrder.OrderTypeColumn).IsNotEqualTo((int)OrderType.Common)
@@ -264,8 +264,8 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
                           .And(SysCompany.CompanyTypeColumn).IsEqualTo((int)CompanyType.MealCompany)
                           .OrderDesc(VMealOrder.OrderDateColumn.QualifiedName)
                           .AndEx(VMealOrder.OrderOperColumn).IsEqualTo(AppContextBase.Context.User.Id)
-                          .Or(VMealOrder.OrderOperColumn).IsNull( )
-                          .CloseEx( );
+                          .Or(VMealOrder.OrderOperColumn).IsNull()
+                          .CloseEx();
                 if (status > 0)
                     query.And(VMealOrder.OrderStatusColumn).IsEqualTo(status);
                 else
@@ -277,7 +277,7 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
                              SysCompany.CompanyNameColumn.QualifiedName,
                              SysCompany.CompanyPhoneColumn.QualifiedName,
                              SysMember.MemberPhoneNumberColumn.QualifiedName)
-                         .From<Order>( )
+                         .From<Order>()
                          .InnerJoin(SysCompany.IdColumn, Order.OrderSellerIDColumn)
                          .InnerJoin(SysMember.IdColumn, Order.OrderMemberIDColumn)
                          .Where(Order.OrderTypeColumn).IsNotEqualTo((int)OrderType.Common)
@@ -310,7 +310,7 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
                     result = string.Format("<a href=\"javascript:void(0)\" onclick=\"orderMeal.popupStatus('{0}');\">{1}</a>", rowData["ID"], rowData[column]);
                     break;
                 case "Action":
-                    string nStatus = rowData["OrderStatus"].ToString( );
+                    string nStatus = rowData["OrderStatus"].ToString();
                     if (nStatus == "2" || nStatus == "3" || nStatus == "4")
                         result = string.Format("<a href=\"javascript:void(0)\" onclick=\"orderMeal.popupOrderEditor('{0}');\">【回复】</a>", rowData["ID"]);
                     else if (nStatus == "5")
@@ -320,7 +320,7 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
                     break;
                 case "OrderStatus":
                     CheckOrderStatus(rowData);
-                    string sStatus = rowData[column].ToString( );
+                    string sStatus = rowData[column].ToString();
                     //if (sStatus == "2" || sStatus == "3")
                     //    result = HtmlControl.GetSelectHtml(OrderMealBLL.OrderStatusSoruce, string.Format("OrderStatus_{0}", rowData["ID"]), rowData[column], string.Format("onchange=\"orderMeal.changeStatus(this,'{0}');\"", rowData["ID"])).ToString( );
                     if (OrderMealBLL.OrderStatusSoruce.ContainsKey(sStatus))
@@ -481,7 +481,7 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
                 goto lbl_false;
             }
             var sp = SP_.SpCompleteMealOrder(orderId, false, null, null);
-            sp.Execute( );
+            sp.Execute();
             message = Utilities.ToString(sp.OutputValues[1]);
             return Utilities.ToInt(sp.OutputValues[0]) == 0;
         //try
@@ -512,7 +512,7 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
                 goto lbl_false;
 
             var sp = SP_.SpCancelMealOrder(orderId, !isLogMsg, null, null);
-            sp.Execute( );
+            sp.Execute();
             message = Utilities.ToString(sp.OutputValues[1]);
             return Utilities.ToInt(sp.OutputValues[0]) == 0;
         //TransactionScope ts = new TransactionScope( );
@@ -574,7 +574,7 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
                     goto lbl_return;
                 }
                 order.OrderDateUpload = DateTime.Now;
-                order.Save( );
+                order.Save();
                 DateTime dt = DateTime.Now;
                 OrderProgressBLL.AddOrderConfirmLog(order.Id, dt.AddSeconds(2), "正在帮您跟餐厅联系，请稍候。");
                 OrderProgressBLL.AddOrderConfirmLog(order.Id, dt.AddSeconds(35), "餐厅表示：您的餐点正在配送途中，请耐心等一会儿。");
@@ -588,13 +588,13 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
 
         public static IEnumerable<IDataReader> GetOrderChangePriceDetail(Order order)
         {
-            var query = DB.Select(OrdersDetail.MenuNameColumn.ColumnName, OrdersDetail.OrderPriceColumn.ColumnName).From<OrdersDetail>( )
+            var query = DB.Select(OrdersDetail.MenuNameColumn.ColumnName, OrdersDetail.OrderPriceColumn.ColumnName).From<OrdersDetail>()
                           .Where(OrdersDetail.OrderIdColumn).IsEqualTo(order.Id)
                           .And(OrdersDetail.IsChgPriceColumn).IsEqualTo(true);
-            return query.GetDataReaderEnumerator( );
+            return query.GetDataReaderEnumerator();
         }
 
-        public static int GetOrderNum( )
+        public static int GetOrderNum()
         {
             QueryCommand cmd = new QueryCommand("Select max(OrderNum) + 1 from Orders where OrderDate > dbo.GetToDay();");
             var val = DataService.ExecuteScalar(cmd);
@@ -641,7 +641,7 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
             var menuDict = MealMenuBLL.LoadCompanyMenu(company.Id).ToDictionary(dr => Convert.ToInt32(dr[SysTakeawayMenu.IdColumn.ColumnName]),
                                                                                 dr =>
                                                                                 {
-                                                                                    SysTakeawayMenu m = new SysTakeawayMenu( );
+                                                                                    SysTakeawayMenu m = new SysTakeawayMenu();
                                                                                     m.Load(dr);
                                                                                     return m;
                                                                                 });
@@ -711,7 +711,7 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
             }
             else
             {
-                order = new Order( );
+                order = new Order();
                 order.OrderCode = OrderBLL.GetOrderCode(company);
                 return SaveOrder(userData, orderData, order, company, companyItem, orderSum, qty, true, out orderId, out message);
             }
@@ -741,9 +741,9 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
             if (isLogin && companyItem != null && !CompanyItemBLL.CanClickCompanyMealItem(company, user, companyItem, userData.orderId, out userOrderAvgSum, out message))
                 return -1;
             bool isNew = false;
-            using (TransactionScope ts = new TransactionScope( ))
+            using (TransactionScope ts = new TransactionScope())
             {
-                using (SharedDbConnectionScope ss = new SharedDbConnectionScope( ))
+                using (SharedDbConnectionScope ss = new SharedDbConnectionScope())
                 {
                     if (isNeedCheckPhone && !MsnBLL.CheckPhoneNumCode(userData.userPhone, userData.checkCode, userData.msnLogId))
                     {
@@ -775,7 +775,7 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
                     }
                     else
                     {
-                        order.OrderNum = GetOrderNum( );
+                        order.OrderNum = GetOrderNum();
                         order.OrderStatus = (int)OrderStatus.NotStart;
                         order.OrderPoint = 0;
                     }
@@ -805,13 +805,13 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
                     order.OrderUpdateOn = DateTime.Now;
                     order.IsNonOut = false;
                     order.HasOutOfStock = false;
-                    order.Save( );
+                    order.Save();
                     //RewardBLL.RewardMemberPointForOrderMeal(user, company, order);
                     //save detail
-                    List<OrdersDetail> details = new List<OrdersDetail>( );
+                    List<OrdersDetail> details = new List<OrdersDetail>();
                     foreach (var pair in orderData)
                     {
-                        var d = new OrdersDetail( )
+                        var d = new OrdersDetail()
                         {
                             MenuId = pair.menudId,
                             MenuName = pair.menuName,
@@ -822,7 +822,7 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
                             IsOutOfStock = false,
                             ItemInfo = pair.isCompanyItem && companyItem != null ? companyItem.ItemInfo : null
                         };
-                        d.Save( );
+                        d.Save();
                         details.Add(d);
                     }
                     if (isLogin && companyItem != null)
@@ -830,8 +830,8 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
 
                     UserBLL.AddUserFavAddress(user.Id, userData.mansionId, userData.address);
                     //UserBLL.AddUserFavCompany(user.Id, company.Id);
-                    OrderBLL.UpdateBalance( );
-                    ts.Complete( );
+                    OrderBLL.UpdateBalance();
+                    ts.Complete();
                     //SendOrderMealMessage(company, user, order, details, out message);
                     if (userData.orderId > 0)
                         OrderProgressBLL.ClearOrderLog(order.Id);
@@ -853,7 +853,7 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
                     else if (user.AdminRoleId > 0)
                         user.LastLoginSubSys = (int)SubSystem.Admin;
                     user.LastLoginDate = DateTime.Now;
-                    user.Save( );
+                    user.Save();
                     Utilities.LoginSigIn(user.Id, (SubSystem)user.LastLoginSubSys);
                     if (isNew)
                     {
@@ -900,7 +900,7 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
             message = string.Empty;
             if (!company.IsUseMsg.HasValue || !company.IsUseMsg.Value || string.IsNullOrEmpty(company.MsnPhoneNum))
                 return true;
-            StringBuilder sb = new StringBuilder( );
+            StringBuilder sb = new StringBuilder();
             sb.AppendFormat("订单编号:{0}.", order.Id);
             sb.AppendFormat("手机号码:{0}.", user.MemberMsnPhone);
             SysAreaMansion mansion = SysAreaMansion.FetchByID(order.MansionId.Value);
@@ -913,7 +913,7 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
             if (!string.IsNullOrEmpty(order.OrderMemo))
                 sb.AppendFormat("备注:{0}.", order.OrderMemo);
             int logId;
-            return MsnBLL.SendMessage(company.MsnPhoneNum, sb.ToString( ), order.Id, out message, out logId);
+            return MsnBLL.SendMessage(company.MsnPhoneNum, sb.ToString(), order.Id, out message, out logId);
         }
         private static bool CheckSendMessagePostData(Order order, out string message)
         {
@@ -944,8 +944,8 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
         {
             msg = string.Empty;
             int nResult = -1;
-            TransactionScope ts = new TransactionScope( );
-            SharedDbConnectionScope ss = new SharedDbConnectionScope( );
+            TransactionScope ts = new TransactionScope();
+            SharedDbConnectionScope ss = new SharedDbConnectionScope();
             try
             {
                 lock (LockScopeAction(orderId))
@@ -1028,7 +1028,7 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
                                 if (!detail.IsOutOfStock.Value)
                                     dSum += detail.OrderQty.Value * detail.OrderPrice.Value;
                                 if (isChanged)
-                                    detail.Save( );
+                                    detail.Save();
                             }
                         }
                         dSum = Math.Round(dSum, 1);
@@ -1074,7 +1074,7 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
 
                     if (!order.OrderOper.HasValue || order.OrderOper.Value == 0)
                         order.OrderOper = AppContextBase.Context.User.Id;
-                    order.Save( );
+                    order.Save();
 
                     if (msnType == 0 || (msnType == 1 && !order.HasOutOfStock.Value))
                     {
@@ -1082,10 +1082,10 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
                         //OrderBLL.UpdateBalance( );
                     }
                     RemoveLockScopeAction(orderId);
-                    ts.Complete( );
-                    ss.Dispose( );
+                    ts.Complete();
+                    ss.Dispose();
                     ss = null;
-                    ts.Dispose( );
+                    ts.Dispose();
                     ts = null;
                     OrderProgressBLL.AddOrderConfirmLog(order, company, msnType, hasChangePrice, message);
                     string msnContent = string.Empty;
@@ -1122,9 +1122,9 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
             finally
             {
                 if (ss != null)
-                    ss.Dispose( );
+                    ss.Dispose();
                 if (ts != null)
-                    ts.Dispose( );
+                    ts.Dispose();
             }
             msg = "发送成功";
             nResult = 0;
@@ -1163,7 +1163,25 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
             return DB.Select("top 1 1").From(OrdersDetail.Schema.TableName)
                      .Where(OrdersDetail.OrderIdColumn).IsEqualTo(orderId)
                      .And(OrdersDetail.MenuIdColumn).IsLessThan(0)
-                     .ExecuteScalar<int>( ) > 0;
+                     .ExecuteScalar<int>() > 0;
+        }
+
+        public static string GetOrderTimespan(Order order)
+        {
+            var status = order.OrderStatus;
+            DateTime dt;
+            if (status == (int)OrderStatus.Completed)
+                dt = order.OrderDateDeliver;
+            else if (status == (int)OrderStatus.Canceled)
+                dt = (order.OrderUpdateOn ?? order.ModifiedOn).Value;
+            else
+                dt = DateTime.Now;
+            var span = (dt - order.OrderDate).ToString();
+            var index = span.IndexOf(".");
+            if (index > 0)
+                return span.Substring(0, span.IndexOf("."));
+            else
+                return span;
         }
         #region nested type
         public class OrderDetailItem

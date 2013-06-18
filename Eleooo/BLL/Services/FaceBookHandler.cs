@@ -14,7 +14,7 @@ namespace Eleooo.BLL.Services
     {
         #region IHandlerServices 成员
 
-        public Common.ServicesResult QueryM(System.Web.HttpContext context)
+        public Common.ServicesResult Get(System.Web.HttpContext context)
         {
             var Request = context.Request;
             var fbType = Formatter.ToEnum<FaceBookType>(Request["t"], FaceBookType.OrderMeal);
