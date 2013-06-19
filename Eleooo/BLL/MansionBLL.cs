@@ -148,6 +148,13 @@ namespace Eleooo.Web
             return query.GetRecordCount( ) > 0;
         }
 
+        public static string GetMansionNameByID(int mansionID)
+        {
+            return DB.Select(SysAreaMansion.NameColumn.QualifiedName).From<SysAreaMansion>()
+                     .Where(SysAreaMansion.IdColumn).IsEqualTo(mansionID)
+                     .ExecuteScalar<string>();
+        }
+
         public static SysAreaMansion GetAreaMansion(string areaName, string mansionName)
         {
             var areaDict = AreaBLL.AreaNameMapping;

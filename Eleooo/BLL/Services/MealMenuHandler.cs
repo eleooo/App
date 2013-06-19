@@ -109,6 +109,7 @@ namespace Eleooo.BLL.Services
                 var q = context.Request["q"];
                 var query = DB.Select(Utilities.GetTableColumns(SysTakeawayMenu.Schema),
                                       SysTakeawayDirectory.Columns.DirName)
+                              .From<SysTakeawayMenu>()
                               .InnerJoin(SysTakeawayDirectory.IdColumn, SysTakeawayMenu.DirIDColumn)
                               .Where(SysTakeawayDirectory.CompanyIDColumn).IsEqualTo(AppContextBase.Context.Company.Id)
                               .And(SysTakeawayMenu.IsDeletedColumn).IsEqualTo(false)

@@ -28,11 +28,7 @@ namespace Eleooo.Web.SiteAppPage
         }
         protected string GetMansionName( )
         {
-            SysAreaMansion mansion = SysAreaMansion.FetchByID(Meal.MansionId);
-            if (mansion != null)
-                return mansion.Name;
-            else
-                return null;
+            return MansionBLL.GetMansionNameByID(Meal.MansionId.Value);
         }
         protected string GetMemberPhone( )
         {
