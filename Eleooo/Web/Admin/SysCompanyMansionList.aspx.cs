@@ -31,15 +31,15 @@ namespace Eleooo.Web.Admin
                           .InnerJoin(SysArea.IdColumn, SysAreaMansion.AreaIDColumn)
                           .Where(SysCompany.CompanyTypeColumn).IsEqualTo((int)CompanyType.MealCompany)
                           .OrderDesc(SysCompanyMansion.IdColumn.QualifiedName);
-            if (!string.IsNullOrEmpty(txtCompanyName.Value) && !string.IsNullOrEmpty(txtMansionName.Value))
-            {
-                query.And(SysCompany.CompanyTelColumn).IsEqualTo(txtCompanyName.Value)
-                     .And(SysAreaMansion.NameColumn).Like(string.Concat("%", txtMansionName.Value, "%"));
-            }
-            else if (!string.IsNullOrEmpty(txtCompanyName.Value))
-                query.And(SysCompany.CompanyTelColumn).IsEqualTo(txtCompanyName.Value);
-            else if (!string.IsNullOrEmpty(txtMansionName.Value))
+            if (!string.IsNullOrEmpty(txtMansionName.Value))
                 query.And(SysAreaMansion.NameColumn).Like(string.Concat("%", txtMansionName.Value, "%"));
+            if (!string.IsNullOrEmpty(txtCompanyName.Value))
+            {
+                if (!Formatter.IsChinese(txtCompanyName.Value))
+                    query.And(SysCompany.CompanyTelColumn).Like(Utilities.GetAllLikeQuery(txtCompanyName.Value));
+                else
+                    query.And(SysCompany.CompanyNameColumn).Like(Utilities.GetAllLikeQuery(txtCompanyName.Value));
+            }
             gridView.DataSource = query;
             gridView.AddShowColumn(SysCompany.CompanyNameColumn)
                     .AddShowColumn(SysCompany.CompanyTelColumn)

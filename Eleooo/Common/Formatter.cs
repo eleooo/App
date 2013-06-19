@@ -9,6 +9,7 @@ namespace Eleooo.Common
 {
     public class Formatter
     {
+        private static readonly int _ChineseBeginChar = 19968;
         private const string PATTERN_QUOTE = @"(.*)(\(.*\))(.*)";
         public static string ReplaceQuote(string source, string replacement)
         {
@@ -23,6 +24,10 @@ namespace Eleooo.Common
                 return source;
             else
                 return Regex.Replace(source, word, replacement.Replace("{0}", word));
+        }
+        public static bool IsChinese(string input)
+        {
+            return !string.IsNullOrEmpty(input) && (int)(input.First( )) >= _ChineseBeginChar;
         }
         public static decimal CalcSumOk(decimal dsumOk)
         {
