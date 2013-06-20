@@ -35,7 +35,7 @@
                         菜单名称：</label><input runat="server" id="txtMenuName" name="txtMenuName" type="text" />
                     <label>
                         <%=ResBLL.GetRes("searchBox_companyPhone","商家账号：","搜索框商家账号") %></label>
-                    <input type="text" runat="server" id="txtCompanyName" maxlength="11" />
+                    <input type="text" runat="server" id="txtCompanyName" />
                     <input type="submit" name="btnSearch" value="查找(F)" accesskey="F" />
                     <br/>
                     <label>

@@ -70,13 +70,20 @@ namespace Eleooo.Web.Admin
         {
             DateTime dtBegin = Utilities.ToDateTime(txtDateStart.Value);
             DateTime dtEnd = Utilities.ToDateTime(txtDateEnd.Value).AddDays(1).Date;
-            string filterCompanyTel = string.IsNullOrEmpty(txtCompanyName.Value) ? "%" : string.Concat(txtCompanyName.Value.Trim( ), "%");
-            gridView.DataSource = DB.Select( ).From<SysCompany>( )
+            var query = DB.Select( ).From<SysCompany>( )
                                     .Where(SysCompany.CompanyDateColumn).IsBetweenAnd(dtBegin, dtEnd)
-                                    .AndEx(SysCompany.CompanyTelColumn.ColumnName).Like(filterCompanyTel)
-                                    .Or(SysCompany.CompanyNameColumn).Like(filterCompanyTel)
-                                    .CloseEx( )
+                                    //.AndEx(SysCompany.CompanyTelColumn.ColumnName).Like(filterCompanyTel)
+                                    //.Or(SysCompany.CompanyNameColumn).Like(filterCompanyTel)
+                                    //.CloseEx( )
                                     .OrderDesc(SysCompany.Columns.CompanyDate);
+            if (!string.IsNullOrEmpty(txtCompanyName.Value))
+            {
+                if (Formatter.IsChinese(txtCompanyName.Value))
+                    query.And(SysCompany.CompanyNameColumn).Like(Utilities.GetAllLikeQuery(txtCompanyName.Value));
+                else
+                    query.And(SysCompany.CompanyTelColumn).IsEqualTo(txtCompanyName.Value);
+            }
+            gridView.DataSource = query;
             gridView.AddShowColumn(SysCompany.CompanyCodeColumn)
                     .AddShowColumn(SysCompany.CompanyNameColumn)
                     .AddShowColumn(SysCompany.CompanyTelColumn)

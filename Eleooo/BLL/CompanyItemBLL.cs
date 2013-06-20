@@ -692,11 +692,21 @@ namespace Eleooo.Web
                 return new List<int>( );
             return Utilities.JSONToObj<List<int>>(cookieData);
         }
-        public static void UpdateCompanyItemSum(int? itemID, decimal itemSum)
+        public static void UpdateCompanyItemSum(int? itemID, decimal itemSum, decimal? oldSum = null)
         {
-            QueryCommand cmd = new QueryCommand("UPDATE Sys_Company_Item SET [ItemSum]=@ItemSum WHERE ItemID = @ItemID AND  [ItemSum]<>@ItemSum;");
+            QueryCommand cmd;
+            if (oldSum.HasValue)
+            {
+                cmd = new QueryCommand("UPDATE Sys_Company_Item SET [ItemSum]= ([ItemSum] - @OldSum + @ItemSum) WHERE charindex('['+@ItemID+']',ItemInfo) > 0 OR charindex('['+@ItemID+',',ItemInfo) > 0 OR charindex(','+@ItemID+',',ItemInfo) > 0 OR charindex(','+@ItemID+']',ItemInfo) >0;");
+                cmd.AddParameter("@OldSum", oldSum.Value, DbType.Decimal);
+                cmd.AddParameter("@ItemID", itemID.ToString( ), DbType.String);
+            }
+            else
+            {
+                cmd = new QueryCommand("UPDATE Sys_Company_Item SET [ItemSum]=@ItemSum WHERE ItemID = @ItemID AND  [ItemSum]<>@ItemSum;");
+                cmd.AddParameter("@ItemID", Math.Abs(itemID.Value), DbType.Int32);
+            }
             cmd.AddParameter("@ItemSum", itemSum, DbType.Decimal);
-            cmd.AddParameter("@ItemID", Math.Abs(itemID.Value), DbType.Int32);
             DataService.ExecuteQuery(cmd);
         }
         public static void SetCookieRecViewItem(int itemID)

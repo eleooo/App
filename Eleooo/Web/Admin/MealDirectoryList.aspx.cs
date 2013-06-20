@@ -21,7 +21,12 @@ namespace Eleooo.Web.Admin
                                     .InnerJoin(SysCompany.IdColumn, SysTakeawayDirectory.CompanyIDColumn)
                                     .OrderDesc(Utilities.GetTableColumn(SysTakeawayDirectory.IdColumn));
             if (!string.IsNullOrEmpty(txtCompanyName.Value))
-                query.Where(SysCompany.CompanyTelColumn).Like(Utilities.GetAllLikeQuery(txtCompanyName.Value));
+            {
+                if (!Formatter.IsChinese(txtCompanyName.Value))
+                    query.And(SysCompany.CompanyTelColumn).Like(Utilities.GetAllLikeQuery(txtCompanyName.Value));
+                else
+                    query.And(SysCompany.CompanyNameColumn).Like(Utilities.GetAllLikeQuery(txtCompanyName.Value));
+            }
             gridView.DataSource = query;
             gridView.AddShowColumn(SysTakeawayDirectory.IdColumn)
                     .AddShowColumn(SysCompany.CompanyTelColumn)

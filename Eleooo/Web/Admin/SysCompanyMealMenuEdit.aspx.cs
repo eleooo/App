@@ -68,12 +68,17 @@ namespace Eleooo.Web.Admin
             }
             _company = SysCompany.FetchByID(dir.CompanyID);
             SysTakeawayMenu menu = SysTakeawayMenu.FetchByID(MenuId);
+            var price = Utilities.ToDecimal(txtPrice.Text);
             if (menu == null)
             {
                 menu = new SysTakeawayMenu( );
                 menu.Code = null;
             }
-            menu.Price = Utilities.ToDecimal(txtPrice.Text);
+            else if (menu.Price.HasValue && price != menu.Price.Value)
+            {
+                CompanyItemBLL.UpdateCompanyItemSum(MenuId, price, menu.Price.Value);
+            }
+            menu.Price = price;
             menu.Name = txtMenuName.Text.Trim( );
             menu.DirID = dir.Id;
             menu.CompanyID = dir.CompanyID;

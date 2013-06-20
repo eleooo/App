@@ -30,10 +30,16 @@ namespace Eleooo.Web.Admin
                           .From<SysTakeawayMenu>( )
                           .InnerJoin(SysCompany.IdColumn, SysTakeawayMenu.CompanyIDColumn)
                           .InnerJoin(SysTakeawayDirectory.IdColumn, SysTakeawayMenu.DirIDColumn)
-                          .Where(SysCompany.CompanyTelColumn).Like(Utilities.GetAllLikeQuery(txtCompanyName.Value))
-                          .And(SysTakeawayMenu.NameColumn).Like(Utilities.GetAllLikeQuery(txtMenuName.Value))
+                          .Where(SysTakeawayMenu.NameColumn).Like(Utilities.GetAllLikeQuery(txtMenuName.Value))
                           .And(SysTakeawayMenu.IsDeletedColumn).IsEqualTo(false)
                           .OrderDesc(SysTakeawayMenu.IdColumn.QualifiedName);
+            if (!string.IsNullOrEmpty(txtCompanyName.Value))
+            {
+                if (!Formatter.IsChinese(txtCompanyName.Value))
+                    query.And(SysCompany.CompanyTelColumn).Like(Utilities.GetAllLikeQuery(txtCompanyName.Value));
+                else
+                    query.And(SysCompany.CompanyNameColumn).Like(Utilities.GetAllLikeQuery(txtCompanyName.Value));
+            }
             gridView.DataSource = query;
             gridView.AddShowColumn(SysCompany.CompanyNameColumn)
                     .AddShowColumn(SysCompany.CompanyTelColumn)
