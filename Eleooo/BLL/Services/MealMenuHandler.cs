@@ -113,7 +113,7 @@ namespace Eleooo.BLL.Services
                               .InnerJoin(SysTakeawayDirectory.IdColumn, SysTakeawayMenu.DirIDColumn)
                               .Where(SysTakeawayDirectory.CompanyIDColumn).IsEqualTo(AppContextBase.Context.Company.Id)
                               .And(SysTakeawayMenu.IsDeletedColumn).IsEqualTo(false)
-                              .OrderAsc(SysTakeawayMenu.Columns.DirID, SysTakeawayMenu.Columns.Id);
+                              .OrderAsc(SysTakeawayMenu.DirIDColumn.QualifiedName, SysTakeawayMenu.IdColumn.QualifiedName);
                 if (!string.IsNullOrEmpty(q))
                 {
                     q = Utilities.GetAllLikeQuery(q);
