@@ -44,7 +44,7 @@ namespace Eleooo.BLL.Services
                     SysTakeawayMenu menu;
                     if (!TryGetMenuItem(context, out menu, out message))
                         goto lbl_return;
-                    var price = Utilities.ToDecimal(context.Request["val"]);
+                    var price = Utilities.ToDecimal(context.Request["v"]);
                     menu.Price = price;
                     AppContextBase.Context.Company.MenuDate = DateTime.Now;
                     menu.Save();
@@ -63,7 +63,7 @@ namespace Eleooo.BLL.Services
                     SysTakeawayMenu menu;
                     if (!TryGetMenuItem(context, out menu, out message))
                         goto lbl_return;
-                    var isout = Utilities.ToBool(context.Request["val"]);
+                    var isout = Utilities.ToBool(context.Request["v"]);
                     menu.IsOutOfStock = isout;
                     if (isout)
                         menu.OutOfStockDate = DateTime.Now;
@@ -121,6 +121,7 @@ namespace Eleooo.BLL.Services
                 }
                 var pageCount = Utilities.CalcPageCount(_PageSize, query.GetRecordCount());
                 var menus = query.Paged(p, _PageSize).ExecuteDataTable();
+                Utilities.LowerCaseDataTable(menus);
                 return new Common.ServicesResult { data = new { pageCount = pageCount, menus = menus } };
             }
             else

@@ -876,12 +876,17 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
                 message = "该订单已取消";
                 return false;
             }
+            if (order.OrderStatus == (int)OrderStatus.Completed)
+            {
+                message = "该订单已经订餐成功";
+                return false;
+            }
             if (Formatter.ToEnum<OrderType>(order.OrderType.Value) == OrderType.Common)
             {
                 message = "这个不是快餐店的订单.";
                 return false;
             }
-            if (!AppContextBase.Context.User.AdminRoleId.HasValue || AppContextBase.Context.User.AdminRoleId <= 0)
+            if ((!AppContextBase.Context.User.AdminRoleId.HasValue || AppContextBase.Context.User.AdminRoleId <= 0) && AppContextBase.Context.User.CompanyId != order.OrderSellerID)
             {
                 message = "你无权限发送订单消息.";
                 return false;

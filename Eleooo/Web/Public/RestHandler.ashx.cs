@@ -62,7 +62,6 @@ namespace Eleooo.Web.Public
         }
         public void ProcessRequest(HttpContext context)
         {
-            context.Response.ContentType = "text/html";
             var caller = Utilities.GetServicesAction(context);
 
             HandlerContainer container;
@@ -122,13 +121,17 @@ namespace Eleooo.Web.Public
             var callback = context.Request["callback"];
             if (!string.IsNullOrEmpty(callback))
             {
+                context.Response.ContentType = "application/x-javascript";
                 context.Response.Write(callback);
                 context.Response.Write("(");
                 context.Response.Write(result);
                 context.Response.Write(");");
             }
             else
+            {
+                context.Response.ContentType = "text/html";
                 context.Response.Write(result);
+            }
         }
 
         public bool IsReusable
