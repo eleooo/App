@@ -43,7 +43,7 @@ namespace Eleooo.Common
                 return (T)HttpContext.Current.Items[key];
             else
             {
-                T t = Activator.CreateInstance<T>();
+                T t = Activator.CreateInstance<T>( );
                 if (initProperty != null && initProperty.Count > 0)
                 {
                     foreach (string initKey in initProperty.Keys)
@@ -89,7 +89,7 @@ namespace Eleooo.Common
             return Newtonsoft.Json.JsonConvert.DeserializeObject(json);
         }
         public static T JSONToObj<T>(string json)
-            where T : new()
+            where T : new( )
         {
             if (string.IsNullOrEmpty(json))
                 return default(T);
@@ -169,11 +169,11 @@ namespace Eleooo.Common
         {
             double dTimeOut = 24;
             FormsAuthenticationTicket ticket = new FormsAuthenticationTicket((int)sys,
-            userId.ToString(),
+            userId.ToString( ),
             DateTime.Now,
             DateTime.Now.AddHours(dTimeOut == 0 ? 60 : dTimeOut),
             false,
-            ((int)loginSys).ToString());
+            ((int)loginSys).ToString( ));
             return ticket;
         }
         public static string GenFormsAuthenticationTicketValue(int userId, SubSystem loginSys, LoginSystem sys = LoginSystem.Web)
@@ -183,7 +183,7 @@ namespace Eleooo.Common
         public static void LoginSigIn(int userId, SubSystem loginSys, LoginSystem sys = LoginSystem.Web)
         {
 
-            FormsAuthentication.SignOut();
+            FormsAuthentication.SignOut( );
             var ticket = GenFormsAuthenticationTicket(userId, loginSys, sys);
             HttpCookie authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(ticket));
             authCookie.Expires = ticket.Expiration;
@@ -193,7 +193,7 @@ namespace Eleooo.Common
             HttpContext.Current.Request.Cookies.Add(authCookie);
             //AppContext.Context.RegLoginUser(loginUser);
         }
-        public static FormsAuthenticationTicket GetTicket()
+        public static FormsAuthenticationTicket GetTicket( )
         {
             try
             {
@@ -204,10 +204,10 @@ namespace Eleooo.Common
             }
             catch { return null; }
         }
-        public static void LoginOutSigOut()
+        public static void LoginOutSigOut( )
         {
             //OrderMealBLL.RecycleAdminOrder( );
-            FormsAuthentication.SignOut();
+            FormsAuthentication.SignOut( );
             HttpCookie authCookie = HttpContext.Current.Response.Cookies[FormsAuthentication.FormsCookieName];
             HttpContext.Current.Response.Cookies.Remove(FormsAuthentication.FormsCookieName);
             authCookie = new HttpCookie(FormsAuthentication.FormsCookieName);
@@ -248,7 +248,7 @@ namespace Eleooo.Common
             }
         }
 
-        public static string GetSiteUrl()
+        public static string GetSiteUrl( )
         {
             string port = HttpContext.Current.Request.ServerVariables[ServerVariable.SERVER_PORT];
 
@@ -315,7 +315,7 @@ namespace Eleooo.Common
         public static void RegisterScript(string key, string scriptPath)
         {
             string script = "<script src=\"{0}\" type=\"text/javascript\"></script>";
-            AppContextBase.Page.ClientScript.RegisterClientScriptBlock(HttpContext.Current.Handler.GetType(), key, string.Format(script, scriptPath));
+            AppContextBase.Page.ClientScript.RegisterClientScriptBlock(HttpContext.Current.Handler.GetType( ), key, string.Format(script, scriptPath));
         }
         public static void RegisterScriptBlock(string key, string script)
         {
@@ -323,12 +323,12 @@ namespace Eleooo.Common
             @"<script type='text/javascript'>
                {0}
               </script>";
-            AppContextBase.Page.ClientScript.RegisterClientScriptBlock(HttpContext.Current.Handler.GetType(), key, string.Format(scriptDeclare, script));
+            AppContextBase.Page.ClientScript.RegisterClientScriptBlock(HttpContext.Current.Handler.GetType( ), key, string.Format(scriptDeclare, script));
         }
         public static void RegisterCSS(string key, string cssPath)
         {
             string css = "<link href=\"{0}\" rel=\"stylesheet\" type=\"text/css\" />";
-            AppContextBase.Page.ClientScript.RegisterClientScriptBlock(AppContextBase.Page.GetType(), key, string.Format(css, cssPath));
+            AppContextBase.Page.ClientScript.RegisterClientScriptBlock(AppContextBase.Page.GetType( ), key, string.Format(css, cssPath));
         }
         public static void ShowMessage(string title, string content)
         {
@@ -341,15 +341,15 @@ namespace Eleooo.Common
                 RegisterScript("tipswindownScript", "/Scripts/jquery.tipswindown/jquery.tipswindown.js");
                 RegisterCSS("tipswindownCSS", "/Scripts/jquery.tipswindown/jquery.tipswindown.css");
             }
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder( );
             sb.AppendLine("<script type=\"text/javascript\">");
             sb.AppendLine(string.Format("tipsWindown('{0}', 'text:{0}', 400, 250, 'true', '', 'true', '');", title, content));
             sb.AppendLine("</script>");
-            HttpContext.Current.Response.Write(sb.ToString());
+            HttpContext.Current.Response.Write(sb.ToString( ));
             //HttpContext.Current.Response.Flush( );
             //HttpContext.Current.Response.End( );
             AppContextBase.Page.Visible = false;
-            HttpContext.Current.ApplicationInstance.CompleteRequest();
+            HttpContext.Current.ApplicationInstance.CompleteRequest( );
         }
 
         public static string GetTableColumns(TableSchema.Table table)
@@ -362,8 +362,8 @@ namespace Eleooo.Common
         }
         public static string GetTableColumns(TableSchema.Table table, bool PreTableName = true, params TableSchema.TableColumn[] notNeedCols)
         {
-            List<string> columns = new List<string>();
-            List<TableSchema.TableColumn> cols = new List<TableSchema.TableColumn>();
+            List<string> columns = new List<string>( );
+            List<TableSchema.TableColumn> cols = new List<TableSchema.TableColumn>( );
             if (notNeedCols != null && notNeedCols.Length > 0)
                 cols.AddRange(notNeedCols);
             foreach (TableSchema.TableColumn tc in table.Columns)
@@ -371,7 +371,7 @@ namespace Eleooo.Common
                 if (!cols.Contains(tc))
                     columns.Add(PreTableName ? string.Concat(table.Name, ".", tc.ColumnName) : tc.ColumnName);
             }
-            return string.Join(", ", columns.ToArray());
+            return string.Join(", ", columns.ToArray( ));
         }
         public static string GetTableColumn(TableSchema.TableColumn col)
         {
@@ -386,13 +386,13 @@ namespace Eleooo.Common
         {
             if (cols == null || cols.Length == 0)
                 return new string[0];
-            return cols.Select(col => string.Concat(col.Table.TableName, ".", col.ColumnName)).ToArray();
+            return cols.Select(col => string.Concat(col.Table.TableName, ".", col.ColumnName)).ToArray( );
         }
         public static TableSchema.TableColumn GetTableColumn<T>(string colName)
-            where T : ReadOnlyRecord<T>, new()
+            where T : ReadOnlyRecord<T>, new( )
         {
-            T t = new T();
-            TableSchema.Table table = t.GetSchema();
+            T t = new T( );
+            TableSchema.Table table = t.GetSchema( );
             return table.Columns.GetColumn(colName);
         }
 
@@ -411,11 +411,14 @@ namespace Eleooo.Common
             if (!string.IsNullOrEmpty(datetime) && DateTime.TryParse(datetime, out dt))
                 return dt;
             else
-                return DateTime.MinValue.AddYears(1753);
+                return System.Data.SqlTypes.SqlDateTime.MinValue.Value;
         }
         public static DateTime ToDateTime(object datetime)
         {
-            return ToDateTime(Convert.ToString(datetime));
+            if (datetime is DateTime)
+                return (DateTime)datetime;
+            else
+                return ToDateTime(Convert.ToString(datetime));
         }
         public static string ToDate(string datetime)
         {
@@ -467,7 +470,7 @@ namespace Eleooo.Common
             if (IsNull(content))
                 return string.Empty;
             else
-                return ToHTML(content.ToString());
+                return ToHTML(content.ToString( ));
         }
         public static bool IsNull(object val)
         {
@@ -503,7 +506,7 @@ namespace Eleooo.Common
             else if (obj is string)
                 return (string)obj;
             else
-                return obj.ToString();
+                return obj.ToString( );
         }
 
         public static decimal ToDecimal(object obj)
@@ -511,7 +514,7 @@ namespace Eleooo.Common
             if (obj == null)
                 return 0;
             decimal d;
-            decimal.TryParse(obj.ToString(), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.CurrentCulture, out d);
+            decimal.TryParse(obj.ToString( ), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.CurrentCulture, out d);
             return d;
         }
         public static int ToInt(object obj)
@@ -519,7 +522,7 @@ namespace Eleooo.Common
             if (IsNull(obj))
                 return 0;
             bool b;
-            if (bool.TryParse(obj.ToString(), out b))
+            if (bool.TryParse(obj.ToString( ), out b))
                 return b ? 1 : 0;
             return (int)ToDecimal(obj);
         }
@@ -530,7 +533,7 @@ namespace Eleooo.Common
             bool b;
             if (obj is bool)
                 return (bool)obj;
-            if (bool.TryParse(obj.ToString(), out b))
+            if (bool.TryParse(obj.ToString( ), out b))
                 return b;
             else if (ToInt(obj) > 0)
                 return true;
@@ -553,7 +556,7 @@ namespace Eleooo.Common
             //HttpContext.Current.Response.Write(string.Format(REDIRECT_SCRIPT, url));
             if (p != null)
                 p.Visible = false;
-            HttpContext.Current.ApplicationInstance.CompleteRequest();
+            HttpContext.Current.ApplicationInstance.CompleteRequest( );
         }
         public static void ShowMessageRedirect(string message, string redirector)
         {
@@ -563,7 +566,7 @@ namespace Eleooo.Common
             //HttpContext.Current.Response.Flush( );
             if (p != null)
                 p.Visible = false;
-            HttpContext.Current.ApplicationInstance.CompleteRequest();
+            HttpContext.Current.ApplicationInstance.CompleteRequest( );
             //AppContext.Page.Response.End( );
         }
         public static void ShowMessageRedirect(string message)
@@ -588,23 +591,23 @@ namespace Eleooo.Common
 
         public static string GenerateCheckCode(int length)
         {
-            Random random = new Random();
-            string str = random.Next().ToString().Substring(0, length);
+            Random random = new Random( );
+            string str = random.Next( ).ToString( ).Substring(0, length);
             return str;
         }
 
         public static string GetTypeVersion(Type type)
         {
             var ass = type.Assembly;
-            return File.GetLastWriteTime(ass.Location).Ticks.ToString();
+            return File.GetLastWriteTime(ass.Location).Ticks.ToString( );
             //return File.GetLastWriteTime(ass.Location).ToString("yyyyMMdd");
         }
 
         public static ServicesAction GetServicesAction(HttpContext context)
         {
             var pathInfo = (context.Request.PathInfo ?? string.Empty).Split(_PathSpliter, StringSplitOptions.RemoveEmptyEntries);
-            string name = pathInfo.Length > 0 ? (pathInfo[0].ToLower() ?? _defaultServicesName) : _defaultServicesName;
-            return new ServicesAction { Name = name, Method = (pathInfo.Length > 1 ? pathInfo[1] : Actions.Query.ToString()).ToLower() };
+            string name = pathInfo.Length > 0 ? (pathInfo[0].ToLower( ) ?? _defaultServicesName) : _defaultServicesName;
+            return new ServicesAction { Name = name, Method = (pathInfo.Length > 1 ? pathInfo[1] : Actions.Query.ToString( )).ToLower( ) };
         }
 
         private static readonly char[] _addressSpliter = new char[] { '|' };

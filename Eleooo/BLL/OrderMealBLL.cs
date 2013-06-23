@@ -1137,6 +1137,20 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
             else
                 return span;
         }
+        public static DataTable GetOrdersFormMobile(int companyId, string phone, DateTime d1, DateTime d2, DateTime? d3, int pageIndex, int pageSize, out int pageCount)
+        {
+            int total = 0;
+            var sp = SP_.SpGetOrders(companyId, phone, d2, d2, d3, pageIndex, pageSize, total);
+            var ds = sp.GetDataSet( );
+            if (pageIndex > 0 && d3.HasValue)
+            {
+                total = Utilities.ToInt(sp.OutputValues[0]);
+                pageCount = Utilities.CalcPageCount(pageSize, total);
+            }
+            else
+                pageCount = 0;
+            return ds.Tables[0];
+        }
         #region nested type
         public class OrderDetailItem
         {

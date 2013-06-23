@@ -7,12 +7,52 @@ using Eleooo.Web;
 using Eleooo.Common;
 using SubSonic;
 using Eleooo.DAL;
+using System.Data;
 
 namespace Eleooo.BLL.Services
 {
     class OrderMealHandler : IHandlerServices
     {
+        private static readonly string[] _ItemQueryColumns;
+        private static readonly Dictionary<string, Func<string, System.Data.IDataReader, string>> _ItemQueryColumnsFormatter;
         private static readonly int _PageSize = 10;
+
+        static OrderMealHandler( )
+        {
+            _ItemQueryColumns = new string[]
+            {
+                SysCompanyItem.Columns.ItemPoint,//积分兑换
+                SysCompanyItem.Columns.ItemNeedPay,//现金支付
+                SysCompanyItem.Columns.ItemAmount,//投放数量
+                SysCompanyItem.Columns.OrderFreqLimit,//消费频率
+                SysCompanyItem.Columns.OrderSumLimit,//平均金额
+                SysCompanyItem.Columns.ItemDate, //投放周期
+                SysCompanyItem.Columns.ItemEndDate,//投放周期
+                SysCompanyItem.Columns.WorkingHours, //促销时段
+                SysCompanyItem.Columns.ItemLimit, //抢购次数
+                SysCompanyItem.Columns.ItemPic,
+                SysCompanyItem.Columns.ItemSum,//总额
+                SysCompanyItem.Columns.CompanyID,
+                SysCompanyItem.Columns.ItemInfo,
+                SysCompanyItem.Columns.ItemID
+            };
+            _ItemQueryColumnsFormatter = new Dictionary<string, Func<string, System.Data.IDataReader, string>>( );
+            _ItemQueryColumnsFormatter.Add(SysCompanyItem.Columns.ItemDate, (col, dr) =>
+                {
+                    if (Utilities.IsNull(dr[col]))
+                        return null;
+                    else
+                        return Utilities.ToDateTime(dr[col]).ToString("yyyy-MM-dd");
+                });
+            _ItemQueryColumnsFormatter.Add(SysCompanyItem.Columns.ItemEndDate, (col, dr) =>
+            {
+                if (Utilities.IsNull(dr[col]))
+                    return null;
+                else
+                    return Utilities.ToDateTime(dr[col]).ToString("yyyy-MM-dd");
+            });
+        }
+
         public Common.ServicesResult GetMsnCode(HttpContext context)
         {
             string message;
@@ -47,27 +87,9 @@ namespace Eleooo.BLL.Services
             var phone = request["q"];
             var t = request["t"];
             bool isSyn = !string.IsNullOrEmpty(t);
-            int pageCount = 0;
-            var query = DB.Select(Utilities.GetTableColumns(Order.Schema),
-                                      SysMember.Columns.MemberPhoneNumber,
-                                      SysMember.Columns.MemberFullname)
-                              .From<Order>( )
-                              .InnerJoin(SysMember.IdColumn, Order.OrderMemberIDColumn)
-                              .Where(Order.OrderDateColumn).IsBetweenAnd(d1, d2)
-                              .OrderDesc(Order.OrderUpdateOnColumn.QualifiedName);
-            if (AppContextBase.CurrentSysId != (int)SubSystem.Admin)
-                query.And(Order.OrderSellerIDColumn).IsEqualTo(companyId);
-            if (!isSyn)
-            {
-                if (!string.IsNullOrEmpty(phone))
-                    query.And(SysMember.MemberPhoneNumberColumn).IsEqualTo(phone);
-                var total = query.GetRecordCount( );
-                pageCount = Utilities.CalcPageCount(_PageSize, total);
-                query.Paged(pageIndex, _PageSize);
-            }
-            else
-                query.And(Order.OrderUpdateOnColumn).IsGreaterThan(Utilities.ToDateTime(t));
-            return ServicesResult.GetInstance(new { pageCount = pageCount, orders = query.ExecuteDataTable( ) });
+            int pageCount;
+            var result = OrderMealBLL.GetOrdersFormMobile(companyId, phone, d1, d2, isSyn ? Utilities.ToDateTime(t) : (DateTime?)null, pageIndex, _PageSize, out pageCount);
+            return ServicesResult.GetInstance(new { pageCount = pageCount, orders = result });
         }
 
         public Common.ServicesResult GetDetail(HttpContext context)
@@ -124,6 +146,36 @@ namespace Eleooo.BLL.Services
                 code = OrderProgressBLL.AddOrderTempLog(context, order, out result, out message) ? 0 : code;
             else
                 message = "订单不存在.";
+            return Common.ServicesResult.GetInstance(code, message, result);
+        }
+
+        public Common.ServicesResult GetItem(HttpContext context)
+        {
+            var id = Utilities.ToInt(context.Request["id"]);
+            int code = -1;
+            string message = string.Empty;
+            Dictionary<string, object> result = new Dictionary<string, object>( );
+            var query = DB.Select(_ItemQueryColumns)
+                         .From<SysCompanyItem>( )
+                         .Where(SysCompanyItem.ItemIDColumn).IsEqualTo(id);
+            using (var dr = query.ExecuteReader( ))
+            {
+                if (dr.Read( ))
+                {
+                    foreach (var col in _ItemQueryColumns)
+                    {
+                        if (_ItemQueryColumnsFormatter.ContainsKey(col))
+                            result[col] = _ItemQueryColumnsFormatter[col](col, dr);
+                        else
+                            result[col] = dr[col];
+                    }
+                }
+                else
+                {
+                    foreach (var col in _ItemQueryColumns)
+                        result[col] = null;
+                }
+            }
             return Common.ServicesResult.GetInstance(code, message, result);
         }
     }

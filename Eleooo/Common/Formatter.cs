@@ -157,5 +157,9 @@ namespace Eleooo.Common
             }
             return true;
         }
+        public static byte[] Base64ToImgage(string source)
+        {
+            return Convert.FromBase64String(source);
+        }
     }
 }

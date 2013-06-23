@@ -116,6 +116,32 @@ namespace Eleooo.DAL{
         }
         
         /// <summary>
+        /// Creates an object wrapper for the sp_GetOrders Procedure
+        /// </summary>
+        public static StoredProcedure SpGetOrders(int? CompanyID, string UserPhone, DateTime? Date1, DateTime? Date2, DateTime? Date3, int? PageIndex, int? PageSize, int? RecordCount)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("sp_GetOrders", DataService.GetInstance("SqlDataProvider"), "dbo");
+        	
+            sp.Command.AddParameter("@CompanyID", CompanyID, DbType.Int32, 0, 10);
+        	
+            sp.Command.AddParameter("@UserPhone", UserPhone, DbType.String, null, null);
+        	
+            sp.Command.AddParameter("@Date1", Date1, DbType.DateTime, null, null);
+        	
+            sp.Command.AddParameter("@Date2", Date2, DbType.DateTime, null, null);
+        	
+            sp.Command.AddParameter("@Date3", Date3, DbType.DateTime, null, null);
+        	
+            sp.Command.AddParameter("@PageIndex", PageIndex, DbType.Int32, 0, 10);
+        	
+            sp.Command.AddParameter("@PageSize", PageSize, DbType.Int32, 0, 10);
+        	
+            sp.Command.AddOutputParameter("@RecordCount", DbType.Int32, 0, 10);
+            
+            return sp;
+        }
+        
+        /// <summary>
         /// Creates an object wrapper for the sp_Job_RunOnceEveryDay Procedure
         /// </summary>
         public static StoredProcedure SpJobRunOnceEveryDay()
