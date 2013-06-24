@@ -34,7 +34,9 @@ namespace Eleooo.BLL.Services
                 SysCompanyItem.Columns.ItemSum,//总额
                 SysCompanyItem.Columns.CompanyID,
                 SysCompanyItem.Columns.ItemInfo,
-                SysCompanyItem.Columns.ItemID
+                SysCompanyItem.Columns.ItemID,
+                SysCompanyItem.Columns.ItemTitle,
+                SysCompanyItem.Columns.ItemStatus
             };
             _ItemQueryColumnsFormatter = new Dictionary<string, Func<string, System.Data.IDataReader, string>>( );
             _ItemQueryColumnsFormatter.Add(SysCompanyItem.Columns.ItemDate, (col, dr) =>
@@ -51,6 +53,14 @@ namespace Eleooo.BLL.Services
                 else
                     return Utilities.ToDateTime(dr[col]).ToString("yyyy-MM-dd");
             });
+            _ItemQueryColumnsFormatter.Add(SysCompanyItem.Columns.ItemStatus, (col, dr) =>
+                {
+                    var v = Utilities.ToString(dr[col]);
+                    if (CompanyItemBLL.CompanyItemStatus.ContainsKey(v))
+                        return CompanyItemBLL.CompanyItemStatus[v];
+                    else
+                        return v;
+                });
         }
 
         public Common.ServicesResult GetMsnCode(HttpContext context)
@@ -149,12 +159,15 @@ namespace Eleooo.BLL.Services
             return Common.ServicesResult.GetInstance(code, message, result);
         }
 
+        #region for mobile companyitem
+
         public Common.ServicesResult GetItem(HttpContext context)
         {
             var id = Utilities.ToInt(context.Request["id"]);
             int code = -1;
             string message = string.Empty;
             Dictionary<string, object> result = new Dictionary<string, object>( );
+            //var cols = _ItemQueryColumns.Where(col => !Utilities.Compare(SysCompanyItem.Columns.ItemTitle,col)).ToArray( );
             var query = DB.Select(_ItemQueryColumns)
                          .From<SysCompanyItem>( )
                          .Where(SysCompanyItem.ItemIDColumn).IsEqualTo(id);
@@ -176,7 +189,151 @@ namespace Eleooo.BLL.Services
                         result[col] = null;
                 }
             }
+            code = 0;
             return Common.ServicesResult.GetInstance(code, message, result);
         }
+        public Common.ServicesResult GetItems(HttpContext context)
+        {
+            int code = -1;
+            string message = string.Empty;
+            object result = null;
+            var p = Utilities.ToInt(context.Request["p"]);
+            var d1 = Utilities.ToDateTime(context.Request["d1"]);
+            var d2 = Utilities.ToDateTime(context.Request["d2"]).AddDays(1);
+            var query = DB.Select(_ItemQueryColumns)
+                         .From<SysCompanyItem>( )
+                         .Where(SysCompanyItem.CompanyIDColumn).IsEqualTo(AppContextBase.Context.User.CompanyId)
+                         .And(SysCompanyItem.IsDeletedColumn).IsEqualTo(false)
+                         .And(SysCompanyItem.ItemDateColumn).IsBetweenAnd(d1, d2)
+                         .OrderDesc(SysCompanyItem.ItemIDColumn.QualifiedName);
+            var pageCount = Utilities.CalcPageCount(_PageSize, query.GetRecordCount( ));
+            result = query.Paged(p, _PageSize).GetDataReaderEnumerator( ).Select(dr =>
+                {
+                    Dictionary<string, object> dict = new Dictionary<string, object>( );
+                    foreach (var col in _ItemQueryColumns)
+                    {
+                        if (_ItemQueryColumnsFormatter.ContainsKey(col))
+                            dict[col] = _ItemQueryColumnsFormatter[col](col, dr);
+                        else
+                            dict[col] = dr[col];
+                    }
+                    dict["Row"] = Utilities.ToInt(dr["Row"]).ToString("00");
+                    return dict;
+                });
+            code = 0;
+            return Common.ServicesResult.GetInstance(code, message, new { pageCount = pageCount, items = result });
+        }
+        public Common.ServicesResult SaveItem(HttpContext context)
+        {
+            int code = -1;
+            string message;
+            object ret = null;
+            try
+            {
+                var data = Utilities.JSONToObj<Dictionary<string, object>>(context.Request["item"]);
+                if (!data.ContainsKey(SysCompanyItem.Columns.ItemID))
+                {
+                    message = "数据格式不合法.";
+                    goto lbl_return;
+                }
+                var id = Utilities.ToInt(data[SysCompanyItem.Columns.ItemID]);
+                data.Remove(SysCompanyItem.Columns.ItemID);
+                SysCompanyItem item = SysCompanyItem.FetchByID(id);
+                if (item != null || AppContextBase.Context.Company == null)
+                {
+                    if (AppContextBase.Context.Company == null || item.CompanyID != AppContextBase.Context.Company.Id)
+                    {
+                        message = "你没权限进行此操作.";
+                        goto lbl_return;
+                    }
+                }
+                else
+                {
+                    item = new SysCompanyItem( );
+                    item.MemberLimit = 0;
+                    item.IsCanDel = 0;
+                    item.IsPass = true;
+                    item.AreaDepth = AppContextBase.Context.Company.AreaDepth;
+                    item.IsDeleted = false;
+                    item.ItemClicked = 0;
+                    item.ItemUsed = 0;
+                }
+                foreach (var pair in data)
+                {
+                    item.SetColumnValue(pair.Key, pair.Value);
+                }
+                var img = context.Request["img"];
+                if (!string.IsNullOrEmpty(img))
+                {
+                    var imgData = Convert.FromBase64String(img);
+                    var result = FileUpload.SaveUploadFile(imgData, FileType.Image, SaveType.CompanyItem, "a.jpg", out message, true);
+                    if (result == null)
+                        goto lbl_return;
+                    item.ItemPic = result.RelPath;
+                }
+                if (item.ItemSum == null)
+                    item.ItemSum = 0M;
+                if (item.ItemAmount == null)
+                    item.ItemAmount = 0;
+                if (item.OrderSumLimit == null)
+                    item.OrderSumLimit = 0;
+                item.CompanyID = AppContextBase.Context.User.CompanyId.Value;
+                item.Save( );
+                data[SysCompanyItem.Columns.ItemID] = item.ItemID;
+                message = "保存成功.";
+                code = 0;
+                ret = data;
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+            }
+        lbl_return:
+            return Common.ServicesResult.GetInstance(code, message, ret);
+        }
+        public Common.ServicesResult DelItem(HttpContext context)
+        {
+            var id = Utilities.ToInt(context.Request["id"]);
+            int code = -1;
+            string message;
+            var item = SysCompanyItem.FetchByID(id);
+            if (item == null)
+            {
+                message = "抢购项目不存在.";
+                goto lbl_return;
+            }
+            if (item.CompanyID != AppContextBase.Context.User.CompanyId)
+            {
+                message = "你没权限进行此操作.";
+                goto lbl_return;
+            }
+            item.IsDeleted = true;
+            message = "删除成功.";
+            code = 0;
+        lbl_return:
+            return Common.ServicesResult.GetInstance(code, message, null);
+        }
+        public Common.ServicesResult GetRushItems(HttpContext context)
+        {
+            var p = Utilities.ToInt(context.Request["p"]);
+            var d1 = Utilities.ToDateTime(context.Request["d1"]);
+            var d2 = Utilities.ToDateTime(context.Request["d2"]).AddDays(1);
+            int total = 0;
+            var sp = SP_.SpGetRushRecord(AppContextBase.Context.User.CompanyId, d1, d2, p, _PageSize, total);
+            var result = sp.GetDataReaderEnumerator( ).Select(dr =>
+                {
+                    return new
+                    {
+                        MemberPhoneNumber = dr[SysMember.Columns.MemberPhoneNumber],
+                        OrderPrice = dr[OrdersDetail.Columns.OrderPrice],
+                        OrderDate = Utilities.ToDateTime(dr[SysMemberItem.Columns.OrderDate]).ToString("MM-dd HH:mm:ss"),
+                        ItemPoint = dr[SysMemberItem.Columns.ItemPoint],
+                        ItemID = dr[SysMemberItem.Columns.ItemID]
+                    };
+                }).ToArray( );
+            total = Utilities.CalcPageCount(_PageSize, Utilities.ToInt(sp.OutputValues[0]));
+            return Common.ServicesResult.GetInstance(0, null, new { pageCount = total, items = result });
+        }
+        #endregion
     }
 }

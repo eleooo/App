@@ -200,6 +200,18 @@ namespace Eleooo
             return builder.ToString( );
         }
 
+        public static IEnumerable<IDataReader> GetDataReaderEnumerator(this StoredProcedure sp)
+        {
+            if (sp != null)
+            {
+                using (var dr = sp.GetReader( ))
+                {
+                    while (dr.Read( ))
+                        yield return dr;
+                }
+            }
+        }
+
         public static IEnumerable<IDataReader> GetDataReaderEnumerator(this SqlQuery query)
         {
             if (query != null)

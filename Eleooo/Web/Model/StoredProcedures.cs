@@ -116,6 +116,24 @@ namespace Eleooo.DAL{
         }
         
         /// <summary>
+        /// Creates an object wrapper for the sp_GetFinance Procedure
+        /// </summary>
+        public static StoredProcedure SpGetFinance(int? CompanyID, DateTime? d1, DateTime? d2, int? Type)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("sp_GetFinance", DataService.GetInstance("SqlDataProvider"), "dbo");
+        	
+            sp.Command.AddParameter("@CompanyID", CompanyID, DbType.Int32, 0, 10);
+        	
+            sp.Command.AddParameter("@d1", d1, DbType.DateTime, null, null);
+        	
+            sp.Command.AddParameter("@d2", d2, DbType.DateTime, null, null);
+        	
+            sp.Command.AddParameter("@Type", Type, DbType.Int32, 0, 10);
+        	
+            return sp;
+        }
+        
+        /// <summary>
         /// Creates an object wrapper for the sp_GetOrders Procedure
         /// </summary>
         public static StoredProcedure SpGetOrders(int? CompanyID, string UserPhone, DateTime? Date1, DateTime? Date2, DateTime? Date3, int? PageIndex, int? PageSize, int? RecordCount)
@@ -131,6 +149,28 @@ namespace Eleooo.DAL{
             sp.Command.AddParameter("@Date2", Date2, DbType.DateTime, null, null);
         	
             sp.Command.AddParameter("@Date3", Date3, DbType.DateTime, null, null);
+        	
+            sp.Command.AddParameter("@PageIndex", PageIndex, DbType.Int32, 0, 10);
+        	
+            sp.Command.AddParameter("@PageSize", PageSize, DbType.Int32, 0, 10);
+        	
+            sp.Command.AddOutputParameter("@RecordCount", DbType.Int32, 0, 10);
+            
+            return sp;
+        }
+        
+        /// <summary>
+        /// Creates an object wrapper for the sp_GetRushRecord Procedure
+        /// </summary>
+        public static StoredProcedure SpGetRushRecord(int? CompanyID, DateTime? Date1, DateTime? Date2, int? PageIndex, int? PageSize, int? RecordCount)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("sp_GetRushRecord", DataService.GetInstance("SqlDataProvider"), "dbo");
+        	
+            sp.Command.AddParameter("@CompanyID", CompanyID, DbType.Int32, 0, 10);
+        	
+            sp.Command.AddParameter("@Date1", Date1, DbType.DateTime, null, null);
+        	
+            sp.Command.AddParameter("@Date2", Date2, DbType.DateTime, null, null);
         	
             sp.Command.AddParameter("@PageIndex", PageIndex, DbType.Int32, 0, 10);
         	

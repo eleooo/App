@@ -85,6 +85,13 @@ namespace Eleooo.BLL.Services
             }
             return result;
         }
-
+        public Common.ServicesResult GetFinance(HttpContext context)
+        {
+            var d1 = Utilities.ToDateTime(context.Request["d1"]);
+            var d2 = Utilities.ToDateTime(context.Request["d2"]).AddDays(1);
+            var t = Utilities.ToInt(context.Request["t"]);
+            var sp = SP_.SpGetFinance(AppContextBase.Context.User.CompanyId, d1, d2, t);
+            return ServicesResult.GetInstance(0, null, sp.ExecuteScalar( ));
+        }
     }
 }
