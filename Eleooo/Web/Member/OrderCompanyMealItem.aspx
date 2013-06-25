@@ -62,9 +62,8 @@
                         <td>
                             <%=CurrentUser.MemberPhoneNumber %>
                         </td>
-                        <td align="left">
-                            <div style="height: 30px; padding-left: 20px;">
-                                <input type="text" id="txtAddr" runat="server" class="input_w" readonly="readonly" style="width:200px;" /></div>
+                        <td>
+                            <input type="text" id="txtAddr" runat="server" class="input_w" readonly="readonly" style="width: 200px; margin-left: 0px;" />
                         </td>
                     </tr>
                 </tbody>

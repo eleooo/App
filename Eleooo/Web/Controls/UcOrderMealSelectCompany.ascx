@@ -11,7 +11,7 @@
                 <span>积分抢购</span>
                 <div class="jf_select">
                     <input name="cbjf" value="0" <% RenderCheckBox(0,'0'); %> type="radio" />全部
-                    <input name="cbjf" value="1" <% RenderCheckBox(0,'1'); %> type="radio" />热卖中
+                    <input name="cbjf" value="1" <% RenderCheckBox(0,'1'); %> type="radio" />抢购中
                     <input name="cbjf" value="2" <% RenderCheckBox(0,'2'); %> type="radio" />免送餐费</div>
             </div>
             <div class="jf-main">
