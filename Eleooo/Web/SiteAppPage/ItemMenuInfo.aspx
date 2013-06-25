@@ -19,10 +19,10 @@
             <FooterTemplate>
                 </select></FooterTemplate>
             <ItemTemplate>
-                <optgroup label="<%#Eval("Key.Value") %>" data-label="<%#Eval("Key.Value") %>" id="g_<%#Eval("Key.Key") %>">
+                <optgroup label="<%#Eval("Key.Value") %>" data-label="<%#HttpUtility.UrlEncodeUnicode(Eval("Key.Value").ToString()) %>" id="g_<%#Eval("Key.Key") %>">
                     <asp:Repeater ID="rpMenu" runat="server" DataSource='<%# Container.DataItem %>'>
                         <ItemTemplate>
-                            <option data-label="<%#Eval("name") %>" value="<%#Eval("id") %>" data-value="<%#Eval("id") %>" data-price="<%#Eval("price") %>">
+                            <option data-label="<%# HttpUtility.UrlEncodeUnicode(Eval("name").ToString()) %>" value="<%#Eval("id") %>" data-value="<%#Eval("id") %>" data-price="<%#Eval("price") %>">
                                 <%#Eval("name") %></option>
                         </ItemTemplate>
                     </asp:Repeater>
@@ -37,7 +37,7 @@
                 var titleInfo=[],dSum = 0;
                 $.each(items,function(i,item){
                     vals.push(item.data("ms-value"));
-                    titleInfo.push( item.attr("data-label"));
+                    titleInfo.push(unescape(item.attr("data-label")));
                     dSum += parseFloat(item.attr("data-price"));
                 });
                 if($.isFunction(parent.onItemMenuInfoClosed))

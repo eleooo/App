@@ -30,7 +30,7 @@
             <div class="jf-main-w">
                 <h3>
                     <a href="/Member/OrderCompanyMealItem.aspx?ItemID=<%# Eval("ItemID") %>&MansionId=<%=MansionId %>" target="_blank">
-                        <%# Formatter.SubStr(Eval("ItemTitle"),20) %></a></h3>
+                        <%# HttpUtility.HtmlDecode(Formatter.SubStr(Eval("ItemTitle"), 20))%></a></h3>
                 <div class="jf-mian-bq">
                     <span>原价<%# Eval("ItemSum") %>元</span>
                     <p>
@@ -50,7 +50,7 @@
             <div class="jf-main-w01">
                 <h3>
                     <a href="/Member/OrderCompanyMealItem.aspx?ItemID=<%# Eval("ItemID") %>&MansionId=<%=MansionId %>" target="_blank">
-                        <%# Formatter.SubStr(Eval("ItemTitle"),20) %></a></h3>
+                        <%# HttpUtility.HtmlDecode(Formatter.SubStr(Eval("ItemTitle"),20)) %></a></h3>
                 <div class="jf-mian-bq">
                     <span>
                         <%# Eval("ItemSum") %>元</span>

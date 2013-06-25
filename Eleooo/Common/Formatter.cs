@@ -69,7 +69,7 @@ namespace Eleooo.Common
         }
         public static string SubStr(string a_SrcStr, int a_Cnt)
         {
-            return SubStr(a_SrcStr, 0, a_Cnt);
+            return SubStr(a_SrcStr.Trim(), 0, a_Cnt);
         }
         public static string SubStr(string a_SrcStr, int a_StartIndex, int a_Cnt, bool withEllipsis = true)
         {
