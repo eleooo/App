@@ -57,7 +57,7 @@ namespace Eleooo.Web.Admin
                     result = string.Format("{0}至{1}", Utilities.ToDate(rowData[SysCompanyItem.Columns.ItemDate]), Utilities.ToDate(rowData[SysCompanyItem.Columns.ItemEndDate]));
                     break;
                 case "ItemTitle":
-                    result = string.Format("<div style=\"text-align:left\">{0}</div>", Formatter.SubStr(rowData[column], 20));
+                    result = string.Format("<div style=\"text-align:left\">{0}</div>", HttpUtility.HtmlEncode(Formatter.SubStr(rowData[column], 20)));
                     break;
                 case "Action":
                     result = string.Concat("[", string.Format(ACTION_DLG_TEMPLATE, rowData[SysCompanyItem.Columns.ItemID], "详细"), "]&nbsp;&nbsp;[",
