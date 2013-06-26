@@ -268,6 +268,10 @@
                 return;
             }
             var menu = Opts.menus[menuId];
+            if (menu.menuId < 0) {
+                alert("积分抢购套餐只能选择一次.");
+                return;
+            }
             if (!_checkMenuGroup(menu))
                 return;
             _refreshInfo(menuId, 1);

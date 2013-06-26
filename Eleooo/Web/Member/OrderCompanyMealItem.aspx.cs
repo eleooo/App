@@ -141,7 +141,7 @@ namespace Eleooo.Web.Member
                 else
                 {
                     var address = UserBLL.GetUserDefFavAddress(CurrentUser.Id, MansionId);
-                    if(address.HasValue)
+                    if (address.HasValue)
                         txtAddr.Value += Utilities.ConcatAddres(address.Value.name);
                 }
             }
@@ -197,10 +197,10 @@ namespace Eleooo.Web.Member
                 return;
             }
             decimal sum;
-            if (CompanyItemBLL.CanClickCompanyMealItem(Company, CurrentUser, CompanyItem,0,out sum, out message))
+            if (CompanyItemBLL.CanClickCompanyMealItem(Company, CurrentUser, CompanyItem, 0, out sum, out message))
             {
                 //Utilities.ShowMessageRedirect("抢购成功!", "/Member/OrderMealViewPage.aspx?OrderId=" + orderId.ToString( ));
-                Utilities.Redirect("/Public/OrderMealPage.aspx?CompanyId={0}&ItemId={1}&MansionId={2}", Company.Id, CompanyItem.ItemID,MansionId);
+                Utilities.Redirect("/Public/OrderMealPage.aspx?CompanyId={0}&ItemId={1}&MansionId={2}", Company.Id, CompanyItem.ItemID, MansionId);
                 return;
             }
             ValidateMessage = message.Replace("{ItemType}", "抢购");
@@ -218,7 +218,7 @@ namespace Eleooo.Web.Member
             if (CompanyItem.ItemNeedPay.HasValue && CompanyItem.ItemNeedPay > 0)
                 sb.AppendFormat("+<label class='yellow'>{0:0.##}</label>元现金", CompanyItem.ItemNeedPay);
             sb.Append("，即享");
-            sb.Append(CompanyItem.ItemTitle);
+            sb.Append(HttpUtility.HtmlDecode(CompanyItem.ItemTitle));
             sb.Append("；先到先得，下手要快！");
             return sb.ToString( );
         }

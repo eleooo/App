@@ -6,11 +6,13 @@ using System.Web;
 using Eleooo.Common;
 using Eleooo.Web;
 using Eleooo.DAL;
+using System.IO;
 
 namespace Eleooo.BLL.Services
 {
     class AppHandler : IHandlerServices
     {
+        private static readonly string _MobileClientVersionFile = "/Mobile/Version.txt";
         public void Log(HttpContext context)
         {
             if (!string.IsNullOrEmpty(context.Request["source"]) && !string.IsNullOrEmpty(context.Request["message"]))
@@ -72,7 +74,7 @@ namespace Eleooo.BLL.Services
                 if (MsnBLL.SendMessage(user.MemberPhoneNumber, "亲爱的用户：您的登录密码为" + pwd + "，请妥善保管。【乐多分】", 0, out message, out logId))
                 {
                     config.MsnPwdCount = count + 1;
-                    config.Save();
+                    config.Save( );
                     result.message = "你的登录密码已经发送到:" + phone;
                     result.code = 0;
                 }
@@ -92,6 +94,13 @@ namespace Eleooo.BLL.Services
             var t = Utilities.ToInt(context.Request["t"]);
             var sp = SP_.SpGetFinance(AppContextBase.Context.User.CompanyId, d1, d2, t);
             return ServicesResult.GetInstance(0, null, sp.ExecuteScalar( ));
+        }
+        public Common.ServicesResult GetVer(HttpContext context)
+        {
+            using (var reader = new StreamReader(context.Request.MapPath(_MobileClientVersionFile)))
+            {
+                return Common.ServicesResult.GetInstance(0, null, reader.ReadLine( ));
+            }
         }
     }
 }
