@@ -573,6 +573,30 @@
     <Content Include="Controls\UcOrderMealStatus.ascx" />
     <Content Include="Controls\UcPagePosition.ascx" />
     <Content Include="Controls\UcTypeAndAreaFilter.ascx" />
+    <Content Include="Mobile\css\css.css" />
+    <Content Include="Mobile\css\mobiscroll.custom-2.5.4.min.css" />
+    <Content Include="Mobile\images\add.png" />
+    <Content Include="Mobile\images\camera.png" />
+    <Content Include="Mobile\images\clock.png" />
+    <Content Include="Mobile\images\face.png" />
+    <Content Include="Mobile\images\key.png" />
+    <Content Include="Mobile\images\logo.png" />
+    <Content Include="Mobile\images\off.png" />
+    <Content Include="Mobile\images\on.png" />
+    <Content Include="Mobile\images\spinner.gif" />
+    <Content Include="Mobile\images\user.png" />
+    <Content Include="Mobile\images\u_sprite_0325.png" />
+    <Content Include="Mobile\images\voice.png" />
+    <Content Include="Mobile\images\voice2.png" />
+    <Content Include="Mobile\images\wp_icons.png" />
+    <Content Include="Mobile\index.html" />
+    <Content Include="Mobile\js\application.js" />
+    <Content Include="Mobile\js\lib\cordova.js" />
+    <Content Include="Mobile\js\lib\jquery-1.7.js" />
+    <Content Include="Mobile\js\lib\json2.js" />
+    <Content Include="Mobile\js\lib\mobiscroll.custom-2.5.4.min.js" />
+    <Content Include="Mobile\js\lib\zepto.js" />
+    <Content Include="Mobile\js\templates.js" />
     <Content Include="Public\EleoooComment.aspx" />
     <Content Include="Scripts\jquery-1.7.2.min.js" />
     <Content Include="Scripts\multi-select\css\multi-select.css" />
@@ -2354,6 +2378,7 @@
     <Content Include="MasterPage\EleoooMemberMaster.master" />
     <Content Include="MasterPage\EleoooMasterV2.master" />
     <Content Include="MasterPage\EleoooMemberMasterV2.master" />
+    <None Include="Mobile\eleooo.appcache" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\Eleooo.BLL.csproj">

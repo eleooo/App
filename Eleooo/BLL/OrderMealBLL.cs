@@ -1142,7 +1142,7 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
             int total = 0;
             var sp = SP_.SpGetOrders(companyId, phone, d1, d2, d3, pageIndex, pageSize, total);
             var ds = sp.GetDataSet( );
-            if (pageIndex > 0 && d3.HasValue)
+            if (pageIndex > 0 && !d3.HasValue)
             {
                 total = Utilities.ToInt(sp.OutputValues[0]);
                 pageCount = Utilities.CalcPageCount(pageSize, total);

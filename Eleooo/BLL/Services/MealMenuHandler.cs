@@ -33,9 +33,9 @@ namespace Eleooo.BLL.Services
             return true;
         }
 
-        static MealMenuHandler()
+        static MealMenuHandler( )
         {
-            _MealMenuCommands = new Dictionary<string, Func<System.Web.HttpContext, ServicesResult>>();
+            _MealMenuCommands = new Dictionary<string, Func<System.Web.HttpContext, ServicesResult>>( );
             _MealMenuCommands.Add("chg", (context) =>
                 {
                     int code = -1;
@@ -47,11 +47,11 @@ namespace Eleooo.BLL.Services
                     var price = Utilities.ToDecimal(context.Request["v"]);
                     menu.Price = price;
                     AppContextBase.Context.Company.MenuDate = DateTime.Now;
-                    menu.Save();
-                    AppContextBase.Context.Company.Save();
+                    menu.Save( );
+                    AppContextBase.Context.Company.Save( );
                     code = 0;
                     message = "修改成功";
-                    result = menu.ToDictionary<SysTakeawayMenu>();
+                    result = menu.ToDictionary<SysTakeawayMenu>( );
                 lbl_return:
                     return Common.ServicesResult.GetInstance(code, message, result);
                 });
@@ -70,12 +70,12 @@ namespace Eleooo.BLL.Services
                     else
                         menu.OutOfStockDate = null;
                     AppContextBase.Context.Company.MenuDate = DateTime.Now;
-                    menu.Save();
-                    menu.Save();
-                    AppContextBase.Context.Company.Save();
+                    menu.Save( );
+                    menu.Save( );
+                    AppContextBase.Context.Company.Save( );
                     code = 0;
                     message = "修改成功";
-                    result = menu.ToDictionary<SysTakeawayMenu>();
+                    result = menu.ToDictionary<SysTakeawayMenu>( );
                 lbl_return:
                     return Common.ServicesResult.GetInstance(code, message, result);
                 });
@@ -88,9 +88,9 @@ namespace Eleooo.BLL.Services
                         goto lbl_return;
                     menu.IsDeleted = true;
                     AppContextBase.Context.Company.MenuDate = DateTime.Now;
-                    menu.Save();
-                    menu.Save();
-                    AppContextBase.Context.Company.Save();
+                    menu.Save( );
+                    menu.Save( );
+                    AppContextBase.Context.Company.Save( );
                     code = 0;
                     message = "删除成功.";
                 lbl_return:
@@ -107,22 +107,31 @@ namespace Eleooo.BLL.Services
             {
                 var p = Utilities.ToInt(context.Request["p"]);
                 var q = context.Request["q"];
-                var query = DB.Select(Utilities.GetTableColumns(SysTakeawayMenu.Schema),
-                                      SysTakeawayDirectory.Columns.DirName)
-                              .From<SysTakeawayMenu>()
-                              .InnerJoin(SysTakeawayDirectory.IdColumn, SysTakeawayMenu.DirIDColumn)
-                              .Where(SysTakeawayDirectory.CompanyIDColumn).IsEqualTo(AppContextBase.Context.Company.Id)
+                var d = Utilities.ToInt(context.Request["d"]);
+                object dirs = null;
+                if (d <= 0)
+                {
+                    dirs = MealMenuBLL.LoadMenuDirectory(AppContextBase.Context.Company.Id).Select(dir =>
+                        {
+                            if (d <= 0)
+                                d = dir.Id;
+                            return NameIDResult.GetNameIDResult(dir.Id, dir.DirName);
+                        }).ToArray( );
+                }
+                var query = DB.Select( )
+                              .From<SysTakeawayMenu>( )
+                              .Where(SysTakeawayMenu.DirIDColumn).IsEqualTo(d)
                               .And(SysTakeawayMenu.IsDeletedColumn).IsEqualTo(false)
-                              .OrderAsc(SysTakeawayMenu.DirIDColumn.QualifiedName, SysTakeawayMenu.IdColumn.QualifiedName);
+                              .OrderAsc(SysTakeawayMenu.IdColumn.QualifiedName);
                 if (!string.IsNullOrEmpty(q))
                 {
                     q = Utilities.GetAllLikeQuery(q);
                     query.And(SysTakeawayMenu.NameColumn).Like(q);
                 }
-                var pageCount = Utilities.CalcPageCount(_PageSize, query.GetRecordCount());
-                var menus = query.Paged(p, _PageSize).ExecuteDataTable();
+                var pageCount = Utilities.CalcPageCount(_PageSize, query.GetRecordCount( ));
+                var menus = query.Paged(p, _PageSize).ExecuteDataTable( );
                 Utilities.LowerCaseDataTable(menus);
-                return new Common.ServicesResult { data = new { pageCount = pageCount, menus = menus } };
+                return new Common.ServicesResult { data = new { pageCount = pageCount, menus = menus, dirs = dirs } };
             }
             else
                 return new Common.ServicesResult { data = new { pageCount = 0 } };
@@ -136,16 +145,16 @@ namespace Eleooo.BLL.Services
             {
                 goto label_end;
             }
-            var query = DB.Select("id as id", "DirName as name").From<SysTakeawayDirectory>()
+            var query = DB.Select("id as id", "DirName as name").From<SysTakeawayDirectory>( )
                           .Where(SysTakeawayDirectory.CompanyIDColumn).IsEqualTo(company.Id);
-            dt = query.ExecuteDataTable();
+            dt = query.ExecuteDataTable( );
         label_end:
             return new Common.ServicesResult { data = dt };
         }
 
         public Common.ServicesResult Add(System.Web.HttpContext context)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException( );
         }
 
         public Common.ServicesResult Edit(System.Web.HttpContext context)
@@ -159,17 +168,17 @@ namespace Eleooo.BLL.Services
 
         public Common.ServicesResult Delete(System.Web.HttpContext context)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException( );
         }
 
         public Common.ServicesResult Login(System.Web.HttpContext context)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException( );
         }
 
         public Common.ServicesResult Logout(System.Web.HttpContext context)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException( );
         }
 
         #endregion

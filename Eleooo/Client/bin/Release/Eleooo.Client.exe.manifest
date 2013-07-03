@@ -98,7 +98,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>lzHDLc81uf87vVs2/LG6dov0ey8=</dsig:DigestValue>
+        <dsig:DigestValue>jq+h/MsJEmSt1SGuPdNQYuSzGRQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -110,19 +110,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>6wypEXXVMgRB6dIOxueq1MoBOfY=</dsig:DigestValue>
+        <dsig:DigestValue>92V2+OOsn3XPtIdURLDjTbKfkXM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Eleooo.DAL.dll" size="566784">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Eleooo.DAL.dll" size="568320">
       <assemblyIdentity name="Eleooo.DAL" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>igkNB+oLeugRh/SoooHWCnBJ0l8=</dsig:DigestValue>
+        <dsig:DigestValue>CBVUT3urtvASqYH8rdjrXaz8tLE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
