@@ -114,7 +114,8 @@ namespace Eleooo.Web.Controls
             if (favCmps != null && favCmps.Count > 0)
                 query.And(SysCompany.IdColumn).NotIn(favCmps);
             if (cbCompany == '1') //营业中
-                query.ConstraintExpression(CompanyBLL.FuncCheckIsWorkingTime(1));
+                query.And(SysCompany.IsSuspendColumn).IsNotEqualTo(true)
+                     .ConstraintExpression(CompanyBLL.FuncCheckIsWorkingTime(1));
             else if (cbCompany == '2')
                 query.AndEx(SysCompany.ServiceSumColumn).IsEqualTo(0)
                      .Or(SysCompany.ServiceSumColumn).IsNull( )
@@ -142,7 +143,8 @@ namespace Eleooo.Web.Controls
             //if (isLogin)
             //    query.ConstraintExpression(CompanyItemBLL.RenderCheckItemFuncInVals(AppContext.Context.User.Id, userLastOrderSum, "1", "-20","-19"));
             if (cbJf == '1') //营业中
-                query.ConstraintExpression(CompanyBLL.FuncCheckIsWorkingTime(1));
+                query.And(SysCompany.IsSuspendColumn).IsNotEqualTo(true)
+                     .ConstraintExpression(CompanyBLL.FuncCheckIsWorkingTime(1));
             else if (cbJf == '2')
                 query.AndEx(SysCompany.ServiceSumColumn).IsEqualTo(0)
                      .Or(SysCompany.ServiceSumColumn).IsNull( )
@@ -171,7 +173,8 @@ namespace Eleooo.Web.Controls
                           .And(SysCompany.IdColumn).In(favCmps)
                           .OrderDesc(SysCompany.Columns.SetTopDate, SysCompany.Columns.IsOnSale, SysCompany.Columns.IsPoint);
             if (cbMyCompany == '1') //营业中
-                query.ConstraintExpression(CompanyBLL.FuncCheckIsWorkingTime(1));
+                query.And(SysCompany.IsSuspendColumn).IsNotEqualTo(true)
+                     .ConstraintExpression(CompanyBLL.FuncCheckIsWorkingTime(1));
             else if (cbMyCompany == '2') //免费送餐
                 query.AndEx(SysCompany.ServiceSumColumn).IsEqualTo(0)
                      .Or(SysCompany.ServiceSumColumn).IsNull( )

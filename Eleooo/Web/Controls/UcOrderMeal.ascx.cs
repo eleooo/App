@@ -138,7 +138,10 @@ namespace Eleooo.Web.Controls
             Dictionary<string, object> userData = new Dictionary<string, object>( );
             data.Add("companyId", Company.Id);
             data.Add("isLogin", isLogin);
-            data.Add("isWorkingTime", (Company.IsSuspend.HasValue && Company.IsSuspend.Value) || CompanyBLL.CheckIsWorkingTime(Company.CompanyWorkTime, Company.CompanyType.Value));
+            if (Company.IsSuspend.HasValue && Company.IsSuspend.Value)
+                data.Add("isWorkingTime", false);
+            else
+                data.Add("isWorkingTime", CompanyBLL.CheckIsWorkingTime(Company.CompanyWorkTime, Company.CompanyType.Value));
             data.Add("menus", menuDict);
             data.Add("userData", userData);
             data.Add("companyRate", RewardBLL.OrderMealRewardRate(Company) / 100M);

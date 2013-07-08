@@ -105,7 +105,7 @@ from dbo.Sys_Company_FaceBook WHERE FaceBookDate BETWEEN @d1 AND @d2 AND FaceBoo
             }
             else if (fbType == FaceBookType.OrderMeal)
             {
-                if (replyUser.CompanyId != faceBook.FaceBookBizID || replyUser.AdminRoleId.Value <= 0)
+                if (replyUser.CompanyId != faceBook.FaceBookBizID && replyUser.AdminRoleId.Value <= 0)
                 {
                     message = "你不能回复不属于你的评论.";
                     goto lbl_return;
