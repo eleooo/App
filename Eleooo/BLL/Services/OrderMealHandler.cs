@@ -308,6 +308,7 @@ namespace Eleooo.BLL.Services
                 goto lbl_return;
             }
             item.IsDeleted = true;
+            item.Save( );
             message = "删除成功.";
             code = 0;
         lbl_return:
