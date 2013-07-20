@@ -359,15 +359,15 @@ u.warm{ position:absolute; display:block; font-size:12px; margin-left:202px; wid
 .see_btn{ border:none; cursor:pointer; background:url(cut/abg.png) -206px -515px; width:122px; height:39px; display:block; margin:20px auto;}
 .kzwd_btn{border:none; cursor:pointer; background:url(cut/abg.png) -330px -515px; width:162px; height:44px; position:absolute; margin-left:249px; margin-top:173px;}
 .see_gg{  border:1px solid #d7d7d7; width:757px; background:#fff; margin-top:24px; }
-.subject{ border-left:1px solid #dfd2bf; border-right:1px solid #dfd2bf; background-color:#fff8e6; width:390px; padding:10px;}
+.subject{ border-left:1px solid #dfd2bf; border-right:1px solid #dfd2bf; background-color:#fff8e6; padding:10px;}
 .subject dd{ background-color:#fff; border:1px solid #ddd; line-height:30px; margin:8px 0; padding:0 10px;  cursor:pointer;}
 .subject dt{ font-weight:bold; line-height:35px; color:#333; font-size:14px;}
 .subject dd:hover{background-color:#fffed8; border:1px solid #f8c700; color:#753d0a;}
 .t_radio{ height:30px; line-height:30px; margin-right:5px;}
-.topic h2{ background:url(cut/subject_sprite.png) left top; height:39px; line-height:36px; font-size:14px; padding-top:3px; padding-left:32px; color:#fff;}
+.topich2{ background:url(cut/subject_sprite.png) left top; height:39px; line-height:36px; font-size:14px; padding-top:3px; padding-left:32px; color:#fff;}
 .bottom20{background:url(cut/subject_sprite.png) left -60px; height:10px; line-height:10px; font-size:0;}
 .test_tj_btn,.s_r_btn,.s_w_btn{ border:none; cursor:pointer;background:url(cut/abg.png) -497px -515px; width:96px; height:37px; display:block; margin:20px auto 0 auto;}
-.answer_right,.answer_wrong{background:url(cut/subject_sprite.png) left -70px; width:220px; height:110px; position:absolute; font-size:13px; text-align:center; line-height:20px; margin:98px 0 0 96px; padding:10px 0;}
+.answer_right,.answer_wrong{background:url(cut/subject_sprite.png) left -70px; width:220px; height:110px; position:absolute; font-size:13px; text-align:center; line-height:20px; margin:136px 0 0 225px; padding:10px 0;}
 .answer_wrong{padding:25px 0 10px 0; height:95px;}
 .answer_right p span{ color:#f60; font-weight:bold; padding:0 5px;}
 .s_r_btn,.s_w_btn{ width:117px; height:33px; margin-top:5px;}

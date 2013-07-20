@@ -578,6 +578,11 @@
             var m = Opts.menus[menuId.toString()];
             if (isLimit && !_checkMenuGroup(m))
                 return;
+            if (!m) {
+                Opts.itemId = 0;
+                alert("抢购的菜单当前缺货或不存在.");
+                return;
+            }
             _initAddMenuItem();
             var html = __replace(tplCtr.html(), 'menuId', m.menuId);
             html = __replace(html, 'menuName', m.menuName.substr(0, 10));

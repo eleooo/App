@@ -48,6 +48,9 @@ namespace Eleooo.BLL.Services
                 company.CompanyWorkTime = request["CompanyWorkTime"];
                 company.OnSetSum = Utilities.ToDecimal(request["OnSetSum"]);
                 company.IsSuspend = Utilities.ToBool(request["IsSuspend"]);
+                company.OrderMaxAmount = Utilities.ToInt(request["OrderMaxAmount"]);
+                company.ServiceSum = Utilities.ToDecimal(request["ServiceSum"]);
+                company.CompanyProvince = request["CompanyProvince"];
                 string temp = request["p1"];
                 bool ispass = !string.IsNullOrEmpty(temp);
                 if (ispass) //change password

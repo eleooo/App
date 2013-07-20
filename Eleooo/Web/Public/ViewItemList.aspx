@@ -12,7 +12,7 @@
         <div class="left">
             <uc:UcTypeAndAreaFilter ID="filter" runat="server" CssClass="typeItemNav" IsShowLoginInfo="true" />
             <eleooo:DataListExt ID="view" runat="server" AllowPaging="true" ShowFootPaging="true"
-                ShowHeadPaging="false" PageSize="12" EmptyDataIsShowHeaderAndFooterTemplate="false" FooterPagingTemplate="~/Controls/UcFooterPaging1.ascx">
+                ShowHeadPaging="false" PageSize="24" EmptyDataIsShowHeaderAndFooterTemplate="false" FooterPagingTemplate="~/Controls/UcFooterPaging1.ascx">
                 <HeaderTemplate>
                     <ul class="zjf_list">
                 </HeaderTemplate>

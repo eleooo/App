@@ -10,7 +10,7 @@
     <div class="xrk1">
         <span style="float: left; margin-right: 10px;">
             <img src="/App_Themes/ThemesV2/images/wyz.png" alt="" /></span>
-        <input type="text" value="请输入您所在的大厦或小区，如：赛格广场" defval="请输入您所在的大厦或小区，如：赛格广场" id="txtInputVal" name="txtInputVal" />
+        <input type="text" value="请输入楼宇名称，如：赛格广场、NEO大厦、创新科技广场" defval="请输入楼宇名称，如：赛格广场、NEO大厦、创新科技广场" id="txtInputVal" name="txtInputVal" />
         <img src="/App_Themes/ThemesV2/images/xrk-san.png" style="float: left;" alt="" />
         <span style="float: right;"><a href="javascript:void(0)" onclick="onSubmitMansion();">
             <img width="82" height="60" src="/App_Themes/ThemesV2/images/jwm.png" alt="" /></a></span>
@@ -19,6 +19,7 @@
     </div>
     <div class="xrk2" id="noLoginContainer" runat="server">
         <ul>
+            <li style="font-size: 14px; font-weight: bold; color: #FF3300; line-height: 24px;">别担心，深圳关内绝大部分的楼宇和小区都可以直接搜到</li>
             <li>请选定您的位置，我们会找出能够为您提供外卖服务的餐厅</li>
             <li>已经使用过订餐服务的会员请直接<a href="/Public/Login.aspx?ReturnUrl=%2fPublic%2fOrderMealPage.aspx">登录</a></li>
         </ul>
@@ -27,6 +28,7 @@
         <ele:DataListExt ID="rpMyFavAddr" runat="server" EnableViewState="false" AllowPaging="false">
             <HeaderTemplate>
                 <ul>
+                    <li style="font-size: 14px; font-weight: bold; color: #FF3300; line-height: 24px;">别担心，深圳关内绝大部分的楼宇和小区都可以直接搜到</li>
                     <li class="xrk2" id="addrCount3" style="display: none">请选定您的送餐地址<br>
                         您总共可以保存三个常用送餐地址，如需增加请进行应的删减</li>
                     <li class="xrk2" id="addrCount2" style="display: none">请选定您的送餐地址<br>
@@ -38,7 +40,7 @@
                 <li><span class="dc1">
                     <input type="radio" value='<%# Eval("id") %>' name="myFavMansionId" addr='<%# Eval("name") %>' mansion="<%# Eval("mansion") %>" /></span> <span class="dc01">
                         <input type="text" name="" class="input_w" readonly="readonly" value="<%# Eval("mansion") %><%#  Utilities.ConcatAddres(Eval("name")) %>" style="width: 190px;" /></span>
-                    <a href="javascript:void(0);" onclick="onMyFavMansionDel(<%#Eval("id")%>,'<%# Eval("name") %>');" style="margin-left:10px;">
+                    <a href="javascript:void(0);" onclick="onMyFavMansionDel(<%#Eval("id")%>,'<%# Eval("name") %>');" style="margin-left: 10px;">
                         <img border="0" src="/App_Themes/ThemesV2/images/dc01-jh.png" alt="" /></a> </li>
             </ItemTemplate>
             <FooterTemplate>
@@ -155,7 +157,7 @@
 		        '/Public/RestHandler.ashx/Mansion',
 		        {
 		            lang: 'cn',
-		            empty_message: '请输入您所在的大厦或小区，如：赛格广场',
+		            empty_message: '请输入楼宇名称，如：赛格广场、NEO大厦、创新科技广场',
 		            button_img: '/App_Themes/ThemesV2/images/xrk-san.png',
 		            input_padding_left: 20,
 		            plugin_type: 'simple',

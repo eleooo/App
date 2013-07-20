@@ -44,7 +44,8 @@ namespace Eleooo.BLL.Services
                         id = user.Id,
                         p = user.MemberPhoneNumber,
                         t = Utilities.GenFormsAuthenticationTicketValue(user.Id, SubSystem.Company, loginSys),
-                        c = user.CompanyId
+                        c = user.CompanyId,
+                        r = user.MemberDate
                     };
                 }
                 return ServicesResult.GetInstance(result);

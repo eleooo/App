@@ -193,28 +193,31 @@ INSERT INTO [dbo].[Orders_Log]
                 IsPlay = false
             };
             log.Save( );
+            order.MsnType = 5;
+            order.OrderUpdateOn = DateTime.Now;
+            order.Save( );
             tempLog = ConvertLogToTemp(toUser, fromUser, null, log);
             message = "发送成功.";
             return true;
         }
         private static void AddProgressRow(Order order, DateTime dtDate, string desc, int isCurrent = 0)
         {
-            QueryCommand cmd = new QueryCommand(__NewProgressItemCmd);
-            cmd.AddParameter("@OrderID", order.Id, DbType.Int32);
-            cmd.AddParameter("@Desc", desc, DbType.String);
-            cmd.AddParameter("@IsCurrent", isCurrent, DbType.Int32);
-            cmd.AddParameter("@DateX", dtDate, DbType.DateTime);
-            DataService.ExecuteQuery(cmd);
-            //new OrdersLog
-            //{
-            //    Desc = desc,
-            //    IsCurrent = isCurrent,
-            //    DateX = dtDate,
-            //    OrderId = order.Id,
-            //    FromUser = AppContextBase.CurrentUserID,
-            //    ToUser = order.OrderMemberID,
-            //    IsPlay = false
-            //}.Save( );
+            //QueryCommand cmd = new QueryCommand(__NewProgressItemCmd);
+            //cmd.AddParameter("@OrderID", order.Id, DbType.Int32);
+            //cmd.AddParameter("@Desc", desc, DbType.String);
+            //cmd.AddParameter("@IsCurrent", isCurrent, DbType.Int32);
+            //cmd.AddParameter("@DateX", dtDate, DbType.DateTime);
+            //DataService.ExecuteQuery(cmd);
+            new OrdersLog
+            {
+                Desc = desc,
+                IsCurrent = isCurrent,
+                DateX = dtDate,
+                OrderId = order.Id,
+                FromUser = AppContextBase.CurrentUserID,
+                ToUser = order.OrderMemberID,
+                IsPlay = false
+            }.Save( );
         }
         public static void UpdateLogCurrent(object logId, int current)
         {

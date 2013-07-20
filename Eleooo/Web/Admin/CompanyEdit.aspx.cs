@@ -110,6 +110,13 @@ namespace Eleooo.Web.Admin
                 company.SetTopDate = null;
                 formView.SetValue("SetTopDate", DBNull.Value);
             }
+            if (company.CompanyType == (int)CompanyType.MealCompany)
+            {
+                if (!company.CompanyRateMaster.HasValue || company.CompanyRateMaster == 0)
+                    company.CompanyDateView = company.CompanyDate;
+                else if (company.CompanyDate == company.CompanyDateView)
+                    company.CompanyDateView = DateTime.Now;
+            }
         }
         void formView_OnAfterSaved(object item)
         {

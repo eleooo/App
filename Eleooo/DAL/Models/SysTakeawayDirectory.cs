@@ -149,6 +149,14 @@ namespace Eleooo.DAL
 			get { return GetColumnValue<int?>(Columns.CompanyID); }
 			set { SetColumnValue(Columns.CompanyID, value); }
 		}
+		  
+		[XmlAttribute("IsDelete")]
+		[Bindable(true)]
+		public bool? IsDelete 
+		{
+			get { return GetColumnValue<bool?>(Columns.IsDelete); }
+			set { SetColumnValue(Columns.IsDelete, value); }
+		}
 		
 		#endregion
 		
@@ -169,13 +177,15 @@ namespace Eleooo.DAL
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varDirName,int? varCompanyID)
+		public static void Insert(string varDirName,int? varCompanyID,bool? varIsDelete)
 		{
 			SysTakeawayDirectory item = new SysTakeawayDirectory();
 			
 			item.DirName = varDirName;
 			
 			item.CompanyID = varCompanyID;
+			
+			item.IsDelete = varIsDelete;
 			
 		
 			if (System.Web.HttpContext.Current != null)
@@ -187,7 +197,7 @@ namespace Eleooo.DAL
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varId,string varDirName,int? varCompanyID)
+		public static void Update(int varId,string varDirName,int? varCompanyID,bool? varIsDelete)
 		{
 			SysTakeawayDirectory item = new SysTakeawayDirectory();
 			
@@ -196,6 +206,8 @@ namespace Eleooo.DAL
 				item.DirName = varDirName;
 			
 				item.CompanyID = varCompanyID;
+			
+				item.IsDelete = varIsDelete;
 			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
@@ -231,6 +243,13 @@ namespace Eleooo.DAL
         
         
         
+        public static TableSchema.TableColumn IsDeleteColumn
+        {
+            get { return Schema.Columns[3]; }
+        }
+        
+        
+        
         #endregion
 		#region Columns Struct
 		public struct Columns
@@ -238,6 +257,7 @@ namespace Eleooo.DAL
 			 public static string Id = @"ID";
 			 public static string DirName = @"DirName";
 			 public static string CompanyID = @"CompanyID";
+			 public static string IsDelete = @"IsDelete";
 						
 		}
 		#endregion

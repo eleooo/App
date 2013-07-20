@@ -118,6 +118,7 @@ namespace Eleooo.Web
             if (!isLoadAll)
             {
                 query.And(SysTakeawayMenu.IsDeletedColumn).IsEqualTo(false)
+                     .And(SysTakeawayDirectory.IsDeleteColumn).IsEqualTo(false)
                      .And(SysTakeawayMenu.IsOutOfStockColumn).IsEqualTo(false);
             }
             return query.GetDataReaderEnumerator( );
@@ -137,10 +138,10 @@ namespace Eleooo.Web
             var companyMenuDirId = CompanyMenuDirId.GetCompanyMenuDirId(companyId, dirName);
             if (MenuDirMapping.ContainsKey(companyMenuDirId))
                 return MenuDirMapping[companyMenuDirId];
-            SysTakeawayDirectory dir = DB.Select().From<SysTakeawayDirectory>()
+            SysTakeawayDirectory dir = DB.Select( ).From<SysTakeawayDirectory>( )
                                          .Where(SysTakeawayDirectory.DirNameColumn).IsEqualTo(dirName)
                                          .And(SysTakeawayDirectory.CompanyIDColumn).IsEqualTo(companyId)
-                                         .ExecuteSingle<SysTakeawayDirectory>();
+                                         .ExecuteSingle<SysTakeawayDirectory>( );
             if (dir == null)
             {
                 dir = new SysTakeawayDirectory( );

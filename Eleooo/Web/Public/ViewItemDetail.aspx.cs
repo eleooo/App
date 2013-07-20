@@ -153,12 +153,12 @@ namespace Eleooo.Web.Public
                 Utilities.Redirect(string.Format("/Member/OrderCompanyMealItem.aspx?ItemId={0}", Item.ItemID), false);
                 return;
             }
-            bool _isLogin = CurrentSubSys != SubSystem.ALL;
-            if (_isLogin && !UserBLL.UserHasArea(CurrentUser))
-            {
-                Utilities.Redirect("/Member/MyArea.aspx", false);
-                return;
-            }
+            //bool _isLogin = CurrentSubSys != SubSystem.ALL;
+            //if (_isLogin && !UserBLL.UserHasArea(CurrentUser))
+            //{
+            //    Utilities.Redirect("/Member/MyArea.aspx", false);
+            //    return;
+            //}
         }
         private string GetItemTileAsCol( )
         {

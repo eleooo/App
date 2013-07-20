@@ -133,7 +133,7 @@
             var data = { beginRate: beginRate, endRate: endRate, pageIndex: pageIndex };
             execute(getQueryFaceBookService(), data, function (result) {
                 //{"code":0,"data":{"code":0,"good":0,"normal":0,"bad":0,"html":""}
-                $("#faceBookCount").text(result.data.good + result.data.normal + result.data.bad);
+                $("#faceBookCount").text(result.data.good || result.data.normal || result.data.bad);
                 $("#lblFbNormal", reviewContainer).text(result.data.normal);
                 $("#lblFbGood", reviewContainer).text(result.data.good);
                 $("#lblFbBad", reviewContainer).text(result.data.bad);

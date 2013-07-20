@@ -144,12 +144,13 @@ namespace Eleooo.Web.Controls
             //    query.ConstraintExpression(CompanyItemBLL.RenderCheckItemFuncInVals(AppContext.Context.User.Id, userLastOrderSum, "1", "-20","-19"));
             if (cbJf == '1') //营业中
                 query.And(SysCompany.IsSuspendColumn).IsNotEqualTo(true)
-                     .ConstraintExpression(CompanyBLL.FuncCheckIsWorkingTime(1));
+                     .ConstraintExpression(CompanyBLL.FuncCheckIsWorkingTime(SysCompanyItem.WorkingHoursColumn.QualifiedName, SysCompany.CompanyTypeColumn.QualifiedName, 1))
+                     .ConstraintExpression(string.Format(" AND({0} - {1} > 0) ", Utilities.GetTableColumn(SysCompanyItem.ItemAmountColumn), Utilities.GetTableColumn(SysCompanyItem.ItemClickedColumn)));
             else if (cbJf == '2')
                 query.AndEx(SysCompany.ServiceSumColumn).IsEqualTo(0)
                      .Or(SysCompany.ServiceSumColumn).IsNull( )
                      .CloseEx( );
-
+            
             //Logging.Log("test->GetMealCompanyItems", query.ToString( ), string.Empty);
             return query.ExecuteDataTable( );
             //using (var dr = query.ExecuteReader( ))

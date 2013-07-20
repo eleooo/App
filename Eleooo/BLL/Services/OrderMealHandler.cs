@@ -200,6 +200,8 @@ namespace Eleooo.BLL.Services
             var p = Utilities.ToInt(context.Request["p"]);
             var d1 = Utilities.ToDateTime(context.Request["d1"]);
             var d2 = Utilities.ToDateTime(context.Request["d2"]).AddDays(1);
+            if (d1 < AppContextBase.Context.Company.CompanyDateView.Value)
+                d1 = AppContextBase.Context.Company.CompanyDateView.Value;
             var query = DB.Select(_ItemQueryColumns)
                          .From<SysCompanyItem>( )
                          .Where(SysCompanyItem.CompanyIDColumn).IsEqualTo(AppContextBase.Context.User.CompanyId)
@@ -294,6 +296,7 @@ namespace Eleooo.BLL.Services
         public Common.ServicesResult DelItem(HttpContext context)
         {
             var id = Utilities.ToInt(context.Request["id"]);
+            var t = context.Request["t"];
             int code = -1;
             string message;
             var item = SysCompanyItem.FetchByID(id);
@@ -307,7 +310,10 @@ namespace Eleooo.BLL.Services
                 message = "你没权限进行此操作.";
                 goto lbl_return;
             }
-            item.IsDeleted = true;
+            if (string.IsNullOrEmpty(t))
+                item.IsDeleted = true;
+            else
+                item.ItemStatus = !item.ItemStatus.Value;
             item.Save( );
             message = "删除成功.";
             code = 0;

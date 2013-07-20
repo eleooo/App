@@ -80,13 +80,15 @@ namespace Eleooo.DAL
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(string DirName,int? CompanyID)
+	    public void Insert(string DirName,int? CompanyID,bool? IsDelete)
 	    {
 		    SysTakeawayDirectory item = new SysTakeawayDirectory();
 		    
             item.DirName = DirName;
             
             item.CompanyID = CompanyID;
+            
+            item.IsDelete = IsDelete;
             
 	    
 		    item.Save(UserName);
@@ -96,7 +98,7 @@ namespace Eleooo.DAL
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(int Id,string DirName,int? CompanyID)
+	    public void Update(int Id,string DirName,int? CompanyID,bool? IsDelete)
 	    {
 		    SysTakeawayDirectory item = new SysTakeawayDirectory();
 	        item.MarkOld();
@@ -107,6 +109,8 @@ namespace Eleooo.DAL
 			item.DirName = DirName;
 				
 			item.CompanyID = CompanyID;
+				
+			item.IsDelete = IsDelete;
 				
 	        item.Save(UserName);
 	    }

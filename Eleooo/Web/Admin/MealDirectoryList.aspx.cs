@@ -19,6 +19,7 @@ namespace Eleooo.Web.Admin
         {
             var query = DB.Select(Utilities.GetTableColumns(SysTakeawayDirectory.Schema), SysCompany.CompanyTelColumn.QualifiedName).From<SysTakeawayDirectory>( )
                                     .InnerJoin(SysCompany.IdColumn, SysTakeawayDirectory.CompanyIDColumn)
+                                    .Where(SysTakeawayDirectory.IsDeleteColumn).IsEqualTo(false)
                                     .OrderDesc(Utilities.GetTableColumn(SysTakeawayDirectory.IdColumn));
             if (!string.IsNullOrEmpty(txtCompanyName.Value))
             {
@@ -61,7 +62,8 @@ namespace Eleooo.Web.Admin
             }
             else
             {
-                SysTakeawayDirectory.Delete(dir.Id);
+                dir.IsDelete = true;
+                dir.Save( );
                 txtDesc.InnerHtml = "删除成功";
             }
             On_ActionQuery(sender, e);

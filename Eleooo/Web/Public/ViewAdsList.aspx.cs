@@ -15,11 +15,11 @@ namespace Eleooo.Web.Public
         protected override void On_ActionQuery(object sender, EventArgs e)
         {
             _isLogin = CurrentSubSys != SubSystem.ALL;
-            if (_isLogin && !UserBLL.UserHasArea(CurrentUser))
-            {
-                Utilities.Redirect("/Member/MyArea.aspx", false);
-                return;
-            }
+            //if (_isLogin && !UserBLL.UserHasArea(CurrentUser))
+            //{
+            //    Utilities.Redirect("/Member/MyArea.aspx", false);
+            //    return;
+            //}
 
             filter.ResetPageIndexControl = view.PageIndexControlId;
             filter.OnGetAreaName += new Web.Controls.OnGetAreaNameHandler(filter_OnGetAreaName);

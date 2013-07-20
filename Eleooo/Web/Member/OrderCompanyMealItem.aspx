@@ -74,7 +74,7 @@
                 <label id="ctNeedPay" runat="server">
                     +&nbsp;<b class="yellow"><%=(this.CompanyItem.ItemNeedPay ?? (decimal?)0).Value.ToString("0.###")%></b>元</label>
             </span><a href="javascript:void(0)" onclick="__doPostBack('Add');" id="btnPost" runat="server">
-                <img alt="" border="0" src="/App_Themes/ThemesV2/images/xd-aniu-cs2.png" /></a>
+                <img alt="" border="0" src="/App_Themes/ThemesV2/images/xd-aniu-cs3.png" /></a>
         </div>
     </div>
 </asp:Content>

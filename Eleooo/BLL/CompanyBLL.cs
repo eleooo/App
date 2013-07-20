@@ -61,6 +61,9 @@ from
                 CompanyWorkTime = company.CompanyWorkTime,
                 OnSetSum = company.OnSetSum,
                 IsSuspend = company.IsSuspend,
+                OrderMaxAmount = company.OrderMaxAmount,
+                CompanyProvince = company.CompanyProvince,
+                ServiceSum = company.ServiceSum,
                 Ranking1 = ranking1,
                 Amount = amount,
                 Area = company.CompanyLocation

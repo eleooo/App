@@ -51,11 +51,11 @@ namespace Eleooo.Web.Member
         }
         protected override void On_ActionQuery(object sender, EventArgs e)
         {
-            if (!UserBLL.UserHasArea(CurrentUser))
-            {
-                Utilities.Redirect("/Member/MyArea.aspx", false);
-                return;
-            }
+            //if (!UserBLL.UserHasArea(CurrentUser))
+            //{
+            //    Utilities.Redirect("/Member/MyArea.aspx", false);
+            //    return;
+            //}
             decimal orderSum, point;
             orderSum = UserBLL.GetUserLastMonthOrderSum(CurrentUser.Id);
             point = CompanyAdsBLL.GetCompanyAdPoint(orderSum, AdsID);

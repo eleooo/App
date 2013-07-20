@@ -38,7 +38,7 @@
                 </div>
                 <div class="jf-main-aniu">
                     <a target="_blank" href="/Member/OrderCompanyMealItem.aspx?ItemID=<%# Eval("ItemID") %>&MansionId=<%=MansionId %>">
-                        <img alt="" width="59" height="32" border="0" src="/App_Themes/ThemesV2/images/<%# Utilities.ToDecimal(Eval("ItemClicked")) < Utilities.ToDecimal(Eval("ItemAmount")) ? "wyq.png":"wyq_out.png"%>" /></a></div>
+                        <img alt="" width="59" height="32" border="0" src="/App_Themes/ThemesV2/images/<%# Utilities.ToDecimal(Eval("ItemClicked")) < Utilities.ToDecimal(Eval("ItemAmount")) ? "kkx.png":"wyq_out.png"%>" /></a></div>
             </div>
         </li>
     </ItemTemplate>
@@ -59,7 +59,7 @@
                 </div>
                 <div class="jf-main-aniu">
                     <a target="_blank" href="/Member/OrderCompanyMealItem.aspx?ItemID=<%# Eval("ItemID") %>&MansionId=<%=MansionId %>">
-                        <img alt="" width="59" height="32" border="0" src="/App_Themes/ThemesV2/images/<%# Utilities.ToDecimal(Eval("ItemClicked")) < Utilities.ToDecimal(Eval("ItemAmount")) ? "wyq.png":"wyq_out.png"%>" /></a></div>
+                        <img alt="" width="59" height="32" border="0" src="/App_Themes/ThemesV2/images/<%# Utilities.ToDecimal(Eval("ItemClicked")) < Utilities.ToDecimal(Eval("ItemAmount")) ? "kkx.png":"wyq_out.png"%>" /></a></div>
             </div>
         </li>
     </AlternatingItemTemplate>

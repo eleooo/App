@@ -14,6 +14,15 @@ namespace Eleooo.Web
         {
             return ResBLL.GetRes("FaceBookFilterResource", "我操|屌|我叼|你老母", "评价过滤关键字");
         }
+        public static string GetFaceBookRateType(int? faceBookRate)
+        {
+            if (!faceBookRate.HasValue || faceBookRate.Value >= 5)
+                return "good";
+            else if (faceBookRate > 1)
+                return "normal";
+            else
+                return "bad";
+        }
         public static void GetOrderMealRateCount(int bizID, DateTime? d1, DateTime? d2, out int good, out int normal, out int bad)
         {
             good = 0; normal = 0; bad = 0;

@@ -67,6 +67,7 @@ namespace Eleooo.Web.Public
             HandlerContainer container;
             if (!string.IsNullOrEmpty(caller.Name) && _handler.TryGetValue(caller.Name, out container))
             {
+                int step = 0;
                 try
                 {
                     ServicesResult result = null;
@@ -76,8 +77,10 @@ namespace Eleooo.Web.Public
                         var ticket = context.Request["__t"];
                         if (!string.IsNullOrEmpty(ticket))
                         {
+                            step = 1;
                             AppContextBase.SetFormsAuthenticationTicket(ticket);
                         }
+                        step = 2;
                         object obj;
                         if (mi.IsHttpContextArg && mi.ArgCount == 1)
                             obj = mi.Method.Invoke(container.Handler, new object[] { context });
@@ -105,7 +108,9 @@ namespace Eleooo.Web.Public
                 }
                 catch (Exception ex)
                 {
-                    if (ex.InnerException != null)
+                    if (step == 1)
+                        OutputResult(context, Utilities.GetWebServicesResult(-100, "你的登录已过期,请重新登录."));
+                    else if (ex.InnerException != null)
                         OutputResult(context, (Utilities.GetWebServicesResult(-1, ex.InnerException.Message.Trim('\n', '\r'))));
                     else
                         OutputResult(context, (Utilities.GetWebServicesResult(-1, ex.Message.Trim('\n', '\r'))));

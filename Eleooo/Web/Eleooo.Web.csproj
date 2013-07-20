@@ -398,6 +398,7 @@
     <Content Include="App_Themes\ThemesV2\images\jifen.gif" />
     <Content Include="App_Themes\ThemesV2\images\jjh.png" />
     <Content Include="App_Themes\ThemesV2\images\jwm.png" />
+    <Content Include="App_Themes\ThemesV2\images\kkx.png" />
     <Content Include="App_Themes\ThemesV2\images\kk_main.png" />
     <Content Include="App_Themes\ThemesV2\images\lab.png" />
     <Content Include="App_Themes\ThemesV2\images\lctu-x.png" />
@@ -464,6 +465,7 @@
     <Content Include="App_Themes\ThemesV2\images\wyz.png" />
     <Content Include="App_Themes\ThemesV2\images\xd-aniu-cs.png" />
     <Content Include="App_Themes\ThemesV2\images\xd-aniu-cs2.png" />
+    <Content Include="App_Themes\ThemesV2\images\xd-aniu-cs3.png" />
     <Content Include="App_Themes\ThemesV2\images\xd-aniu-tj.png" />
     <Content Include="App_Themes\ThemesV2\images\xd-aniu-tjblue.png" />
     <Content Include="App_Themes\ThemesV2\images\xd-aniu.png" />

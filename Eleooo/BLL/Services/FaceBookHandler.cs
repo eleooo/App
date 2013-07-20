@@ -60,7 +60,7 @@ namespace Eleooo.BLL.Services
             {
                 StringBuilder sb = new StringBuilder( );
                 isReply = !Utilities.IsNull(dr[SysCompanyFaceBook.Columns.ReplyDate]);
-                sb.AppendFormat("<li id=\"item{0}\" data-reply=\"{1}\">", dr[SysCompanyFaceBook.Columns.Id], isReply);
+                sb.AppendFormat("<li id=\"r{0}\" data-reply=\"{1}\" data-rate=\"{2}\">", dr[SysCompanyFaceBook.Columns.Id], isReply.ToString( ).ToLower( ), FaceBookBLL.GetFaceBookRateType(Convert.ToInt32(dr[SysCompanyFaceBook.Columns.FaceBookRate])));
                 sb.Append("<div class=\"rw1\">");
                 sb.Append("<img src=\"images/user.png\" alt=\"\" align=\"absmiddle\" />");
                 sb.AppendFormat("<p><span class=\"user\">{0}</span></p>", dr[SysMember.Columns.MemberPhoneNumber]);

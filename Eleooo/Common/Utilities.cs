@@ -167,11 +167,10 @@ namespace Eleooo.Common
         }
         public static FormsAuthenticationTicket GenFormsAuthenticationTicket(int userId, SubSystem loginSys, LoginSystem sys = LoginSystem.Web)
         {
-            double dTimeOut = 24;
             FormsAuthenticationTicket ticket = new FormsAuthenticationTicket((int)sys,
             userId.ToString( ),
             DateTime.Now,
-            DateTime.Now.AddHours(dTimeOut == 0 ? 60 : dTimeOut),
+            DateTime.MaxValue,
             false,
             ((int)loginSys).ToString( ));
             return ticket;

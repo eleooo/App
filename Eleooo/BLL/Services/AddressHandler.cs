@@ -44,7 +44,7 @@ namespace Eleooo.BLL.Services
                 result.message = "参数错误.";
                 goto lbl_return;
             }
-            var newAddress = string.IsNullOrEmpty(seat) ? floor + "|" + room : seat + "||" + floor + "|" + room;
+            var newAddress = seat + "||" + floor + "|" + room;
             if (Utilities.Compare(newAddress, order.OrderProduct))
             {
                 result.message = "新地址与原地址相同";

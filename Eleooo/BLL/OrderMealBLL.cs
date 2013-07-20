@@ -779,7 +779,7 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
 
                     UserBLL.AddUserFavAddress(user.Id, userData.mansionId, userData.address);
                     //UserBLL.AddUserFavCompany(user.Id, company.Id);
-                    OrderBLL.UpdateBalance( );
+                    //OrderBLL.UpdateBalance( );
                     ts.Complete( );
                     //SendOrderMealMessage(company, user, order, details, out message);
                     if (userData.orderId > 0)
@@ -844,26 +844,26 @@ exec sp_executesql @ItemInfo,N'@OrderQty INT,@OrderSum float',@OrderQty = @Order
             }
             return true;
         }
-        public static bool SendOrderMealMessage(SysCompany company, SysMember user, Order order, IEnumerable<OrdersDetail> detail, out string message)
-        {
-            message = string.Empty;
-            if (!company.IsUseMsg.HasValue || !company.IsUseMsg.Value || string.IsNullOrEmpty(company.MsnPhoneNum))
-                return true;
-            StringBuilder sb = new StringBuilder( );
-            sb.AppendFormat("订单编号:{0}.", order.Id);
-            sb.AppendFormat("手机号码:{0}.", user.MemberMsnPhone);
-            SysAreaMansion mansion = SysAreaMansion.FetchByID(order.MansionId.Value);
-            sb.AppendFormat("送餐地址:{0} {1}.", mansion != null ? mansion.Name : string.Empty, Utilities.ConcatAddres(order.OrderProduct));
-            sb.Append("餐点内容:");
-            foreach (var d in detail)
-            {
-                sb.AppendFormat("[{0}:{1}份]", d.MenuName, d.OrderQty);
-            }
-            if (!string.IsNullOrEmpty(order.OrderMemo))
-                sb.AppendFormat("备注:{0}.", order.OrderMemo);
-            int logId;
-            return MsnBLL.SendMessage(company.MsnPhoneNum, sb.ToString( ), order.Id, out message, out logId);
-        }
+        //public static bool SendOrderMealMessage(SysCompany company, SysMember user, Order order, IEnumerable<OrdersDetail> detail, out string message)
+        //{
+        //    message = string.Empty;
+        //    if (!company.IsUseMsg.HasValue || !company.IsUseMsg.Value || string.IsNullOrEmpty(company.MsnPhoneNum))
+        //        return true;
+        //    StringBuilder sb = new StringBuilder( );
+        //    sb.AppendFormat("订单编号:{0}.", order.Id);
+        //    sb.AppendFormat("手机号码:{0}.", user.MemberMsnPhone);
+        //    SysAreaMansion mansion = SysAreaMansion.FetchByID(order.MansionId.Value);
+        //    sb.AppendFormat("送餐地址:{0} {1}.", mansion != null ? mansion.Name : string.Empty, Utilities.ConcatAddres(order.OrderProduct));
+        //    sb.Append("餐点内容:");
+        //    foreach (var d in detail)
+        //    {
+        //        sb.AppendFormat("[{0}:{1}份]", d.MenuName, d.OrderQty);
+        //    }
+        //    if (!string.IsNullOrEmpty(order.OrderMemo))
+        //        sb.AppendFormat("备注:{0}.", order.OrderMemo);
+        //    int logId;
+        //    return MsnBLL.SendMessage(company.MsnPhoneNum, sb.ToString( ), order.Id, out message, out logId);
+        //}
         private static bool CheckSendMessagePostData(Order order, out string message)
         {
             if (order == null)
