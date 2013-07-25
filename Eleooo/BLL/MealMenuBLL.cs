@@ -147,7 +147,13 @@ namespace Eleooo.Web
                 dir = new SysTakeawayDirectory( );
                 dir.DirName = dirName;
                 dir.CompanyID = companyId;
+                dir.IsDelete = false;
                 dir.Save( );
+            }
+            else if (dir.IsDelete.HasValue && dir.IsDelete.Value)
+            {
+                dir.IsDelete = false;
+                dir.Save();
             }
             MenuDirMapping.Add(companyMenuDirId, dir.Id);
             return dir.Id;
@@ -270,6 +276,13 @@ namespace Eleooo.Web
             var cmd = new QueryCommand(sql);
             cmd.AddParameter("@MenuDate", dtDate);
             return DataService.ExecuteQuery(cmd);
+        }
+        public static void DeleteMenuByDirId(int dir)
+        {
+            //SysTakeawayMenu.Columns
+            var cmd = new QueryCommand("UPDATE dbo.Sys_Takeaway_Menu SET IsDeleted = 1 WHERE DirID=@DirID;");
+            cmd.AddParameter("@DirID", dir, DbType.Int32);
+            DataService.ExecuteQuery(cmd);
         }
     }
 }

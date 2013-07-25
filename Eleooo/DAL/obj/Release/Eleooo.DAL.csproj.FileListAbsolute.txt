@@ -24,3 +24,16 @@ F:\Asp.Net\MyWeb\eleooo.com\WebApp\Eleooo\DAL\bin\Release\SubSonic.xml
 F:\Asp.Net\MyWeb\eleooo.com\WebApp\Eleooo\DAL\obj\Release\ResolveAssemblyReference.cache
 F:\Asp.Net\MyWeb\eleooo.com\WebApp\Eleooo\DAL\obj\Release\Eleooo.DAL.dll
 F:\Asp.Net\MyWeb\eleooo.com\WebApp\Eleooo\DAL\obj\Release\Eleooo.DAL.pdb
+D:\webapp\Eleooo\DAL\bin\Release\Eleooo.DAL.dll
+D:\webapp\Eleooo\DAL\bin\Release\Eleooo.DAL.pdb
+D:\webapp\Eleooo\DAL\bin\Release\SubSonic.dll
+D:\webapp\Eleooo\DAL\bin\Release\System.Data.SQLite.dll
+D:\webapp\Eleooo\DAL\bin\Release\MySql.Data.dll
+D:\webapp\Eleooo\DAL\bin\Release\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\webapp\Eleooo\DAL\bin\Release\Interop.DAO.dll
+D:\webapp\Eleooo\DAL\bin\Release\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\webapp\Eleooo\DAL\bin\Release\SubSonic.pdb
+D:\webapp\Eleooo\DAL\bin\Release\SubSonic.xml
+D:\webapp\Eleooo\DAL\obj\Release\ResolveAssemblyReference.cache
+D:\webapp\Eleooo\DAL\obj\Release\Eleooo.DAL.dll
+D:\webapp\Eleooo\DAL\obj\Release\Eleooo.DAL.pdb

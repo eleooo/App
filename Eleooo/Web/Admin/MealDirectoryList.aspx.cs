@@ -64,9 +64,11 @@ namespace Eleooo.Web.Admin
             {
                 dir.IsDelete = true;
                 dir.Save( );
+                MealMenuBLL.DeleteMenuByDirId(dir.Id);
                 txtDesc.InnerHtml = "删除成功";
             }
             On_ActionQuery(sender, e);
         }
+
     }
 }
