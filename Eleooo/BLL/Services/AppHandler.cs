@@ -103,5 +103,9 @@ namespace Eleooo.BLL.Services
                 return Common.ServicesResult.GetInstance(0, null, reader.ReadLine( ));
             }
         }
+        public Common.ServicesResult HasOrder(HttpContext context)
+        {
+
+        }
     }
 }

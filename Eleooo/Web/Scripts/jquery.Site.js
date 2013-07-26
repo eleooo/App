@@ -1,5 +1,6 @@
 (function ($, document, undefined) {
 
+    /*cookie start*/
     var pluses = /\+/g;
 
     function raw(s) {
@@ -66,6 +67,72 @@
         }
         return false;
     };
+    //cookie end
+
+    //mp3 start
+    jQuery.fn.jmp3 = function (passedOptions) {
+        // hard-wired options
+        var playerpath = "/Scripts/player/"; 				// SET THIS FIRST: path to singlemp3player.swf
+
+        // passable options
+        var options = {
+            "url": "", 									// path to MP3 file (default: current directory)
+            "width": "0", 									// width of player
+            "height": "0",
+            "repeat": "no", 									// repeat mp3?
+            "volume": "70", 									// mp3 volume (0-100)
+            "showfilename": "false",
+            "backcolor": "000000",
+            "forecolor": "00ff00",
+            "autoplay": "true", 							// play immediately on page load?
+            "showdownload": "false", 							// show download button in player
+            "showfilename": "false"								// show .mp3 filename after player
+        };
+
+        // use passed options, if they exist
+        if (passedOptions) {
+            jQuery.extend(options, passedOptions);
+        }
+
+        // iterate through each object
+        return this.each(function () {
+            // filename needs to be enclosed in tag (e.g. <span class='mp3'>mysong.mp3</span>)
+            //var filename = options.filepath + jQuery(this).html();
+            // do nothing if not an .mp3 file
+            //var validfilename = filename.indexOf(".mp3");
+            //if (validfilename == -1) { return false; }
+            // build the player HTML
+            var el = $(this);
+            var id = el.data('_jmp3');
+            if (id) {
+                el.find("#_" + id).remove();
+            }
+            id = Date.now();
+            el.data('_jmp3', id)
+            var mp3html = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="0" height="0" style="display:none" id="_' + id + '" ';
+            //mp3html += 'width="' + options.width + '" height="20" ';
+            mp3html += 'codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab">';
+            mp3html += '<param name="movie" value="' + playerpath + 'singlemp3player.swf?';
+            mp3html += 'showDownload=' + options.showdownload + '&file=' + filename + '&autoStart=' + options.autoplay;
+            mp3html += '&backColor=' + options.backcolor + '&frontColor=' + options.forecolor;
+            mp3html += '&repeatPlay=' + options.repeat + '&songVolume=' + options.volume + '" />';
+            mp3html += '<param name="wmode" value="transparent" />';
+            mp3html += '<embed wmode="transparent" width="' + options.width + '" height="0" ';
+            mp3html += 'src="' + playerpath + 'singlemp3player.swf?'
+            mp3html += 'showDownload=' + options.showdownload + '&file=' + filename + '&autoStart=' + options.autoplay;
+            mp3html += '&backColor=' + options.backcolor + '&frontColor=' + options.forecolor;
+            mp3html += '&repeatPlay=' + options.repeat + '&songVolume=' + options.volume + '" ';
+            mp3html += 'type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />';
+            mp3html += '</object>';
+            // don't display filename if option is set
+            //if (options.showfilename == "false") { jQuery(this).html(""); }
+            el.append(mp3html + "&nbsp;");
+
+            // Eolas workaround for IE (Thanks Kurt!)
+            //if (jQuery.browser.msie) { this.outerHTML = this.outerHTML; }
+        });
+    };
+    //mp3 end
 })(jQuery, document);
 
 function GetParam(url, str) {
@@ -113,3 +180,7 @@ function bindChange(target, fn) {
         }
     }
 }
+//play background sound
+$(document).ready(function () {
+    //<object type=application/x-shockwave-flash data=beep.swf width=0 height=0><param name=movie value=beep.swf /><param name=loop value=false></object>
+});

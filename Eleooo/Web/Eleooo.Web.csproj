@@ -604,6 +604,8 @@
     <Content Include="Scripts\multi-select\css\multi-select.css" />
     <Content Include="Scripts\multi-select\img\switch.png" />
     <Content Include="Scripts\multi-select\jquery.multi-select.js" />
+    <Content Include="Scripts\player\Beep.mp3" />
+    <Content Include="Scripts\player\singlemp3player.swf" />
     <Content Include="SiteAppPage\ItemMenuInfo.aspx" />
     <Content Include="SiteAppPage\ReplyFaceBook.aspx" />
     <Content Include="SiteAppPage\ViewOrderStatus.aspx" />
